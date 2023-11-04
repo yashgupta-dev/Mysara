@@ -119,7 +119,7 @@ class startup
             }
         } else {
             
-            Redirect::url('mvc/admin.php?dispatch=dashboard');
+            Redirect::url('PHP-MVC/admin.php?dispatch=dashboard');
         }
     }
 

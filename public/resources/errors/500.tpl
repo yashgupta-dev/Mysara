@@ -8,7 +8,7 @@
 
     <title>{$title}</title>
 
-    <link type="text/css" rel="stylesheet" href="/mvc/public/assets/css/error/error.css" />
+    <link type="text/css" rel="stylesheet" href="/PHP-MVC/public/assets/css/error/error.css" />
 
 <body>
     <div id="notfound">
@@ -17,7 +17,7 @@
                 <h1>{$code}</h1>
                 <h2>{$msg}</h2>
             </div>
-            <a href="/mvc">{$btn_text}</a>
+            <a href="/PHP-MVC">{$btn_text}</a>
         </div>
     </div>
 </body>

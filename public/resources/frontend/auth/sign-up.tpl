@@ -12,7 +12,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2>Create an account</h2>
         <ol>
-          <li><a href="/mvc">Home</a></li>
+          <li><a href="/PHP-MVC">Home</a></li>
           <li>Create an account</li>
         </ol>
       </div>
