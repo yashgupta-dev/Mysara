@@ -1,0 +1,4 @@
+vendor/*
+core/storage/*
+composer.lock
+config.php
