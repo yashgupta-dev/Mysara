@@ -2,7 +2,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-        <a href="/PHP-MVC/" class="logo d-flex align-items-center me-auto me-lg-0">
+        <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
             <!-- Uncomment the line below if you also wish to use an image logo -->
             <!-- <img src="assets/img/logo.png" alt=""> -->
             <h1>Yummy<span>.</span></h1>
@@ -10,11 +10,11 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a href="/PHP-MVC/">Home</a></li>
-                <li><a href="/PHP-MVC/about-us">About Us</a></li>
-                <li><a href="/PHP-MVC/why-us">Why us</a></li>
-                <li><a href="/PHP-MVC/testimonial">Testimonial</a></li>
-                <li><a href="/PHP-MVC/contact-us">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/why-us">Why us</a></li>
+                <li><a href="/testimonial">Testimonial</a></li>
+                <li><a href="/contact-us">Contact</a></li>
                 <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
                         <li><a href="#">Drop Down 1</a></li>
@@ -37,7 +37,7 @@
             </ul>
         </nav><!-- .navbar -->
 
-        <a class="btn-book-a-table" href="/PHP-MVC/sign-in">Sign in</a>
+        <a class="btn-book-a-table" href="/sign-in">Sign in</a>
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 

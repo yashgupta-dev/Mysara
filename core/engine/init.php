@@ -95,10 +95,10 @@ class init
         $urlParts = parse_url($url);
 
         $classUrl = str_replace('index.php/','',$urlParts['path']);
-        
+
         $urlExplode = (strpos('index.php',$classUrl) === true) ? explode('index.php/', $classUrl) : explode(Parent_folder, $classUrl);
-        
-        $this->urlExplode = !empty($urlExplode[1]) ? $urlExplode[1] : '';
+            
+        $this->urlExplode = !empty($urlExplode[1]) ? $urlExplode[1] : $urlExplode[0];
         
         // seo urls
         $this->seoUrls();
@@ -194,8 +194,10 @@ class init
      */
     protected function seoUrls()
     {
+        $seoURL = explode('/',$this->urlExplode)[1] ?? $this->urlExplode; 
+        
         // Now, you can use $conn to execute SQL queries and interact with the database
-        $res = DB::get()->get->query("SELECT `seo_origin` FROM `seo` WHERE `seo_url` = '" . (string)$this->urlExplode . "' AND `status` = 1")->fetch_assoc();
+        $res = DB::get()->get->query("SELECT `seo_origin` FROM `seo` WHERE `seo_url` = '" . (string)$seoURL . "' AND `status` = 1")->fetch_assoc();
 
         $this->urlExplode = $res['seo_origin'] ?? $this->urlExplode;
     }

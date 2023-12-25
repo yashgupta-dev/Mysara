@@ -69,18 +69,18 @@
 {block name="scripts"} {/block}
     
 <!-- Vendor JS Files -->
-<script src="/PHP-MVC/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/PHP-MVC/public/assets/vendor/aos/aos.js"></script>
-<script src="/PHP-MVC/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/PHP-MVC/public/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="/PHP-MVC/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/public/assets/vendor/aos/aos.js"></script>
+<script src="/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/public/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
 <!-- toastr -->
 <!-- Template Main JS File -->
-<script src="/PHP-MVC/public/assets/js/main.js"></script>
+<script src="/public/assets/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/PHP-MVC/public/assets/css/toaster/toastr.min.js"></script>
-<script src="/PHP-MVC/public/assets/js/ajax.js"></script>
+<script src="/public/assets/css/toaster/toastr.min.js"></script>
+<script src="/public/assets/js/ajax.js"></script>
 </body>
 
 </html>

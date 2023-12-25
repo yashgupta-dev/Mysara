@@ -104,7 +104,7 @@ class startup
 
             // paramater ( & )
             $pramater = explode('&', $this->urlExplode);
-
+            
             // dispatch
             $routeData = explode('/', $pramater[0]);
 
@@ -119,7 +119,7 @@ class startup
             }
         } else {
             
-            Redirect::url('PHP-MVC/admin.php?dispatch=dashboard');
+            Redirect::url('admin.php?dispatch=dashboard');
         }
     }
 
