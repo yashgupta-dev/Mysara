@@ -12,7 +12,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2>Create an account</h2>
         <ol>
-          <li><a href="/">Home</a></li>
+          <li><a href="{route path="welcome"}">Home</a></li>
           <li>Create an account</li>
         </ol>
       </div>

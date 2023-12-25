@@ -78,7 +78,7 @@
 <!-- toastr -->
 <!-- Template Main JS File -->
 <script src="{asset path='public/assets/js/main.js'}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js'}"></script>
+<script src="{asset path='public/assets/js/jquery-3.6.0.min.js'}"></script>
 <script src="{asset path='public/assets/css/toaster/toastr.min.js'}"></script>
 <script src="{asset path='public/assets/js/ajax.js'}"></script>
 </body>

@@ -20,7 +20,10 @@ class Login extends BaseController
     }
 
     public function index() {
-        
+        if($this->requestMethod == 'POST') {
+                
+        }
+
         Tygh::display('frontend/auth/sign-in');
     }
 }
