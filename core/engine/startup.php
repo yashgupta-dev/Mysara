@@ -105,7 +105,7 @@ class startup
 
             // paramater ( & )
             $pramater = explode('&', $this->urlExplode);
-            
+
             // dispatch
             $routeData = explode('/', $pramater[0]);
 
@@ -119,7 +119,7 @@ class startup
                 $this->pramater = $pramater;
             }
         } else {
-            
+
             Redirect::url('admin.php?dispatch=dashboard');
         }
     }
@@ -166,8 +166,8 @@ class startup
             Tygh::assign("code", '404');
             Tygh::assign("btn_text", 'Go to homepage');
             Tygh::assign("msg", '404 - The Page can\'t be found');
-            
-            Tygh::display('errors/404.tpl'); 
+
+            Tygh::display('errors/404.tpl');
         }
     }
 
