@@ -5,6 +5,7 @@ namespace core\engine;
 use app\core\DB;
 use app\core\Tygh;
 use app\functions\lang;
+use app\core\Session;
 
 require_once APP.'functions/function.lang.php';
 
@@ -145,7 +146,7 @@ class init
     public function route()
     {
         $this->myController = ucfirst($this->myController);
-        
+
         if (!file_exists(APP . 'controllers/' . $this->type . '/'. $this->myController . '.php')) {
             $this->flag++;
         }

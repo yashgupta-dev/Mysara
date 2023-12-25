@@ -10,11 +10,11 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about-us">About Us</a></li>
-                <li><a href="/why-us">Why us</a></li>
-                <li><a href="/testimonial">Testimonial</a></li>
-                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="{route path="welcome"}">Home</a></li>
+                <li><a href="{route path="welcome/about"}">About Us</a></li>
+                <li><a href="{route path="welcome/why"}">Why us</a></li>
+                <li><a href="{route path="welcome/testimonial"}">Testimonial</a></li>
+                <li><a href="{route path="welcome/contact"}">Contact</a></li>
                 <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
                         <li><a href="#">Drop Down 1</a></li>
@@ -37,7 +37,7 @@
             </ul>
         </nav><!-- .navbar -->
 
-        <a class="btn-book-a-table" href="/sign-in">Sign in</a>
+        <a class="btn-book-a-table" href="{route path="auth/login"}">Sign in</a>
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 

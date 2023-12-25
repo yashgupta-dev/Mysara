@@ -1,4 +1,4 @@
-{assign var="title" value="welcome"}
+{assign var="title" value="welcome | about"}
 
 {include file="frontend/common/header.tpl"}
 {include file="frontend/common/menu.tpl"}  
