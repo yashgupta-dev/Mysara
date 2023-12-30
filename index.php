@@ -1,7 +1,9 @@
 <?php
+
+require_once './vendor/autoload.php'; // Path to Composer autoloader
+
 use core\engine\init;
 use core\Web;
-// use core\engine\Startup;
 
 // error reporting 
 ini_set('display_errors', 1);

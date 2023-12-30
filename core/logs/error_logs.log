@@ -2,3 +2,15 @@
 2023-10-07 01:34:27 SMTP Error: Could not authenticate.
 2023-10-07 07:19:33 Message body empty
 2023-10-07 07:21:09 Message body empty
+2023-12-30 11:10:45 - PHP Warning:  Undefined property: app\controllers\frontend\Contact::$requestMethod in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 35
+2023-12-30 11:11:29 - PHP Warning:  Undefined property: app\controllers\frontend\Contact::$request in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 35
+2023-12-30 11:11:29 - PHP Warning:  Attempt to read property "server" on null in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 35
+2023-12-30 11:11:29 - PHP Warning:  Undefined property: app\controllers\frontend\Contact::$request in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 36
+2023-12-30 11:11:29 - PHP Warning:  Attempt to read property "server" on null in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 36
+2023-12-30 11:11:36 - PHP Warning:  Undefined property: app\controllers\frontend\Contact::$request in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 35
+2023-12-30 11:11:36 - PHP Warning:  Attempt to read property "server" on null in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 35
+2023-12-30 11:11:36 - PHP Warning:  Undefined property: app\controllers\frontend\Contact::$request in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 36
+2023-12-30 11:11:36 - PHP Warning:  Attempt to read property "server" on null in /var/www/html/PHP-MVC/app/controllers/frontend/Contact.php on line 36
+2023-12-30 11:15:37 - PHP Warning:  Undefined property: app\controllers\frontend\Welcome::$load in /var/www/html/PHP-MVC/app/controllers/frontend/Welcome.php on line 33
+2023-12-30 11:19:34 - PHP Warning:  Undefined property: app\controllers\frontend\Welcome::$load in /var/www/html/PHP-MVC/app/controllers/frontend/Welcome.php on line 33
+2023-12-30 11:19:35 - PHP Warning:  Undefined property: app\controllers\frontend\Welcome::$load in /var/www/html/PHP-MVC/app/controllers/frontend/Welcome.php on line 33
