@@ -5,6 +5,7 @@ namespace core\engine;
 use app\core\Tygh;
 use core\engine\Database;
 use app\core\Redirect;
+use app\core\Session;
 
 /**
  * startup
@@ -118,8 +119,8 @@ class startup
                 $this->pramater = $pramater;
             }
         } else {
-            
-            Redirect::url('mvc/admin.php?dispatch=dashboard');
+
+            Redirect::url('admin.php?dispatch=dashboard');
         }
     }
 
@@ -165,8 +166,8 @@ class startup
             Tygh::assign("code", '404');
             Tygh::assign("btn_text", 'Go to homepage');
             Tygh::assign("msg", '404 - The Page can\'t be found');
-            
-            Tygh::display('errors/404.tpl'); 
+
+            Tygh::display('errors/404.tpl');
         }
     }
 

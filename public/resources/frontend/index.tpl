@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-          <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+          <img src="{asset path="public/assets/img/hero-img.png"}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         </div>
   
         <div class="row gy-4">
-          <div class="col-lg-7 position-relative about-img" style="background-image: url(assets/img/about.jpg) ;" data-aos="fade-up" data-aos-delay="150">
+          <div class="col-lg-7 position-relative about-img" style="background-image: url({asset path="public/assets/img/about.jpg"}) ;" data-aos="fade-up" data-aos-delay="150">
             <div class="call-us position-absolute">
               <h4>Book a Table</h4>
               <p>+1 5589 55488 55</p>
@@ -59,7 +59,7 @@
               </p>
   
               <div class="position-relative mt-4">
-                <img src="assets/img/about-2.jpg" class="img-fluid" alt="">
+                <img src="{asset path="assets/img/about-2.jpg"}" class="img-fluid" alt="">
                 <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
               </div>
             </div>
@@ -192,7 +192,7 @@
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
+                    <img src="{asset path="public/assets/img/testimonials/testimonials-1.jpg"}" class="img-fluid testimonial-img" alt="">
                   </div>
                 </div>
               </div>
@@ -216,7 +216,7 @@
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
+                    <img src="{asset path="public/assets/img/testimonials/testimonials-2.jpg"}" class="img-fluid testimonial-img" alt="">
                   </div>
                 </div>
               </div>
@@ -240,7 +240,7 @@
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
+                    <img src="{asset path="assets/img/testimonials/testimonials-3.jpg"}" class="img-fluid testimonial-img" alt="">
                   </div>
                 </div>
               </div>
@@ -264,7 +264,7 @@
                     </div>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
+                    <img src="{asset path="assets/img/testimonials/testimonials-4.jpg"}" class="img-fluid testimonial-img" alt="">
                   </div>
                 </div>
               </div>

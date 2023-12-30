@@ -9,11 +9,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
   <!-- Favicons -->
-  <link href="/mvc/public/assets/img/favicon.png" rel="icon">
-  <link href="/mvc/public/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{asset path="public/assets/img/favicon.png"}" rel="icon">
+  <link href="{asset path="public/assets/img/apple-touch-icon.png"}" rel="apple-touch-icon">
 
-  <link rel="stylesheet" href="/mvc/public/assets/auth/style.css" />
-  <link href="/mvc/public/assets/css/toaster/toastr.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{asset path="public/assets/auth/style.css"}" />
+  <link href="{asset path="public/assets/css/toaster/toastr.min.css"}" rel="stylesheet">
 
 </head>
 
@@ -28,18 +28,18 @@
               <div class="row">
                 <div class="col-md-4 pr-md-0">
                   <div class="auth-left-wrapper"
-                    style="background-image: linear-gradient(to right, #ab3c3c26,#7f9cf552),url('/mvc/public/assets/img/pattern_5.png');">
+                    style="background-image: linear-gradient(to right, #ab3c3c26,#7f9cf552),url('{asset path="public/assets/img/pattern_5.png"}');">
                   </div>
                 </div>
                 <div class="col-md-8 pl-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
-                    <a href="/mvc/" class="noble-ui-logo d-block mb-2">
+                    <a href="{route path="welcome"}" class="noble-ui-logo d-block mb-2">
                     <h1>Yummy<span>.</span></h1>
                     </a>
 
                     <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.</h5>
 
-                    <form action="/mvc/sign-in" method="post" role="form" class="forms-sample form-ajax p-3 p-md-4">
+                    <form action="{route path="auth/login/index"}" method="post" role="form" class="forms-sample form-ajax p-3 p-md-4">
                       <div class="form-group">
                         <label for="elm_email">E-Mail Address</label>
                         <input id="email" type="email" class="form-control" name="email" />
@@ -58,7 +58,7 @@
                       <div class="form-row">
 
                         <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="/mvc">
+                          <a class="d-block mt-3 text-muted" href="/">
                             <small>Forgot Your Password?</small>
                           </a>
                         </div>
@@ -75,8 +75,8 @@
   </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/mvc/public/assets/css/toaster/toastr.min.js"></script>
-<script src="/mvc/public/assets/js/ajax.js"></script>
+<script src="{asset path='public/assets/js/jquery-3.6.0.min.js'}"></script>
+<script src="{asset path="public/assets/css/toaster/toastr.min.js"}"></script>
+<script src="{asset path="public/assets/js/ajax.js"}"></script>
 
 </html>
