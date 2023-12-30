@@ -102,13 +102,13 @@ class startup
             $urlExplode = (strpos('dispatch=', $urlParts['query']) === true) ? explode('dispatch=', $urlParts['query']) : explode('dispatch=', $urlParts['query']);
 
             $this->urlExplode = !empty($urlExplode[1]) ? $urlExplode[1] : '';
-
+            
             // paramater ( & )
             $pramater = explode('&', $this->urlExplode);
 
             // dispatch
-            $routeData = explode('/', $pramater[0]);
-
+            $routeData = explode('.', $pramater[0]);
+            
             if (!empty($routeData[0])) {
                 $this->myController = $routeData[0];
             }
@@ -120,7 +120,7 @@ class startup
             }
         } else {
 
-            Redirect::url('admin.php?dispatch=dashboard');
+            Redirect::url('admin.php?dispatch=auth.login');
         }
     }
 
