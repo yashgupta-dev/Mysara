@@ -4,5 +4,11 @@
         "phpmailer/phpmailer": "^6.8.1",
         "giggsey/locale": "^1.7|^2.0",
         "symfony/polyfill-mbstring": "^1.17"
+    },
+    
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
     }
 }
