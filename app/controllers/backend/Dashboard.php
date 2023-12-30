@@ -2,6 +2,7 @@
 
 namespace app\controllers\backend;
 
+use app\core\Tygh;
 use app\controllers\BaseController;
 
 class Dashboard extends BaseController
@@ -25,6 +26,6 @@ class Dashboard extends BaseController
      */
     public function index()
     {
-        echo '<pre> asdjagsdjgajgjahgjh ';
+        Tygh::display('backend/index');
     }
 }

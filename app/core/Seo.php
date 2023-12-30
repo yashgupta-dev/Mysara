@@ -26,7 +26,7 @@ class Seo
                 $url = $query->fetch_assoc()['seo_url'];
                 return BASE_URL.$url;
             } else {
-                return BASE_URL.'index.php/' . $params['path'];
+                return BASE_URL . $params['path'];
             }
         }
         
