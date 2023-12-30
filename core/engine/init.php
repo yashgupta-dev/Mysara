@@ -16,7 +16,7 @@ use app\helpers\SeoTrait as HelpersSeoTrait;
 class init
 {
     use HelpersSeoTrait;
-    
+
     /**
      * __construct
      *
@@ -30,7 +30,7 @@ class init
 
         $this->route();
     }
-
+    
     /**
      * autoload
      *
@@ -40,7 +40,7 @@ class init
     public function autoload($class)
     {
         $classFile = str_replace('\\', '/', $class) . '.php';
-        
+
         if (file_exists($classFile)) {
             require_once $classFile;
         }

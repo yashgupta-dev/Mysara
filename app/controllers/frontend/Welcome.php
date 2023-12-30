@@ -13,6 +13,13 @@ class Welcome extends BaseController
      * @var array
      */
     private $error = array();
+    
+    /**
+     * language
+     *
+     * @var array
+     */
+    private $language = [];
 
     /**
      * __construct
