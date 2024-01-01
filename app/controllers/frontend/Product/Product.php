@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\frontend;
+namespace app\controllers\frontend\product;
 
 use app\controllers\BaseController;
 use app\core\Tygh;

@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controllers\frontend;
+namespace app\controllers\frontend\product;
 
 use app\controllers\BaseController;
 use app\core\Tygh;
 
-class Checkout extends BaseController
+class Category extends BaseController
 {    
     /**
      * error
@@ -39,7 +39,7 @@ class Checkout extends BaseController
      */
     public function index() {
        
-        Tygh::display('frontend/checkout/checkout');
+        Tygh::display('frontend/product/category');
         
     }
 

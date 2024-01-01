@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controllers\frontend;
+namespace app\controllers\frontend\blog;
 
 use app\controllers\BaseController;
 use app\core\Tygh;
 
-class Category extends BaseController
+class Blog extends BaseController
 {    
     /**
      * error
@@ -39,8 +39,13 @@ class Category extends BaseController
      */
     public function index() {
        
-        Tygh::display('frontend/product/category');
+        Tygh::display('frontend/blogs/blog');
         
+    }
+
+    public function view() {
+        Tygh::display('frontend/blogs/blog-detail');
+
     }
 
 }

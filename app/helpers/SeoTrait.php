@@ -75,43 +75,33 @@ trait SeoTrait
         $classUrl = str_replace('index.php/', '', $urlParts['path']);
 
         $urlExplode = (strpos('index.php', $classUrl) === true) ? explode('index.php/', $classUrl) : explode(Parent_folder, $classUrl);
-
+        
         $this->urlExplode = !empty($urlExplode[1]) ? $urlExplode[1] : $urlExplode[0];
 
         // seo urls
         $this->seoUrls();
 
-        $routeData = explode('/', $this->urlExplode);
+        $urlExplode = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$this->urlExplode);
+        $urlExplodeArray = explode('/', $urlExplode);
 
-        if (count($routeData) > 2) {
-            // Get the last element
-            $lastElement = array_pop($routeData);
-
-            // Implode the remaining elements
-            $implodedString = implode('/', $routeData);
-
-            if (!empty($implodedString)) {
-                $this->myController = $implodedString;
-            }
-
-            if (!empty($lastElement) && $lastElement != '') {
-                $this->myMethod = $lastElement;
-            }
-            if (!empty($urlParts['query']) && $urlParts['query'] != '') {
-                $this->pramater = $urlParts['query'];
-            }
-        } else {
-            if (!empty($routeData[0])) {
-                $this->myController = $routeData[0];
-            }
-
-            if (!empty($routeData[1]) && $routeData[1] != '') {
-                $this->myMethod = $routeData[1];
-            }
-            if (!empty($urlParts['query']) && $urlParts['query'] != '') {
-                $this->pramater = $urlParts['query'];
-            }
+        // Capitalize the first character of each element in the exploded array
+        foreach ($urlExplodeArray as &$element) {
+            $element = ucfirst($element);
         }
+        
+		// Break apart the route
+		while ($urlExplodeArray) {
+			$file = APP . 'controllers/' . $this->type . '/'  . implode('/', $urlExplodeArray) . '.php';
+    
+			if (is_file($file)) {
+                
+				$this->myController = implode('/', $urlExplodeArray);						
+				break;
+			} else {
+				$this->myMethod = array_pop($urlExplodeArray);
+			}
+		}
+
     }
 
     /**
@@ -121,20 +111,20 @@ trait SeoTrait
      */
     public function route()
     {
-        $this->myController = ucfirst($this->myController);
 
         if (!file_exists(APP . 'controllers/' . $this->type . '/' . $this->myController . '.php')) {
             $this->flag++;
         }
 
         if ($this->flag == 0) {
+            
             // Include the controller file
 
-            include(APP . 'controllers/' . $this->type . '/' . $this->myController . ".php");
+            include(APP . 'controllers/' . $this->type . '/' .  $this->myController . ".php");
 
             // Create an instance of the controller
             $this->myController = str_replace('/', '\\', $this->myController);
-
+            
             $controllerClass = '\\app\\controllers\\' . $this->type . '\\' . $this->myController;
 
             $CallingtheController = new $controllerClass();

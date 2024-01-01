@@ -22,27 +22,27 @@
                             <div class="megamenu">
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Women's Collection</li>
-                                    <li><a href="{route path="category?search=dresses"}">Dresses</a></li>
-                                    <li><a href="{route path="category?search=Blouses"}">Blouses &amp; Shirts</a></li>
-                                    <li><a href="{route path="category?search=T-shirt"}">T-shirts</a></li>
-                                    <li><a href="{route path="category?search=Rompers"}">Rompers</a></li>
-                                    <li><a href="{route path="category?search=Bras"}">Bras &amp; Panties</a></li>
+                                    <li><a href="{route path="product/category?search=dresses"}">Dresses</a></li>
+                                    <li><a href="{route path="product/category?search=Blouses"}">Blouses &amp; Shirts</a></li>
+                                    <li><a href="{route path="product/category?search=T-shirt"}">T-shirts</a></li>
+                                    <li><a href="{route path="product/category?search=Rompers"}">Rompers</a></li>
+                                    <li><a href="{route path="product/category?search=Bras"}">Bras &amp; Panties</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Men's Collection</li>
-                                    <li><a href="{route path="category"}">T-Shirts</a></li>
-                                    <li><a href="{route path="category?search=Polo"}">Polo</a></li>
-                                    <li><a href="{route path="category?search=Shirts"}">Shirts</a></li>
-                                    <li><a href="{route path="category?search=Jackets"}">Jackets</a></li>
-                                    <li><a href="{route path="category?search=Trench"}">Trench</a></li>
+                                    <li><a href="{route path="product/category"}">T-Shirts</a></li>
+                                    <li><a href="{route path="product/category?search=Polo"}">Polo</a></li>
+                                    <li><a href="{route path="product/category?search=Shirts"}">Shirts</a></li>
+                                    <li><a href="{route path="product/category?search=Jackets"}">Jackets</a></li>
+                                    <li><a href="{route path="product/category?search=Trench"}">Trench</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Kid's Collection</li>
-                                    <li><a href="{route path="category?search=Dresses"}">Dresses</a></li>
-                                    <li><a href="{route path="category?search=Shirts"}">Shirts</a></li>
-                                    <li><a href="{route path="category"}">T-shirts</a></li>
-                                    <li><a href="{route path="category?search=Jackets"}">Jackets</a></li>
-                                    <li><a href="{route path="category?search=Trench"}">Trench</a></li>
+                                    <li><a href="{route path="product/category?search=Dresses"}">Dresses</a></li>
+                                    <li><a href="{route path="product/category?search=Shirts"}">Shirts</a></li>
+                                    <li><a href="{route path="product/category"}">T-shirts</a></li>
+                                    <li><a href="{route path="product/category?search=Jackets"}">Jackets</a></li>
+                                    <li><a href="{route path="product/category?search=Trench"}">Trench</a></li>
                                 </ul>
                                 <div class="single-mega cn-col-4">
                                     <img src="{asset path='public/assets/img/bg-img/bg-6.jpg'}" alt="">
@@ -52,16 +52,16 @@
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="{route path="welcome"}">Home</a></li>
-                                <li><a href="{route path="category"}">Shop</a></li>
-                                <li><a href="{route path="product?product_id=2323"}">Product Details</a></li>
-                                <li><a href="{route path="checkout"}">Checkout</a></li>
-                                <li><a href="{route path="blog"}">Blog</a></li>
-                                <li><a href="{route path="blog/view?blog_id=10"}">Single Blog</a></li>
+                                <li><a href="{route path="product/category"}">Shop</a></li>
+                                <li><a href="{route path="product/product?product_id=2323"}">Product Details</a></li>
+                                <li><a href="{route path="checkout/checkout"}">Checkout</a></li>
+                                <li><a href="{route path="blog/blog"}">Blog</a></li>
+                                <li><a href="{route path="blog/blog/view?blog_id=10"}">Single Blog</a></li>
                                 <li><a href="#">Regular Page</a></li>
                                 <li><a href="{route path="welcome/contact"}">Contact</a></li>
                             </ul>
                         </li>
-                        <li><a href="{route path="blog"}">Blog</a></li>
+                        <li><a href="{route path="blog/blog"}">Blog</a></li>
                         <li><a href="{route path="welcome/contact"}">Contact</a></li>
                     </ul>
                 </div>
@@ -84,7 +84,7 @@
             </div>
             <!-- User Login Info -->
             <div class="user-login-info">
-                <a href="#"><img src="{asset path='public/assets/img/core-img/user.svg'}" alt=""></a>
+                <a href="{route path="auth/login"}"><img src="{asset path='public/assets/img/core-img/user.svg'}" alt=""></a>
             </div>
             <!-- Cart Area -->
             <div class="cart-area">
