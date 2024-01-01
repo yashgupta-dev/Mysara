@@ -77,10 +77,10 @@
  <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="{asset path='public/assets/js/jquery/jquery-2.2.4.min.js'}"></script>
+    <script src="{asset path='public/assets/js/jquery/jquery-3.6.0.min.js'}"></script>
 
-    <link rel="stylesheet" href="{asset path='public/assets/vendor/toaster/toastr.min.js'}">
-    <link rel="stylesheet" href="{asset path='public/assets/js/jquery/ajax.js'}">
+    <script src="{asset path='public/assets/vendor/toaster/toastr.min.js'}"></script>
+    <script src="{asset path='public/assets/js/jquery/ajax.js'}"></script>
     <!-- Popper js -->
     <script src="{asset path='public/assets/js/popper.min.js'}"></script>
     <!-- Bootstrap js -->

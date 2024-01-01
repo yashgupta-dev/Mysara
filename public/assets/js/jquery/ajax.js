@@ -24,8 +24,7 @@
   }
 
   let forms = document.querySelectorAll('.form-ajax');
-
-  console.log('sADASD '+forms);
+  
   forms.forEach(function (e) {
 
     e.addEventListener('submit', function (event) {

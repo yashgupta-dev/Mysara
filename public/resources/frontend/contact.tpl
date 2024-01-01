@@ -13,7 +13,7 @@
     <div class="contact-area d-flex align-items-center">
 
         {* <div class="google-map"> *}
-            <form action="{route path="contact"}" method="post" role="form" class="php-email-form form-ajax p-3 p-md-4">
+            <form action="{route path="contact"}" method="post" role="form" class="form-ajax p-3 p-md-4">
                 <div class="row">
                     <div class="col-xl-6 form-group">
                         <input type="text" name="name" class="form-control" id="name" placeholder="Your Name">
