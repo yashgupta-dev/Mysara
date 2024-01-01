@@ -82,17 +82,18 @@ trait SeoTrait
         $this->seoUrls();
 
         $urlExplode = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$this->urlExplode);
-        $urlExplodeArray = explode('/', $urlExplode);
+        
+        $urlExplodeArray = explode('/', ($urlExplode) ? $urlExplode : Default_controller);
 
         // Capitalize the first character of each element in the exploded array
         foreach ($urlExplodeArray as &$element) {
             $element = ucfirst($element);
         }
-        
+
 		// Break apart the route
 		while ($urlExplodeArray) {
 			$file = APP . 'controllers/' . $this->type . '/'  . implode('/', $urlExplodeArray) . '.php';
-    
+            
 			if (is_file($file)) {
                 
 				$this->myController = implode('/', $urlExplodeArray);						
