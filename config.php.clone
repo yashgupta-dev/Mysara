@@ -3,6 +3,8 @@
 define('https','http://localhost/Your-Directory/');
 define('http','http://localhost/Your-Directory/');
 
+define('BASE_URL','http://localhost/Your-Directory/');
+
 define('ROOT','/var/www/html/Your-Directory/');
 define('APP', '/var/www/html/Your-Directory/app/');
 define('CORE','/var/www/html/Your-Directory/core/');
