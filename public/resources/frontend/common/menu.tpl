@@ -1,45 +1,97 @@
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-        <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!-- <img src="assets/img/logo.png" alt=""> -->
-            <h1>Yummy<span>.</span></h1>
-        </a>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a href="{route path="welcome"}">Home</a></li>
-                <li><a href="{route path="welcome/about"}">About Us</a></li>
-                <li><a href="{route path="welcome/why"}">Why us</a></li>
-                <li><a href="{route path="welcome/testimonial"}">Testimonial</a></li>
-                <li><a href="{route path="welcome/contact"}">Contact</a></li>
-                <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+<header class="header_area">
+    <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
+        <!-- Classy Menu -->
+        <nav class="classy-navbar" id="essenceNav">
+            <!-- Logo -->
+            <a class="nav-brand" href="{route path="welcome"}"><img src="{asset path='public/assets/img/core-img/logo.png'}"
+                    alt=""></a>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+                <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+            <!-- Menu -->
+            <div class="classy-menu">
+                <!-- close btn -->
+                <div class="classycloseIcon">
+                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                </div>
+                <!-- Nav Start -->
+                <div class="classynav">
                     <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
+                        <li><a href="#">Shop</a>
+                            <div class="megamenu">
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Women's Collection</li>
+                                    <li><a href="{route path="category?search=dresses"}">Dresses</a></li>
+                                    <li><a href="{route path="category?search=Blouses"}">Blouses &amp; Shirts</a></li>
+                                    <li><a href="{route path="category?search=T-shirt"}">T-shirts</a></li>
+                                    <li><a href="{route path="category?search=Rompers"}">Rompers</a></li>
+                                    <li><a href="{route path="category?search=Bras"}">Bras &amp; Panties</a></li>
+                                </ul>
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Men's Collection</li>
+                                    <li><a href="{route path="category"}">T-Shirts</a></li>
+                                    <li><a href="{route path="category?search=Polo"}">Polo</a></li>
+                                    <li><a href="{route path="category?search=Shirts"}">Shirts</a></li>
+                                    <li><a href="{route path="category?search=Jackets"}">Jackets</a></li>
+                                    <li><a href="{route path="category?search=Trench"}">Trench</a></li>
+                                </ul>
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Kid's Collection</li>
+                                    <li><a href="{route path="category?search=Dresses"}">Dresses</a></li>
+                                    <li><a href="{route path="category?search=Shirts"}">Shirts</a></li>
+                                    <li><a href="{route path="category"}">T-shirts</a></li>
+                                    <li><a href="{route path="category?search=Jackets"}">Jackets</a></li>
+                                    <li><a href="{route path="category?search=Trench"}">Trench</a></li>
+                                </ul>
+                                <div class="single-mega cn-col-4">
+                                    <img src="{asset path='public/assets/img/bg-img/bg-6.jpg'}" alt="">
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="{route path="welcome"}">Home</a></li>
+                                <li><a href="{route path="category"}">Shop</a></li>
+                                <li><a href="{route path="product?product_id=2323"}">Product Details</a></li>
+                                <li><a href="{route path="checkout"}">Checkout</a></li>
+                                <li><a href="{route path="blog"}">Blog</a></li>
+                                <li><a href="{route path="blog/view?blog_id=10"}">Single Blog</a></li>
+                                <li><a href="#">Regular Page</a></li>
+                                <li><a href="{route path="welcome/contact"}">Contact</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="{route path="blog"}">Blog</a></li>
+                        <li><a href="{route path="welcome/contact"}">Contact</a></li>
                     </ul>
-                </li> -->
-                {block name="links"}{/block}
-                
-            </ul>
-        </nav><!-- .navbar -->
+                </div>
+                <!-- Nav End -->
+            </div>
+        </nav>
 
-        <a class="btn-book-a-table" href="{route path="auth/login/index"}">Sign in</a>
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <!-- Header Meta Data -->
+        <div class="header-meta d-flex clearfix justify-content-end">
+            <!-- Search Area -->
+            <div class="search-area">
+                <form action="#" method="post">
+                    <input type="search" name="search" id="headerSearch" placeholder="Type for search">
+                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
+            <!-- Favourite Area -->
+            <div class="favourite-area">
+                <a href="#"><img src="{asset path='public/assets/img/core-img/heart.svg'}" alt=""></a>
+            </div>
+            <!-- User Login Info -->
+            <div class="user-login-info">
+                <a href="#"><img src="{asset path='public/assets/img/core-img/user.svg'}" alt=""></a>
+            </div>
+            <!-- Cart Area -->
+            <div class="cart-area">
+                <a href="#" id="essenceCartBtn"><img src="{asset path='public/assets/img/core-img/bag.svg'}" alt="">
+                    <span>3</span></a>
+            </div>
+        </div>
 
     </div>
-</header><!-- End Header -->
+</header>
