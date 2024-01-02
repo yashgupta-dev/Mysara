@@ -100,24 +100,36 @@ class startup
 
         if (!empty($urlParts['query'])) {
             $urlExplode = (strpos('dispatch=', $urlParts['query']) === true) ? explode('dispatch=', $urlParts['query']) : explode('dispatch=', $urlParts['query']);
-
+            
             $this->urlExplode = !empty($urlExplode[1]) ? $urlExplode[1] : '';
             
             // paramater ( & )
             $pramater = explode('&', $this->urlExplode);
 
             // dispatch
-            $routeData = explode('.', $pramater[0]);
+            $routeData = str_replace('.','/',$pramater[0]);
             
-            if (!empty($routeData[0])) {
-                $this->myController = $routeData[0];
+            $urlExplode = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$routeData);
+            $urlExplodeArray = explode('/', $urlExplode);
+    
+            // Capitalize the first character of each element in the exploded array
+            foreach ($urlExplodeArray as &$element) {
+                $element = ucfirst($element);
             }
-            if (!empty($routeData[1]) && $routeData[1] != '') {
-                $this->myMethod = $routeData[1];
+
+            // Break apart the route
+            while ($urlExplodeArray) {
+                $file = APP . 'controllers/' . $this->type . '/'  . implode('/', $urlExplodeArray) . '.php';
+        
+                if (is_file($file)) {
+                    
+                    $this->myController = implode('/', $urlExplodeArray);						
+                    break;
+                } else {
+                    $this->myMethod = array_pop($urlExplodeArray);
+                }
             }
-            if (!empty($pramater) && $pramater != '') {
-                $this->pramater = $pramater;
-            }
+
         } else {
 
             Redirect::url('admin.php?dispatch=auth.login');
@@ -131,7 +143,6 @@ class startup
      */
     public function route()
     {
-        $this->myController = ucfirst($this->myController);
 
         if (!file_exists(APP . 'controllers/' . $this->type . '/' . $this->myController . '.php')) {
             $this->flag++;
@@ -141,6 +152,9 @@ class startup
             // Include the controller file
             include(APP . 'controllers/' . $this->type . '/' . $this->myController . ".php");
 
+            // Create an instance of the controller
+            $this->myController = str_replace('/', '\\', $this->myController);
+            
             // Create an instance of the controller
             $controllerClass = '\\app\\controllers\\' . $this->type . '\\' . $this->myController;
 

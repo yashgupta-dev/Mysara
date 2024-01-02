@@ -4,14 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Northern India Tourism | Sign in</title>
+  <title>Sign-in</title>
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
   <!-- Favicons -->
-  <link href="{asset path="public/assets/img/favicon.png"}" rel="icon">
-  <link href="{asset path="public/assets/img/apple-touch-icon.png"}" rel="apple-touch-icon">
-
+  <link rel="icon" href="{asset path='public/assets/img/core-img/favicon.ico'}">
+  
   <link rel="stylesheet" href="{asset path="public/assets/auth/style.css"}" />
   <link href="{asset path="public/assets/css/toaster/toastr.min.css"}" rel="stylesheet">
 
