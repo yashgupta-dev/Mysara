@@ -1,0 +1,13 @@
+2024-04-14 02:34:41 Field 'recovery_key' doesn't have a default value
+2024-04-14 05:26:41 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:26:45 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:27:01 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:28:03 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:28:26 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:28:41 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:29:33 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:31:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:32:54 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:33:31 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:33:46 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 = 'recovery_key'  WHERE 1 AND email = "customer@example.com"' at line 1
+2024-04-14 05:59:30 Unknown column 'recovery_code' in 'field list'

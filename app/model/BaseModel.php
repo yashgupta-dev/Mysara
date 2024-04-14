@@ -2,6 +2,7 @@
 namespace app\model;
 
 use app\core\DB;
+use Exception;
 
 /**
  * BaseModel
@@ -20,7 +21,7 @@ class BaseModel
      * @var mixed
      */
     private $conn;
-
+    
     /**
      * __construct
      *
@@ -28,11 +29,7 @@ class BaseModel
      */
     public function __construct()
     {
-        // To get the global database connection instance
-        $db = DB::get();
-
-        // To get the connection object
-        $this->conn = $db->get();
+        
     }
 
     /**
@@ -43,7 +40,7 @@ class BaseModel
      * @param  array $where
      * @return array
      */
-    public function select($table = '', $selection = array(), $where = array(), $func = 'fetch_assoc()')
+    public function select($table = '', $selection = array(), $where = array(), $func = 'fetch_assoc')
     {
         try {
             $query = '';
@@ -64,9 +61,11 @@ class BaseModel
                 }
             }
 
-            return $this->conn->query($query)->$func;
+            return $func(DB::get()->get->query($query));
+            
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
+            return ['success'=> false, 'message' => $e->getMessage()];
         }
     }
 
@@ -125,9 +124,12 @@ class BaseModel
 
         try {
 
-            return $this->conn->query($query . '' . $setParams . ' ' . $condition);
+            DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
+            return ['success'=> true, 'message' => 'Changes successfully saved.'];
+
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
+            return ['success'=> false, 'message' => $e->getMessage()];
         }
     }
 
@@ -186,12 +188,28 @@ class BaseModel
 
         try {
 
-            return $this->conn->query($query . '' . $setParams . ' ' . $condition);
-            // get inserted ID            
-            // return $this->conn->getLastId();
+            DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
+            
+            return ['success'=> true, 'message' => 'Changes successfully saved.'];
 
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
+            return ['success'=> false, 'message' => $e->getMessage()];
+            
+        }
+    }
+    
+    /**
+     * getLastId
+     *
+     * @return bool|int
+     */
+    public function getLastId() {
+        try {
+
+            $response = DB::get()->get->getLastId();
+
+        } catch(Exception $e) {
             return false;
         }
     }
@@ -208,7 +226,7 @@ class BaseModel
     //     $query = "INSERT INTO " . DB_PREFIX . "$table";
 
     //     try {            
-    //         return db_query($query,$params);
+    //         $response = DB_query($query,$params);
     //     } catch (\Exception $e) {
 
     //         $this->writeLog($this->logFile,$e->getMessage());
@@ -254,9 +272,12 @@ class BaseModel
 
             try {
 
-                return $this->conn->query($query . '' . $condition);
+                $response = DB::get()->get->query($query . '' . $condition);
+                return ['success'=> true, 'message' => 'Changes successfully saved.'];
+
             } catch (\Exception $e) {
                 $this->_writeLog($this->logFile, $e->getMessage());
+                return ['success'=> false, 'message' => $e->getMessage()];
             }
         }
     }

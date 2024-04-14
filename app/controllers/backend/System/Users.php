@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controllers\backend;
+namespace app\controllers\backend\System;
 
 use app\core\Tygh;
 use app\controllers\BaseController;
 
-class Auth extends BaseController
+class Users extends BaseController
 {
 
     /**
@@ -18,18 +18,14 @@ class Auth extends BaseController
     {
         parent::__construct();
     }
-
+    
     /**
      * index
      *
      * @return void
      */
-    public function login()
-    {
-        Tygh::display('backend/auth/login');
-    }
-    
-    public function forget() {
-        Tygh::display('backend/auth/forget');
+    public function index() {
+        // var_dump(['as']);
+        Tygh::display('backend/system/users');
     }
 }

@@ -202,6 +202,22 @@ class Validation
                     }
                     break;
 
+                case 'equals':
+                    if (!empty($data[$field])) {                        
+
+                        if ($data[$field] !== $ruleValue) {
+                            $valid = false;
+                        }
+                        
+                        if (!$valid) {
+                            $fieldMsg = isset($msgs[$field]) ? $msgs[$field] : $field;
+                            self::$validationError[$field] = $fieldMsg . " doesn't matched ";
+                        }
+
+                    }
+                    
+                    break;
+
                 case 'decimal':
                     if (!empty($data[$field])) {
                         $valid = (is_numeric($data[$field]) && preg_match('/^\d+(\.\d{1,' . $ruleValue . '})?$/', $data[$field])) ? true : false;
@@ -238,7 +254,7 @@ class Validation
 
                         // Phone number and country code to validate
                         $phoneNumber = $data[$field];
-                        $countryCode = $data['phone_code'] ?? 'US'; // Replace with the country code you want to validate against (e.g., US for United States)
+                        $countryCode = $data['phone_code'] ?? 'IN'; // Replace with the country code you want to validate against (e.g., US for United States)
 
 
                         try {

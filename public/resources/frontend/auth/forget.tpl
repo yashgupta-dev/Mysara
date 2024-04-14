@@ -38,35 +38,22 @@
 
                     <h5 class="text-muted font-weight-normal mb-4">{__('sign.text_heading')}</h5>
 
-                    <form action="{route path="auth/login"}" method="post" role="form"
+                    <form action="{route path="auth/forget/forget"}" method="post" role="form"
                       class="form-ajax forms-sample p-3 p-md-4">
                       <div class="form-group">
                         <label for="elm_email">E-Mail Address</label>
                         <input id="email" type="email" class="form-control" name="email" />
                       </div>
 
-                      <div class="form-group">
-                        <label for="elm_password">Password</label>
-                        <input id="password" type="password" class="form-control" name="password" />
-
-                      </div>
-
                       <div class="mt-3">
-                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Sign
-                          in</button>
+                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Forget password?</button>
                       </div>
                       <div class="form-row">
 
                         <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="{route path="auth/forget"}">
-                            <small>{__('sign.text_forget')}</small>
-                          </a>
-                        </div>
-
-                        <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="{route path="auth/register"}">
-                            <small>{__('sign.text_create_account')}</small>
-                          </a>
+                            <a class="d-block mt-3 text-muted" href="{route path="auth/login"}">
+                                <small>{__('register.text_back')}</small>
+                            </a>
                         </div>
                       </div>
                     </form>

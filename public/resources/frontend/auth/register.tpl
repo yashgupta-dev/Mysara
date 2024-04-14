@@ -27,7 +27,7 @@
               <div class="row">
                 <div class="col-md-4 pr-md-0">
                   <div class="auth-left-wrapper"
-                    style="background-image: linear-gradient(to right, #ab3c3c26,#7f9cf552),url('{asset path="public/assets/img/pattern/pattern_5.png"}'); height:100%">
+                    style="background-image: linear-gradient(to right, #ab3c3c26,#7f9cf552),url('{asset path="public/assets/img/pattern/pattern_2.png"}'); height:100%;">
                   </div>
                 </div>
                 <div class="col-md-8 pl-md-0">
@@ -38,34 +38,47 @@
 
                     <h5 class="text-muted font-weight-normal mb-4">{__('sign.text_heading')}</h5>
 
-                    <form action="{route path="auth/login"}" method="post" role="form"
+                    <form action="{route path="auth/register"}" method="post" role="form"
                       class="form-ajax forms-sample p-3 p-md-4">
+
                       <div class="form-group">
-                        <label for="elm_email">E-Mail Address</label>
+                        <label for="elm_firstname">{__('register.text_firstname')}</label>
+                        <input id="firstname" type="firstname" class="form-control" name="firstname" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="elm_lastname">{__('register.text_lastname')}</label>
+                        <input id="lastname" type="lastname" class="form-control" name="lastname" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="elm_email">{__('register.text_email')}</label>
                         <input id="email" type="email" class="form-control" name="email" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_password">Password</label>
-                        <input id="password" type="password" class="form-control" name="password" />
+                        <label for="elm_phone">{__('register.text_phone')}</label>
+                        <input id="phone" type="phone" class="form-control" name="phone" />
+                      </div>
 
+                      <div class="form-group">
+                        <label for="elm_password">{__('register.text_password')}</label>
+                        <input id="password" type="password" class="form-control" name="password" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="elm_confirm_password">{__('register.text_confirm_password')}</label>
+                        <input id="confirm_password" type="password" class="form-control" name="confirm_password" />
                       </div>
 
                       <div class="mt-3">
-                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Sign
-                          in</button>
+                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">{__('register.text_create_account')}</button>
                       </div>
                       <div class="form-row">
 
                         <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="{route path="auth/forget"}">
-                            <small>{__('sign.text_forget')}</small>
-                          </a>
-                        </div>
-
-                        <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="{route path="auth/register"}">
-                            <small>{__('sign.text_create_account')}</small>
+                          <a class="d-block mt-3 text-muted" href="{route path="auth/login"}">
+                            <small>{__('register.text_back')}</small>
                           </a>
                         </div>
                       </div>

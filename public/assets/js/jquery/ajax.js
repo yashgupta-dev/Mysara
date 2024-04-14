@@ -8,7 +8,7 @@
 
   toastr.options = {
     "closeButton": true,
-    "debug": false,
+    "debug": true,
     "newestOnTop": true,
     "progressBar": true,
     "positionClass": 'toast-bottom-right',
@@ -32,6 +32,7 @@
 
       
       let thisForm = this;
+      let btnText = 'Submit';
       
       removeErrorDivs(thisForm); // remove errors;
 
@@ -45,6 +46,7 @@
       }
       
       thisForm.button.setAttribute('disabled','disabled');
+      btnText = thisForm.button.innerHTML;
       thisForm.button.innerHTML = 'wait..';
       // thisForm.querySelector('.error-message').classList.remove('d-block');
       // thisForm.querySelector('.sent-message').classList.remove('d-block');
@@ -53,11 +55,11 @@
 
       formData.append('is_ajax', '1'); // Append the is_ajax field with the value '1'
       
-      call(thisForm, action, method, formData);
+      call(thisForm, action, method, formData, btnText);
     });
   });
 
-  function call(thisForm, action, method, formData) {
+  function call(thisForm, action, method, formData, btnText) {
 
     fetch(action, {
       method: method,
@@ -74,7 +76,7 @@
       })
       .then(data => {
         thisForm.button.removeAttribute('disabled');
-        thisForm.button.innerHTML = "Submit";
+        thisForm.button.innerHTML = btnText;
         // thisForm.querySelector('.loading').classList.remove('d-block');
 
         var res = JSON.parse(data);
@@ -89,16 +91,22 @@
           thisForm.reset(); 
           toastr.success('Success',res.message);
         }
+
+        
+        if(res.redirect_url) {
+          window.location.href = res.redirect_url;
+        }
+        
       })
       .catch((error) => {
-        displayError(thisForm, error);
+        displayError(thisForm, error, btnText);
       });
   }
 
-  function displayError(thisForm, error) {
+  function displayError(thisForm, error, btnText) {
     toastr.error('Error',error);
     thisForm.button.removeAttribute('disabled');
-    thisForm.button.innerHTML = "Submit";
+    thisForm.button.innerHTML = btnText;
 
     // thisForm.querySelector('.loading').classList.remove('d-block');
     // thisForm.querySelector('.error-message').innerHTML = error;
@@ -106,21 +114,23 @@
   }
 
   function errorCreate(errors, formData) {
+    if(errors.length == undefined) {
+      $.each(errors, function (i, v) {
+        var errorText = `<div class="text-danger" id="errors" style="font-size:12px;"><small>${v}</small></div>`;
+        
+        var id = `#${i}`;
+        toastr.error('Error',v);
+        if ($(formData).find(id).length) {
+          $(formData).find(id).css({
+            'border': '1px solid red'
+          });
+          $(formData).find(id).parent().append(errorText);
+        }
 
-    $.each(errors, function (i, v) {
-
-      var errorText = `<div class="text-danger" id="errors" style="font-size:12px;"><small>${v}</small></div>`;
-      
-      var id = `#${i}`;
-      toastr.error('Erro',v);
-      if ($(formData).find(id).length) {
-        $(formData).find(id).css({
-          'border': '1px solid red'
-        });
-        $(formData).find(id).parent().append(errorText);
-      }
-
-    });
+      });
+    } else {
+      toastr.error('Error',errors);
+    }
   }
 
   function removeErrorDivs(formData) {

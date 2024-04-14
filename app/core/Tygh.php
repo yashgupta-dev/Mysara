@@ -61,6 +61,11 @@ class Tygh
         $file_path = (strpos($file_path, '.tpl') === false) ? $file_path . '.tpl' : $file_path;
         self::getInstance()->smarty->display($file_path);
     }
+
+    public static function fetch($file_path) {
+        $file_path = (strpos($file_path, '.tpl') === false) ? $file_path . '.tpl' : $file_path;
+        return self::getInstance()->smarty->fetch($file_path);
+    }
     
     /**
      * getInstance

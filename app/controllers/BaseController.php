@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 // use core\View;
-use app\model\MyModel;
+
+use app\core\Redirect;
+use app\core\Setting;
 use app\core\validation\Validation;
 
 class BaseController
@@ -19,21 +21,26 @@ class BaseController
     protected $requestParam;
 
     /**
-     * @var object this variable is used to run the model method in class.
+     * @var array|string $_SERVER data is save under this variable
      */
-    protected $loadModel;
+    protected $server;
+
+    protected $registry;
+
+    protected $redirect;
+
+    protected $setting;
 
     /**
      * BaseController constructor.
      *
-     * @param string $mode
      */
     public function __construct()
-    {
-        $this->loadModel = new MyModel(); // model
-    
+    {    
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-
         $this->requestParam = $_REQUEST;
+        $this->server = $_SERVER;
+        $this->redirect = new Redirect();
+        $this->setting = new Setting();
     }
 }
