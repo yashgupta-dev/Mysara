@@ -8,13 +8,6 @@ use app\core\Tygh;
 class Welcome extends BaseController
 {    
     /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-    
-    /**
      * language
      *
      * @var array

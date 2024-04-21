@@ -4,6 +4,7 @@ function smarty_function_func($params, $smarty)
 {
     require_once './app/controllers/function/function.php';
 
+    print_r($params);
     if (!empty($params['name'])) {
         $functionName = $params['name'];
         // Check if the function exists and call it without parameters

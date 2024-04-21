@@ -56,8 +56,23 @@ class AuthModel extends BaseModel
      * @param  string $email
      * @return array
      */
-    public function selectUser(string $email) {
-        return $this->select('users',array('firstname','email','password'),array('email' => $email),'mysqli_fetch_assoc');
+    public function selectUser(string $email, $user_type = "C") {
+        $fileds = [
+            'id',
+            'firstname',
+            'lastname',
+            'user_type',
+            'username',
+            'email',
+            'password',
+            'phone',
+            'active',
+            'last_updated_password_at',
+            'custom_fields',
+            'created_at',
+            'updated_at',
+        ];
+        return $this->select('users', $fileds, array('email' => $email,'user_type' => $user_type),'mysqli_fetch_assoc');
     }
     
     /**
@@ -66,9 +81,9 @@ class AuthModel extends BaseModel
      * @param  mixed $email
      * @return bool
      */
-    public function generateRecoveryKey(string $email) {
+    public function generateRecoveryKey(string $email, $user_type = 'C') {
         $recoveryKey = Response::codegenerate(32);
-        $this->update('users',array('recovery_key' => $recoveryKey),array('email' => $email));
+        $this->update('users',array('recovery_key' => $recoveryKey),array('email' => $email,'user_type' => $user_type));
         return $recoveryKey;
     }
     
@@ -78,12 +93,12 @@ class AuthModel extends BaseModel
      * @param  mixed $data
      * @return bool
      */
-    public function changePassword(array $data) {
+    public function changePassword(array $data, $user_type = 'C') {
         return $this->update('users',array(
             'password' => password_hash($data['confirm_password'],PASSWORD_DEFAULT),
             'recovery_key' => '',
             'last_updated_password_at' => date('Y-m-d h:i:s')
-        ),array('email' => $data['email']));
+        ),array('email' => $data['email'],'user_type' => $user_type));
     }
 
 }

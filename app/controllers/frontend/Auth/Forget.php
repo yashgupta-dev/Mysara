@@ -13,16 +13,6 @@ use app\core\validation\Validation;
 
 class Forget extends BaseController
 {   
-
-    /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-
-    protected $registerModel;
-
     /**
      * __construct
      *
@@ -32,7 +22,7 @@ class Forget extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->registerModel = new AuthModel();
+        $this->model = new AuthModel();
     }
 
     public function index() {
@@ -63,7 +53,7 @@ class Forget extends BaseController
 
             } else {
                 // create recovery key
-                $res = $this->registerModel->generateRecoveryKey($this->requestParam['email']);
+                $res = $this->model->generateRecoveryKey($this->requestParam['email']);
                 if($res) {           
                     // email send
                     Tygh::assign('link',$this->redirect->link('auth/forget/update?code='.$res.'',['email'=>$this->requestParam['email']]));
@@ -142,7 +132,7 @@ class Forget extends BaseController
 
             } else {
                 // create recovery key
-                $res = $this->registerModel->changePassword($this->requestParam);
+                $res = $this->model->changePassword($this->requestParam);
                 if($res) {           
                     // email send
                     $template = Tygh::fetch('frontend/auth/mail/password_update');

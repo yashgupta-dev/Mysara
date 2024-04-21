@@ -1,12 +1,12 @@
 <?php
 
-namespace app\controllers\backend\System;
+namespace app\controllers\backend;
 
 use app\core\Tygh;
 use app\controllers\BaseController;
-use app\model\Backend\SettingModel;
+use app\model\Backend\CustomerModel;
 
-class Users extends BaseController
+class Customers extends BaseController
 {
     /**
      * __construct
@@ -17,19 +17,22 @@ class Users extends BaseController
     public function __construct()
     {
         parent::__construct();
+        
         $this->executeMiddleware($this->requestParam, ['AuthMiddleware']);
-        $this->model = new SettingModel();
+
+        $this->model = new CustomerModel();
     }
-    
+
     /**
      * index
      *
      * @return void
      */
-    public function index() {
-        $users = $this->model->getUsers($this->requestParam);
+    public function index()
+    {
+        $customers = $this->model->getCustomers($this->requestParam);
         
-        Tygh::assign('users',$users);
-        Tygh::display('backend/system/users');
+        Tygh::assign('customers',$customers);
+        Tygh::display('backend/customers/lists');
     }
 }

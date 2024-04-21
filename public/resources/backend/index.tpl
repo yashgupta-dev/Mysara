@@ -8,7 +8,7 @@
     <div class="layout-container">
       {* {$menu} *}
       {block name="menu"}
-        {include file="backend/layouts/menu.tpl"}
+        {include file="backend/common/menu.tpl"}
       {/block}
       <!-- Layout container -->
       <div class="layout-page">

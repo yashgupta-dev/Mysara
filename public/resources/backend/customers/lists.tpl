@@ -42,19 +42,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {foreach from=$users item=user key=key}
+                                        {foreach from=$customers item=customer key=key}
                                             <tr>
                                                 <td scope="row">
-                                                    <input type="checkbox" value="{$user.id}" name="ids" id="user_ids"/>                                                    
+                                                    <input type="checkbox" value="{$customer.id}" name="ids" id="customer_ids"/>                                                    
                                                 </td>
-                                                <td>{$user.name}</td>
-                                                <td><a href="mailto:{$user.email}">{$user.email}</a></td>
-                                                <td><a href="tel:{$user.phone}">{$user.phone}</a></td>
+                                                <td>{$customer.name}</td>
+                                                <td><a href="mailto:{$customer.email}">{$customer.email}</a></td>
+                                                <td><a href="tel:{$customer.phone}">{$customer.phone}</a></td>
                                                 
-                                                <td>{$func->fn_get_status($user.active)}</td>
-                                                {* <td>{$user.profile_id}</td> *}
-                                                <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$user.created_at)}</td>
-                                                {* <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$user.updated_at)}</td> *}
+                                                <td>{$func->fn_get_status($customer.active)}</td>
+                                                {* <td>{$customer.profile_id}</td> *}
+                                                <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$customer.created_at)}</td>
+                                                {* <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$customer.updated_at)}</td> *}
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>

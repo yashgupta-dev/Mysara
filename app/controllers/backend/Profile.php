@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controllers\backend\System;
+namespace app\controllers\backend;
 
 use app\core\Tygh;
 use app\controllers\BaseController;
 
-class Setting extends BaseController
+class Profile extends BaseController
 {
 
     /**
@@ -17,10 +17,17 @@ class Setting extends BaseController
     public function __construct()
     {
         parent::__construct();
+
         $this->executeMiddleware($this->requestParam, ['AuthMiddleware']);
     }
 
-    public function index() {
-        Tygh::display('backend/system/settings');
+    /**
+     * account
+     *
+     * @return void
+     */
+    public function account()
+    {
+        Tygh::display('backend/profile/account');
     }
 }

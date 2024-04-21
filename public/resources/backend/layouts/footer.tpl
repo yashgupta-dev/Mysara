@@ -14,7 +14,8 @@
 
 <!-- Main JS -->
 <script src="{asset path='public/resources/backend/assets/js/main.js'}"></script>
-
+<script src="{asset path='public/assets/vendor/toaster/toastr.min.js'}"></script>
+<script src="{asset path="public/assets/js/jquery/ajax.js"}"></script>
 <!-- Page JS -->
 <script src="{asset path='public/resources/backend/assets/js/dashboards-analytics.js'}"></script>
 </body>

@@ -2,45 +2,60 @@
 
 namespace app\controllers;
 
-// use core\View;
-
-use app\core\Redirect;
 use app\core\Setting;
-use app\core\validation\Validation;
+use core\engine\Session;
+use app\traits\DefaultTrait;
+// use app\controllers\middleware\traits\AuthMiddleware;
+use app\controllers\middleware\MiddlewarePipeline;
 
 class BaseController
 {
-    /**
-     * @var string Server Request method like GET,POST is save under this variable
-     */
-    protected $requestMethod;
+    use DefaultTrait;
 
     /**
-     * @var array|string $_REQUEST data is save under this variable
+     * error
+     *
+     * @var mixed
      */
-    protected $requestParam;
+    protected $error;
 
-    /**
-     * @var array|string $_SERVER data is save under this variable
-     */
-    protected $server;
-
-    protected $registry;
-
-    protected $redirect;
-
-    protected $setting;
-
+    protected $model;
+    
     /**
      * BaseController constructor.
      *
      */
     public function __construct()
     {    
-        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-        $this->requestParam = $_REQUEST;
-        $this->server = $_SERVER;
-        $this->redirect = new Redirect();
-        $this->setting = new Setting();
+        $this->setRequestMethod();
+        $this->setRequest();
+        $this->setPost();
+        $this->setGet();
+        $this->setFiles();
+        $this->setServer();
+        $this->setRedirect();
+        $this->functions();
+        $this->setting = new Setting;
     }
+
+    protected function executeMiddleware($request, $middlewares) {
+        // Create instances of middleware
+        $middlewareInstances = [];
+
+        // Create an instance of the controller
+        
+        foreach ($middlewares as $middlewareClass) {
+            $Class = '\\app\\controllers\\middleware\\' . $middlewareClass;
+            
+            $middlewareInstances[] = new $Class;
+        }
+
+        // Create a middleware pipeline with the middleware in the desired order
+        $pipeline = new MiddlewarePipeline($middlewareInstances);
+
+        // Execute the middleware pipeline
+        return $pipeline->handle($request);
+    }
+
+
 }

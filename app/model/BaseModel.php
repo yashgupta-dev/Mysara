@@ -57,11 +57,15 @@ class BaseModel
                         $value = $_isValid ? $this->checkIsString(explode(':', $values)[0]) : $this->checkIsString($values);
                         $constraint = $_isValid ? explode(':', $values)[1] : '=';
                     }
-                    $query .= "AND $column $constraint $value ";
+                    $query .= "AND `$column` $constraint $value ";
                 }
             }
 
-            return $func(DB::get()->get->query($query));
+            if($func == 'mysqli_fetch_all') {
+                return $func(DB::get()->get->query($query),MYSQLI_ASSOC);
+            } else {
+                return $func(DB::get()->get->query($query));
+            }
             
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());

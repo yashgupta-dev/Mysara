@@ -12,16 +12,6 @@ use app\core\validation\Validation;
 
 class Register extends BaseController
 {
-
-    /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-    
-    protected $registerModel;
-    
     /**
      * __construct
      *
@@ -31,7 +21,7 @@ class Register extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->registerModel = new AuthModel();
+        $this->model = new AuthModel();
     }
     
     /**
@@ -63,7 +53,7 @@ class Register extends BaseController
                 }
             } else {
                 // creating account
-                $response = $this->registerModel->createAccount($this->requestParam);
+                $response = $this->model->createAccount($this->requestParam);
 
                 // email send
                 $template = Tygh::fetch('frontend/auth/mail/register');

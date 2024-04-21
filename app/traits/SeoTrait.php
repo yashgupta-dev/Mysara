@@ -1,12 +1,13 @@
 <?php
 
-namespace app\helpers;
+namespace app\traits;
 
 use app\core\DB;
 use app\core\Tygh;
 use app\core\Request;
 use app\core\Redirect;
 use app\core\Registry;
+// use app\core\SessionManager;
 
 trait SeoTrait
 {
@@ -63,6 +64,9 @@ trait SeoTrait
     {
         $this->registry = new Registry();
         $this->registryLoad();
+        // $sessionManager = new SessionManager(DB::get());
+        // session_start();  
+              
         $this->reWriteUrl();
     }
     

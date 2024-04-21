@@ -15,15 +15,6 @@ class Login extends BaseController
 {   
 
     /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-
-    protected $registerModel;
-
-    /**
      * __construct
      *
      * @param  mixed $mode
@@ -32,7 +23,7 @@ class Login extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->registerModel = new AuthModel();
+        $this->model = new AuthModel();
     }
     
     /**
@@ -90,7 +81,7 @@ class Login extends BaseController
      * @return bool
      */
     protected function verifyPassword(array $data) {
-        $response = $this->registerModel->selectUser($data['email']);
+        $response = $this->model->selectUser($data['email']);
         if(!empty($response) && password_verify($data['password'], $response['password'])) {
             return true;
         }

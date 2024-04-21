@@ -56,18 +56,20 @@
                           in</button>
                       </div>
                       <div class="form-row">
-
-                        <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="{route path="auth/forget"}">
-                            <small>{__('sign.text_forget')}</small>
-                          </a>
-                        </div>
-
-                        <div class="col-md-6">
-                          <a class="d-block mt-3 text-muted" href="{route path="auth/register"}">
-                            <small>{__('sign.text_create_account')}</small>
-                          </a>
-                        </div>
+                        {if $config->get('config_password_forget')}
+                          <div class="col-md-6">
+                            <a class="d-block mt-3 text-muted" href="{route path="auth/forget"}">
+                              <small>{__('sign.text_forget')}</small>
+                            </a>
+                          </div>
+                        {/if}
+                        {if $config->get('config_account_create')}
+                          <div class="col-md-6">
+                            <a class="d-block mt-3 text-muted" href="{route path="auth/register"}">
+                              <small>{__('sign.text_create_account')}</small>
+                            </a>
+                          </div>
+                        {/if}
                       </div>
                     </form>
                   </div>

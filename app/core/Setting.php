@@ -31,7 +31,7 @@ class Setting extends BaseModel{
 			} else {
 				$this->config[$result['key']] = json_decode($result['value'], true);
 			}
-		}
+		}   
 
         return $this->config;
     }

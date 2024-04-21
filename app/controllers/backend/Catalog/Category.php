@@ -1,18 +1,12 @@
 <?php
 
-namespace app\controllers\frontend\product;
+namespace app\controllers\backend\Catalog;
 
 use app\controllers\BaseController;
-use app\core\Tygh;
+use app\model\Backend\CategoryModel;
 
 class Category extends BaseController
-{    
-    /**
-     * language
-     *
-     * @var array
-     */
-    private $language = [];
+{
 
     /**
      * __construct
@@ -23,16 +17,20 @@ class Category extends BaseController
     public function __construct()
     {
         parent::__construct();
+
+        $this->executeMiddleware($this->requestParam, ['AuthMiddleware']);
+        
+        $this->model = new CategoryModel;
+
     }
-    
+
     /**
      * index
      *
      * @return void
      */
-    public function index() {
-       
-        Tygh::display('frontend/product/category');
+    public function index()
+    {
         
     }
 
