@@ -5,6 +5,8 @@ return [
     'hero.btn_text_view'     => 'view collection',
     // Add more language strings here
 
+    // settings
+    'text_setting'  => 'Setting',
     // common
     'text_back' => 'Previous',
     

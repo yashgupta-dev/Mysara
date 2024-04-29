@@ -285,6 +285,37 @@ class BaseModel
             }
         }
     }
+    
+    /**
+     * query
+     *
+     * @param  string $table
+     * @param  array $fields
+     * @param  array $join
+     * @param  array $conditions
+     * @param  array $other
+     * @param  string $func
+     * @return array
+     */
+    public function query($table, $func, $fields = [], $join = [], $conditions = [], $other = []) {
+        try {
+
+            $sql = "SELECT ".implode(', ', $fields)." FROM ".$table." ";
+            $sql .= implode(' ', $join);
+            $sql .= implode(' ', $conditions);
+            $sql .= implode(', ', $other);
+
+            if($func == 'mysqli_fetch_all') {
+                return $func(DB::get()->get->query($sql),MYSQLI_ASSOC);
+            } else {
+                return $func(DB::get()->get->query($sql));
+            }
+            
+        } catch (\Exception $e) {
+            $this->_writeLog($this->logFile, $e->getMessage());
+            return ['success'=> false, 'message' => $e->getMessage()];
+        }
+    }
 
     /**
      * @param string

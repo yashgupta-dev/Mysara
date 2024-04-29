@@ -45,32 +45,6 @@ class Menu extends BaseController
             'child'     => [],
         ];
 
-        // system menu
-        $settings['system.users'] = [
-            'title'     => 'Users',
-            'link'      => $this->redirect->link('admin.php?dispatch=system.users'),
-        ];
-        
-        $settings['system.groups'] = [
-            'title'     => 'Groups',
-            'link'      => $this->redirect->link('admin.php?dispatch=system.groups'),
-        ];
-
-        $settings['system.setting'] = [
-            'title'     => 'Setting',
-            'link'      => $this->redirect->link('admin.php?dispatch=system.setting'),
-        ];
-
-        if($settings) {
-            $this->menu['system'] = [
-                'title' => 'System',
-                'link'  => 'javascript:;',
-                'icon'  => 'bx-cog',
-                'sort'      => 3,
-                'child' => $settings,
-            ];
-        }
-
         // catalog
         $catalog['catalog.category'] = [
             'title'     => 'Category',
@@ -102,10 +76,32 @@ class Menu extends BaseController
             ];
         }
 
-        // Custom sorting function
-        // usort($this->menu, function ($a, $b) {
-        //     return $a['sort'] - $b['sort'];
-        // });
+
+        // system menu
+        $settings['system.users'] = [
+            'title'     => 'Users',
+            'link'      => $this->redirect->link('admin.php?dispatch=system.users'),
+        ];
+        
+        $settings['system.groups'] = [
+            'title'     => 'Groups',
+            'link'      => $this->redirect->link('admin.php?dispatch=system.groups'),
+        ];
+
+        $settings['system.setting'] = [
+            'title'     => 'Setting',
+            'link'      => $this->redirect->link('admin.php?dispatch=system.setting'),
+        ];
+
+        if($settings) {
+            $this->menu['system'] = [
+                'title' => 'System',
+                'link'  => 'javascript:;',
+                'icon'  => 'bx-cog',
+                'sort'      => 3,
+                'child' => $settings,
+            ];
+        }
 
         return $this->menu;
     }
