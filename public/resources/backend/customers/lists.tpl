@@ -22,7 +22,7 @@
 
                     <div class="container-xxl flex-grow-1 container-p-y">
                         {include file="backend/common/breadcrumb.tpl" route=$smarty.request.dispatch}
-                        {include file="backend/common/filter.tpl"}
+                        {include file="backend/common/filter.tpl" title="Filter" content="backend/customers/components/filter.tpl"}
                         
                         <!-- Responsive Table -->
                         <div class="card">                            

@@ -9,6 +9,8 @@ return [
     'text_setting'  => 'Setting',
     // common
     'text_back' => 'Previous',
+    "text.filter"   => 'Filter',
+    "text.text_save"   => 'Save Changes',
     
     // login auth [page]
     'sign.text_title' => 'Sign In',

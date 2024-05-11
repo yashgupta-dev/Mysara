@@ -19,17 +19,20 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        {foreach from=$categories item=category key=index}
+                    {foreach from=$categories item=category key=index}
+                            
                             {if $category.children}
                                 <li><a href="#">{$category.name}</a>
-                                {* {split data=$category.children size=2|default:"5" assign="child_category"} *}
-                                {* {$child_category|print_r} *}
+                                {$chunkedData = array_chunk($category.children, $category.column|default:"5")}
+                                
                                 <div class="megamenu">
-                                    <ul class="single-mega cn-col-4">                                            
-                                    {foreach from=$category.children item=child key=key}
-                                        <li><a href="{route path="product/category?search=dresses"}">{$child.name}</a></li>
+                                    {foreach from=$chunkedData item=item key=key}
+                                        <ul class="single-mega cn-col-4">                                            
+                                        {foreach from=$item item=child}
+                                            <li><a href="{route path="product/category?search=dresses"}">{$child.name}</a></li>
+                                        {/foreach}
+                                        </ul>                                        
                                     {/foreach}
-                                    </ul>
                                 </div>
                                 </li>
                             {else}

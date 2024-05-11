@@ -30,9 +30,10 @@ class Customers extends BaseController
      */
     public function index()
     {
-        $customers = $this->model->getCustomers($this->requestParam);
+        list($customers, $search) = $this->model->getCustomers($this->requestParam);
         
         Tygh::assign('customers',$customers);
+        Tygh::assign('search',$search);
         Tygh::display('backend/customers/lists');
     }
 }

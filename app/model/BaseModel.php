@@ -41,7 +41,8 @@ class BaseModel
      * @return array
      */
     public function select($table = '', $selection = array(), $where = array(), $func = 'fetch_assoc')
-    {
+    {   
+
         try {
             $query = '';
 
@@ -49,8 +50,16 @@ class BaseModel
             if (!empty($where)) {
                 $query .= " WHERE 1 ";
                 foreach ($where as $column => $values) {
-                    if (is_array($values)) {
-                        $value = $this->checkWhereClause($values[1]) ? "('" . implode("', '", $values[0]) . "')" : $this->checkIsString($values[0]);
+                    if (is_array($values)) { 
+                        if($values[1] == 'LIKE') {
+                            $value = "'$values[0]%'";
+                        }
+                        else if($values[1] == 'BETWEEN') {
+                            $value = "$values[0]";
+                        } else {  
+                            $value = $this->checkWhereClause($values[1]) ? "('" . implode("', '", $values[0]) . "')" : $this->checkIsString($values[0]);
+                        }
+                        
                         $constraint = $values[1];
                     } else {
                         $_isValid = !empty(explode(':', $values)[1]);
@@ -336,7 +345,7 @@ class BaseModel
      */
     private function checkWhereClause($value)
     {
-        $allowedClause = array('NOT IN', 'IN');
+        $allowedClause = array('NOT IN', 'IN','LIKE');
         return in_array($value, $allowedClause);
     }
 
