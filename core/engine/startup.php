@@ -2,16 +2,9 @@
 
 namespace core\engine;
 
-
-require_once APP . 'functions/function.lang.php';
-
-// get languages
-$language = include_once(RESOURCES . 'lang/en-gb/backend/en-gb.php');
-
 use app\core\Tygh;
 use app\core\Redirect;
 use core\engine\Session;
-use core\engine\Database;
 
 /**
  * startup

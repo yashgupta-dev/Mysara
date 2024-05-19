@@ -4,6 +4,7 @@ namespace app\model;
 
 use app\core\Response;
 use app\model\BaseModel;
+use core\engine\Session;
 use Exception;
 
 /**
@@ -40,7 +41,7 @@ class AuthModel extends BaseModel
                 'password'   => password_hash($data['confirm_password'],PASSWORD_DEFAULT),
                 'email'      => $data['email'],
                 'phone'      => $data['phone'],
-                'active'     => 'A'            
+                'active'     => 'A'
             ];
 
             return $this->replace('users',$_array);            
@@ -81,9 +82,10 @@ class AuthModel extends BaseModel
      * @param  mixed $email
      * @return bool
      */
-    public function generateRecoveryKey(string $email, $user_type = 'C') {
+    public function generateRecoveryKey(string $email, $user_type = '') {
         $recoveryKey = Response::codegenerate(32);
-        $this->update('users',array('recovery_key' => $recoveryKey),array('email' => $email,'user_type' => $user_type));
+        // ,'user_type' => $user_type
+        $this->update('users',array('recovery_key' => $recoveryKey),array('email' => $email));
         return $recoveryKey;
     }
     
@@ -94,11 +96,30 @@ class AuthModel extends BaseModel
      * @return bool
      */
     public function changePassword(array $data, $user_type = 'C') {
+        // 'user_type' => $user_type
         return $this->update('users',array(
             'password' => password_hash($data['confirm_password'],PASSWORD_DEFAULT),
             'recovery_key' => '',
-            'last_updated_password_at' => date('Y-m-d h:i:s')
-        ),array('email' => $data['email'],'user_type' => $user_type));
+            'last_updated_password_at' => TIME
+        ),array('email' => $data['email']));
+    }
+    
+    /**
+     * getPermissions
+     *
+     * @return array
+     */
+    public function getPermissions() {
+        
+        return $this->select(
+            'roles',
+            array('permission'),
+            array('id' => $this->select(
+                'role_user',
+                array('role_id'),
+                array('user_id' => Session::get('auth')['id'])
+            )['role_id'])
+        );
     }
 
 }

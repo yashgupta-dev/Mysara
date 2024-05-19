@@ -64,10 +64,10 @@ class Forget extends BaseController
                     Email::message($template);
                     Email::sendEmail();
 
-                    $response = ['success' => true,'message' => 'Forget password mail sended on your mail address.'];
+                    $response = ['success' => true,'message' => $this->language['text_mail_send']];
                     
                 } else {
-                    $response = ['errors' => 'Warning! unable to handle your request at this moment.'];
+                    $response = ['errors' => $this->language['text_error']];
                 }
             }
 
@@ -142,10 +142,10 @@ class Forget extends BaseController
                     Email::message($template);
                     Email::sendEmail();
 
-                    $response = ['success' => true,'message' => 'Password successfully updated','redirect_url' => $this->redirect->link('auth/login')];
+                    $response = ['success' => true,'message' => $this->language['text_success'],'redirect_url' => $this->redirect->link('auth/login')];
                     
                 } else {
-                    $response = ['errors' => 'Warning! unable to update password at this moment.'];
+                    $response = ['errors' => $this->language['text_password_update_error']];
                 }
             }
 

@@ -7,6 +7,7 @@ use app\core\Tygh;
 use app\core\Email;
 use app\core\Response;
 use app\controllers\BaseController;
+use app\core\Notification;
 use app\core\validation\Validation;
 use app\model\AuthModel;
 use core\engine\Session;
@@ -24,7 +25,7 @@ class Auth extends BaseController
     {
         parent::__construct();
 
-        $this->executeMiddleware($this->requestParam, ['AuthLoginCheckMiddleware']);
+        $this->executeMiddleware($this->requestParam, ['AuthLoginCheckMiddleware','NotificationMiddleware']);
         $this->model = new AuthModel;
 
     }
@@ -67,11 +68,12 @@ class Auth extends BaseController
                     Email::subject('Mysara:: Login alert!!!');
                     Email::message($template);
                     Email::sendEmail();
+                    Notification::set(Notification::TYPE_INFO,'Welcome',sprintf($this->language['text_welcome'],$res['firstname']));
 
                     $response = ['success' => true,'redirect_url' => $this->redirect->link('admin.php?dispatch=dashboard')];
                     
                 } else {
-                    $response = ['errors' => 'Warning! invalid credentials.'];
+                    $response = ['errors' => $this->language['text_invalid_creds']];
                 }
             }
 

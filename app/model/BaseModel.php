@@ -1,4 +1,5 @@
 <?php
+
 namespace app\model;
 
 use app\core\DB;
@@ -14,14 +15,14 @@ class BaseModel
      * @var string logFile is the file path of the logs.
      */
     public $logFile = CORE . '/logs/error_log.log';
-    
+
     /**
      * conn
      *
      * @var mixed
      */
     private $conn;
-    
+
     /**
      * __construct
      *
@@ -29,7 +30,6 @@ class BaseModel
      */
     public function __construct()
     {
-        
     }
 
     /**
@@ -40,45 +40,43 @@ class BaseModel
      * @param  array $where
      * @return array
      */
-    public function select($table = '', $selection = array(), $where = array(), $func = 'fetch_assoc')
-    {   
+    public function select($table = '', $selection = array(), $where = array(), $func = 'mysqli_fetch_assoc')
+    {
 
         try {
             $query = '';
-
             $query .= "SELECT " . (is_array($selection) ? implode(",", $selection) : $selection) . " FROM $table";
             if (!empty($where)) {
                 $query .= " WHERE 1 ";
                 foreach ($where as $column => $values) {
-                    if (is_array($values)) { 
-                        if($values[1] == 'LIKE') {
+                    if (is_array($values)) {
+                        if ($values[1] == 'LIKE') {
                             $value = "'$values[0]%'";
-                        }
-                        else if($values[1] == 'BETWEEN') {
+                        } else if ($values[1] == 'BETWEEN') {
                             $value = "$values[0]";
-                        } else {  
+                        } else {
                             $value = $this->checkWhereClause($values[1]) ? "('" . implode("', '", $values[0]) . "')" : $this->checkIsString($values[0]);
                         }
-                        
+
                         $constraint = $values[1];
                     } else {
                         $_isValid = !empty(explode(':', $values)[1]);
                         $value = $_isValid ? $this->checkIsString(explode(':', $values)[0]) : $this->checkIsString($values);
                         $constraint = $_isValid ? explode(':', $values)[1] : '=';
                     }
-                    $query .= "AND `$column` $constraint $value ";
+                    $query .= "AND $column $constraint $value ";
                 }
             }
 
-            if($func == 'mysqli_fetch_all') {
-                return $func(DB::get()->get->query($query),MYSQLI_ASSOC);
+            if ($func == 'mysqli_fetch_all') {
+                return $func(DB::get()->get->query($query), MYSQLI_ASSOC);
             } else {
+
                 return $func(DB::get()->get->query($query));
             }
-            
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
-            return ['success'=> false, 'message' => $e->getMessage()];
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 
@@ -138,11 +136,10 @@ class BaseModel
         try {
 
             DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
-            return ['success'=> true, 'message' => 'Changes successfully saved.'];
-
+            return ['success' => true, 'message' => 'Changes successfully saved.'];
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
-            return ['success'=> false, 'message' => $e->getMessage()];
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 
@@ -202,27 +199,26 @@ class BaseModel
         try {
 
             DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
-            
-            return ['success'=> true, 'message' => 'Changes successfully saved.'];
 
+            return ['success' => true, 'message' => 'Changes successfully saved.'];
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
-            return ['success'=> false, 'message' => $e->getMessage()];
-            
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
-    
+
     /**
      * getLastId
      *
      * @return bool|int
      */
-    public function getLastId() {
+    public function getLastId()
+    {
         try {
 
-            $response = DB::get()->get->getLastId();
-
-        } catch(Exception $e) {
+            return DB::get()->get->insert_id;
+        } catch (Exception $e) {
+            $this->_writeLog($this->logFile, $e->getMessage());
             return false;
         }
     }
@@ -286,15 +282,14 @@ class BaseModel
             try {
 
                 $response = DB::get()->get->query($query . '' . $condition);
-                return ['success'=> true, 'message' => 'Changes successfully saved.'];
-
+                return ['success' => true, 'message' => 'Changes successfully saved.'];
             } catch (\Exception $e) {
                 $this->_writeLog($this->logFile, $e->getMessage());
-                return ['success'=> false, 'message' => $e->getMessage()];
+                return ['success' => false, 'message' => $e->getMessage()];
             }
         }
     }
-    
+
     /**
      * query
      *
@@ -306,23 +301,23 @@ class BaseModel
      * @param  string $func
      * @return array
      */
-    public function query($table, $func, $fields = [], $join = [], $conditions = [], $other = []) {
+    public function query($table, $func, $fields = [], $join = [], $conditions = [], $other = [])
+    {
         try {
 
-            $sql = "SELECT ".implode(', ', $fields)." FROM ".$table." ";
+            $sql = "SELECT " . implode(', ', $fields) . " FROM " . $table . " ";
             $sql .= implode(' ', $join);
             $sql .= implode(' ', $conditions);
             $sql .= implode(', ', $other);
 
-            if($func == 'mysqli_fetch_all') {
-                return $func(DB::get()->get->query($sql),MYSQLI_ASSOC);
+            if ($func == 'mysqli_fetch_all') {
+                return $func(DB::get()->get->query($sql), MYSQLI_ASSOC);
             } else {
                 return $func(DB::get()->get->query($sql));
             }
-            
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
-            return ['success'=> false, 'message' => $e->getMessage()];
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 
@@ -345,7 +340,7 @@ class BaseModel
      */
     private function checkWhereClause($value)
     {
-        $allowedClause = array('NOT IN', 'IN','LIKE');
+        $allowedClause = array('NOT IN', 'IN', 'LIKE');
         return in_array($value, $allowedClause);
     }
 

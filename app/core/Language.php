@@ -2,28 +2,20 @@
 
 namespace app\core;
 
-use app\core\Session;
+use core\engine\Session;
 
-class Language {
-    
-    
-    public function __construct()
-    {   
-        $lan_code = Session::get('lang_code') ?? '';
-        return $this->loadLanguage($lan_code = 'en-gb');
-    }
-    
-    /**
-     * loadLanguage
-     *
-     * @param  mixed $langCode
-     * @return mix
-     */
-    function loadLanguage($langCode) {
-        $languageFilePath = RESOURCES . 'lang/' . $langCode . '/'.$langCode.'.php';
-        
-        return include $languageFilePath;
-    }
+class Language
+{
 
+    public static function load($controllerName)
+    {
+        $lang = !empty(Session::get('language')) ? Session::get('language') : 'en-gb'; // Default language
+
+        if (file_exists(RESOURCES . 'lang/' . $lang . '/' . strtolower($controllerName) . '.php')) {
+            return include_once(RESOURCES . 'lang/' . $lang . '/' . strtolower($controllerName) . '.php');
+        }
+
+
+        return [];
+    }
 }
-

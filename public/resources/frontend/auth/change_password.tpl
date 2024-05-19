@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{__('sign.text_title')}</title>
+  <title>{$lang.text_update_password_heading}</title>
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
@@ -36,31 +36,31 @@
                       <img src="{asset path='public/assets/img/core-img/logo.png'}" alt="">
                     </a>
 
-                    <h5 class="text-muted font-weight-normal mb-4">{__('sign.text_heading')}</h5>
+                    <h5 class="text-muted font-weight-normal mb-4">{$lang.text_update_password_heading}</h5>
 
                     <form action="{route path="auth/forget/password_change"}" method="post" role="form"
                       class="form-ajax forms-sample p-3 p-md-4">
                       <input type="hidden" value="{$code}" name="code"/>
                       <input type="hidden" value="{$email}" name="email"/>
                       <div class="form-group">
-                        <label for="elm_password">New password</label>
+                        <label for="elm_password">{$lang.text_newpassword}</label>
                         <input id="password" type="password" class="form-control" name="password" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_confirm_password">Confirm password</label>
+                        <label for="elm_confirm_password">{$lang.text_confirm_password}</label>
                         <input id="confirm_password" type="password" class="form-control" name="confirm_password" />
 
                       </div>
 
                       <div class="mt-3">
-                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Update password</button>
+                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">{$lang.btn_update_password}</button>
                       </div>
                       <div class="form-row">
 
                         <div class="col-md-6">
                             <a class="d-block mt-3 text-muted" href="{route path="auth/login"}">
-                                <small>{__('register.text_back')}</small>
+                                <small>{$lang.text_forget_back}</small>
                             </a>
                         </div>
 

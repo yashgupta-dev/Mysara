@@ -1,4 +1,4 @@
-{assign var="title" value="Customers lists"}
+{assign var="title" value="{$lang.text_heading}"}
 
 {include file="backend/layouts/header.tpl"}
 
@@ -31,13 +31,11 @@
                                     <thead>
                                         <tr class="text-nowrap">
                                             <th><input type="checkbox" onclick="$(document).find('#customer_ids').attr('checked',true);"/> </th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Status</th>
-                                            {* <th>Profile</th> *}
-                                            <th>Created At</th>
-                                            {* <th>Updated At</th> *}
+                                            <th>{$lang.column_name}</th>
+                                            <th>{$lang.column_email}</th>
+                                            <th>{$lang.column_phone}</th>
+                                            <th>{$lang.column_status}</th>
+                                            <th>{$lang.column_created_at}</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -59,15 +57,15 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                                         <div class="dropdown-menu"  data-popper-placement="top-end">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> {$lang.text_edit}</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> {$lang.text_delete}</a>
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
                                         {foreachelse}
                                             <tr>
-                                                <td colspan="7" class="text-center">{'No results found.'}</td>
+                                                <td colspan="7" class="text-center">{$lang.text_no_result}</td>
                                             </tr>
 
                                         {/foreach}

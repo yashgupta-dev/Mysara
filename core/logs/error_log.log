@@ -1,44 +1,4 @@
-2024-04-28 10:41:25 Table 'mvc.category_to_store' doesn't exist
-2024-04-28 10:41:26 Table 'mvc.category_to_store' doesn't exist
-2024-05-11 06:52:48 Unknown column '0' in 'where clause'
-2024-05-11 06:53:10 Unknown column '0' in 'where clause'
-2024-05-11 06:58:46 Unknown column 'CONCAT(first_name," ",last_name )' in 'where clause'
-2024-05-11 06:59:06 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `active` = "Y" AND `user_type` = "C"' at line 1
-2024-05-11 06:59:14 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `active` = "Y" AND `user_type` = "C"' at line 1
-2024-05-11 06:59:38 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%muska% AND `active` = "Y" AND `user_type` = "C"' at line 1
-2024-05-11 07:00:18 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%muska% AND `active` = "Y" AND `user_type` = "C"' at line 1
-2024-05-11 07:00:19 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%muska% AND `active` = "Y" AND `user_type` = "C"' at line 1
-2024-05-11 07:00:20 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%muska% AND `active` = "Y" AND `user_type` = "C"' at line 1
-2024-05-11 07:00:30 Unknown column 'CONCAT(first_name," ",last_name )' in 'where clause'
-2024-05-11 07:00:34 Unknown column 'CONCAT(first_name," ",last_name )' in 'where clause'
-2024-05-11 07:02:44 Unknown column 'CONCAT(first_name," ",last_name )' in 'where clause'
-2024-05-11 07:03:13 Unknown column 'first_name' in 'where clause'
-2024-05-11 07:03:23 Unknown column 'first_name' in 'where clause'
-2024-05-11 07:03:33 Unknown column 'first_name' in 'where clause'
-2024-05-11 07:04:07 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:04:31 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:04:37 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:04:47 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:04:47 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:04:48 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:04:52 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:04:55 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:05:21 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:05:23 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = "config_store_name"' at line 1
-2024-05-11 07:06:16 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `active` = "A" AND `user_type` = "C"' at line 1
-2024-05-11 07:09:30 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:09:36 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:10:48 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:10:48 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:11:28 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:11:29 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:11:30 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:11:30 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:11:47 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:12:03 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CONCAT(firstname," ",lastname )' in 'where clause'
-2024-05-11 07:23:16 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2024-04-14 AND  AND `user_type` = "C"' at line 1
-2024-05-11 07:23:25 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2024-04-14 AND  AND `user_type` = "C"' at line 1
-2024-05-11 07:23:53 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `user_type` = "C"' at line 1
-2024-05-11 07:23:59 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `user_type` = "C"' at line 1
-2024-05-11 07:23:59 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `user_type` = "C"' at line 1
-2024-05-11 07:26:29 Unknown column 'DATE(created_at)' in 'where clause'
+2024-05-19 04:59:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = 'payments_cod_status', value = 'D'' at line 1
+2024-05-19 04:59:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = 'payments_cod_total', value = ''' at line 1
+2024-05-19 05:00:34 Field 'serialized' doesn't have a default value
+2024-05-19 05:00:34 Field 'serialized' doesn't have a default value

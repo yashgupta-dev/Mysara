@@ -16,9 +16,9 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="hero-content">
-                        <h6>{__('hero.text_heading')}</h6>
-                        <h2>{__('hero.text_new_collection')}</h2>
-                        <a href="#" class="btn essence-btn">{__('hero.btn_text_view')}</a>
+                        <h6>{$lang.text_heading}</h6>
+                        <h2>{$lang.text_new_collection}</h2>
+                        <a href="#" class="btn essence-btn">{$lang.btn_text_view}</a>
                     </div>
                 </div>
             </div>

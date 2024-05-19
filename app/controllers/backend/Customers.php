@@ -18,7 +18,7 @@ class Customers extends BaseController
     {
         parent::__construct();
         
-        $this->executeMiddleware($this->requestParam, ['AuthMiddleware']);
+        $this->executeMiddleware($this->requestParam, ['AuthMiddleware','PermissionMiddleware']);
 
         $this->model = new CustomerModel();
     }

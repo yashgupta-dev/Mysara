@@ -17,7 +17,7 @@ class Setting extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->executeMiddleware($this->requestParam, ['AuthMiddleware']);
+        $this->executeMiddleware($this->requestParam, ['AuthMiddleware','PermissionMiddleware']);
     }
 
     public function index() {

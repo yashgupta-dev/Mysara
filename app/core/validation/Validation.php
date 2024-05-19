@@ -103,6 +103,7 @@ class Validation
      * @return array|bool
      */
     public static function getErrors() {
+        
         return empty(self::$errors) ? true : self::$errors;
     }
 
@@ -203,8 +204,8 @@ class Validation
                     break;
 
                 case 'equals':
-                    if (!empty($data[$field])) {                        
-
+                    if (!empty($data[$field]) || !empty($ruleValue)) {                        
+                        
                         if ($data[$field] !== $ruleValue) {
                             $valid = false;
                         }
@@ -339,15 +340,23 @@ class Validation
                     }
                     break;
 
-                case 'email_not_in_user':
+                case 'not_in':
                     if (!empty($data[$field])) {
                         $vals = trim($data[$field]);
                         $data[$field] = preg_replace('/\s+/', ' ', $vals);
-
+                        
+                        $not = explode('-',explode(',',$column)[1])[0] ?? '';
+                        $notValue = explode('-',explode(',',$column)[1])[1] ?? '';
+                        if(!empty($not) && !empty($notValue)) {
+                            $column = explode(',',$column)[0] ?? $column;
+                        }
                         $sql = '';
                         $sql .= 'SELECT count(' . $column . ')  as count';
                         $sql .= ' FROM ' . $table;
                         $sql .= ' WHERE ' . $column . ' = "' . $data[$field] . '"';
+                        if(!empty($not) && !empty($notValue)) {
+                            $sql .= ' AND `'.$not.'` != "'.$notValue.'"';
+                        }
                     }
 
                     try {
@@ -383,6 +392,7 @@ class Validation
                         if (!empty($data[$field])) {
                             $valid = DB::get()->get->query($sql)->fetch_assoc()['count'];
                         }
+
                         if (!$valid) {
                             $fieldMsg = isset($msgs[$field]) ? $msgs[$field] : $field;
                             if (empty(self::$validationError[$field])) {
@@ -390,6 +400,38 @@ class Validation
                             }
                         }
                     } catch (\Exception $e) {
+                        $valid = false;
+                        $exceptionMsg = $e->getMessage();
+                    }
+                    break;
+
+                case 'assign':
+                    if (!empty($data[$field])) {
+                        $keys = !empty($data[$field]) ? $data[$field] : 0;
+                        if (is_array($keys)) {
+                            $keys = implode(',', $keys);
+                        }
+                        $sql = '';
+                        $sql .= 'SELECT count(' . $column . ')  as count';
+                        $sql .= ' FROM ' . $table;
+                        $sql .= ' WHERE ' . $column . ' IN ("' . $keys . '")';
+                    }
+
+                    try {
+                        if (!empty($data[$field])) {
+                            $valid = DB::get()->get->query($sql)->fetch_assoc()['count'];
+                        }
+                        if ($valid) {
+                            $valid = false;                            
+                            $fieldMsg = isset($msgs[$field]) ? $msgs[$field] : $field;
+                            
+                            if (empty(self::$validationError[$field])) {
+                            
+                                self::$validationError[$field] = $fieldMsg . " already in used";
+                            }
+                        }
+                    } catch (\Exception $e) {
+                        
                         $valid = false;
                         $exceptionMsg = $e->getMessage();
                     }
@@ -490,9 +532,9 @@ class Validation
                     // Custom rule handling here
                     break;
             }
+
             if (!$valid) {
                 if (!$exceptionMsg) {
-
                     self::$errors = self::$validationError;
                 } else {
                     self::$errors[] = $exceptionMsg;

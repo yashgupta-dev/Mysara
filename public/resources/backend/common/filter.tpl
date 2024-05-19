@@ -1,6 +1,6 @@
 <ul class="navbar-nav flex-row align-items-center ms-auto pb-2">
     <li class="nav-item">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#filter" class="btn btn-dark btn-md">
+<button type="button" data-bs-toggle="modal" data-bs-target="#filter" class="btn btn-{if !empty($color)}{$color}{else}dark{/if} btn-md">
             <i class="bx bx-filter-alt"></i>{'Filter'}
         </button>
     </li>

@@ -5,12 +5,12 @@ namespace app\controllers;
 use app\core\Setting;
 use core\engine\Session;
 use app\traits\DefaultTrait;
-// use app\controllers\middleware\traits\AuthMiddleware;
 use app\controllers\middleware\MiddlewarePipeline;
+use app\traits\LanguageTrait;
 
 class BaseController
 {
-    use DefaultTrait;
+    use DefaultTrait, LanguageTrait;
 
     /**
      * error
@@ -18,7 +18,12 @@ class BaseController
      * @var mixed
      */
     protected $error;
-
+    
+    /**
+     * model
+     *
+     * @var mixed
+     */
     protected $model;
     
     /**
@@ -35,6 +40,7 @@ class BaseController
         $this->setServer();
         $this->setRedirect();
         $this->functions();
+        $this->loadLanguage();
         $this->setting = new Setting;
     }
 

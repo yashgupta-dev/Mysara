@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{__('sign.text_title')}</title>
+  <title>{$lang.text_heading}</title>
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
@@ -36,23 +36,23 @@
                       <img src="{asset path='public/assets/img/core-img/logo.png'}" alt="">
                     </a>
 
-                    <h5 class="text-muted font-weight-normal mb-4">{__('sign.text_heading')}</h5>
+                    <h5 class="text-muted font-weight-normal mb-4">{$lang.text_heading}</h5>
 
                     <form action="{route path="auth/forget/forget"}" method="post" role="form"
                       class="form-ajax forms-sample p-3 p-md-4">
                       <div class="form-group">
-                        <label for="elm_email">E-Mail Address</label>
+                        <label for="elm_email">{$lang.text_email_address}</label>
                         <input id="email" type="email" class="form-control" name="email" />
                       </div>
 
                       <div class="mt-3">
-                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Forget password?</button>
+                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">{$lang.text_forget}</button>
                       </div>
                       <div class="form-row">
 
                         <div class="col-md-6">
                             <a class="d-block mt-3 text-muted" href="{route path="auth/login"}">
-                                <small>{__('register.text_back')}</small>
+                                <small>{$lang.text_forget_back}</small>
                             </a>
                         </div>
                       </div>

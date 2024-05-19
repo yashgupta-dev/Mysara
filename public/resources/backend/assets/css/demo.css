@@ -163,3 +163,8 @@
 .modal.right.fade.in .modal-dialog {
   right: 0;
 }
+
+ul.navbar-nav.flex-row.align-items-center.ms-auto.pb-2 {
+  display: inline-flex;
+  justify-content: space-between;
+}

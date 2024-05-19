@@ -22,6 +22,7 @@ define('Default_controller_admin','dashboard');
 define('Default_method_admin','index');
 
 define('Parent_folder','Your-Directory/');
+define('TIME',strtotime(date('Y-m-d h:i:s')));
 
 // error reporting
 define('error_debbug', true);

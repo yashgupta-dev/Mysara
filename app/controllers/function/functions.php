@@ -31,7 +31,7 @@ class functions {
      */
     function fn_get_human_readable_date($dateFormat, $timestamp) {
         
-        return date($dateFormat,strtotime($timestamp));
+        return date($dateFormat,$timestamp);
     }
     
     /**

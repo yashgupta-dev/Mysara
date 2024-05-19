@@ -7,7 +7,7 @@
     {foreach from=$lists item=item}
         
         {if $item@last}
-            /{$item}
+            / {$item}
         {else}
             <span class="text-muted fw-light">/
                 <a href="{route path='admin.php?dispatch='|cat:$smarty.request.dispatch}">{$item}</a>

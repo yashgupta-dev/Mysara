@@ -43,11 +43,14 @@ class Setting extends BaseModel{
      * @return array
      */
     public function get($key) {
-        $value = $this->select('settings',array('value','serialized'),array('key' => $key),'mysqli_fetch_assoc');
-        if (!$value['serialized']) {
-            return $value['value'];
-        } else {
-            return json_decode($value['value'],true);
+        $conditions['name'] = $key;
+        $value = $this->select('settings',array('value','serialized'),$conditions,'mysqli_fetch_assoc');
+        if (!empty($value)) {
+            if (!$value['serialized']) {
+                return $value['value'];
+            } else {
+                return json_decode($value['value'],true);
+            }
         }
     }
 

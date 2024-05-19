@@ -1,14 +1,8 @@
 <?php
 return [
-    'hero.text_heading' => 'Latest Mysara',
-    'hero.text_new_collection'  => 'New Collection',
-    'hero.btn_text_view'     => 'view collection',
-    // Add more language strings here
-
     // settings
     'text_setting'  => 'Setting',
     // common
-    'text_back' => 'Previous',
     "text.filter"   => 'Filter',
     "text.text_save"   => 'Save Changes',
     
@@ -25,8 +19,25 @@ return [
     'register.text_phone' => 'Phone',
     'register.text_password' => 'Password',
     'register.text_confirm_password' => 'Confirm password',
-    'register.text_back'    => '<i class="fa fa-angle-left"></i> I\'ve an account.',
     'register.text_create_account'  => 'Create account',
+    
+    'text_back' => 'Previous',
+    'text_success' => 'Changes successfully saved.',
+    'text_filter'   => 'Filter',
 
-    'text_success' => 'Changes successfully saved.'
+    'text_edit' => 'Edit',
+    'text_delete' => 'Delete',
+    'text_btn_save' => 'Save changes',
+    'text_none'     => '--- none ---',
+
+    'text_enabled'  => 'Active',
+    'text_disabled'  => 'Deactivate',
+
+    'text_extension'    => '%s installed successfully',
+    'text_extension_uninstalled'    => '%s uninstalled successfully',
+    'text_save' => '<i class="bx bx-save"></i> Save',
+    'text_add'  => '<i class="bx bx-plus"></i> Add',
+    'text_status'   => 'Status',
+
+    'text_no_result'    => 'No results found.'
 ];

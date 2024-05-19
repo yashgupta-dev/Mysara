@@ -1,4 +1,4 @@
-{assign var="title" value="Dashboard | Sign-in"}
+{assign var="title" value=$lang.text_heading}
 
 {include file="backend/layouts/header.tpl"}
 {block name="style"}
@@ -19,19 +19,19 @@
             </a>
             </div>
             <!-- /Logo -->
-            <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-            <p class="mb-4">Please sign-in to your account and start the adventure</p>
+            <h4 class="mb-2">{$lang.text_wc_snpt}</h4>
+            <p class="mb-4">{$lang.text_title}</p>
 
             <form id="formAuthentication" class="form-ajax mb-3" action="{route path="admin.php?dispatch=auth.login"}" method="POST">
             <div class="mb-3">
-                <label for="email" class="form-label">Username</label>
+                <label for="elm-email" class="form-label">{$lang.text_username}</label>
                 <input type="text" class="form-control" id="email" name="email"/>
             </div>
             <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">
-                <label class="form-label" for="password">Password</label>
-                <a href="auth-forgot-password-basic.html">
-                    <small>Forgot Password?</small>
+                <label class="form-label" for="elm_password">{$lang.text_password}</label>
+                <a href="{route path="auth/forget"}">
+                    <small>{$lang.text_forget}</small>
                 </a>
                 </div>
                 <div class="input-group input-group-merge">
@@ -41,7 +41,7 @@
             </div>
             
             <div class="mb-3">
-                <button class="btn btn-primary d-grid w-100" type="submit" name="button">Sign in</button>
+                <button class="btn btn-primary d-grid w-100" type="submit" name="button">{$lang.text_signin}</button>
             </div>
             </form>
         </div>

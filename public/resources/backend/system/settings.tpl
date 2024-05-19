@@ -23,9 +23,10 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         {include file="backend/common/breadcrumb.tpl" route=$smarty.request.dispatch}
                         <div class="col-md-12 grid-margin stretch-card">
-                           
-                        </div>
+                               
 
+
+                        </div>
                     </div>
                     <!-- / Content -->
 

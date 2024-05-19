@@ -7,12 +7,6 @@ use app\core\Tygh;
 
 class Welcome extends BaseController
 {    
-    /**
-     * language
-     *
-     * @var array
-     */
-    private $language = [];
 
     /**
      * __construct
