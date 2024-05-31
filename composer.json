@@ -3,7 +3,8 @@
         "smarty/smarty": "^4.3",
         "phpmailer/phpmailer": "^6.8.1",
         "giggsey/locale": "^1.7|^2.0",
-        "symfony/polyfill-mbstring": "^1.17"
+        "symfony/polyfill-mbstring": "^1.17",
+        "giggsey/libphonenumber-for-php": "^8.13"
     },
     
     "autoload": {

@@ -2,38 +2,66 @@
 
 namespace app\controllers;
 
-// use core\View;
-use app\model\MyModel;
-use app\core\validation\Validation;
+use app\core\Setting;
+use core\engine\Session;
+use app\traits\DefaultTrait;
+use app\controllers\middleware\MiddlewarePipeline;
+use app\traits\LanguageTrait;
 
 class BaseController
 {
-    /**
-     * @var string Server Request method like GET,POST is save under this variable
-     */
-    protected $requestMethod;
+    use DefaultTrait, LanguageTrait;
 
     /**
-     * @var array|string $_REQUEST data is save under this variable
+     * error
+     *
+     * @var mixed
      */
-    protected $requestParam;
-
+    protected $error;
+    
     /**
-     * @var object this variable is used to run the model method in class.
+     * model
+     *
+     * @var mixed
      */
-    protected $loadModel;
-
+    protected $model;
+    
     /**
      * BaseController constructor.
      *
-     * @param string $mode
      */
     public function __construct()
-    {
-        $this->loadModel = new MyModel(); // model
-    
-        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-
-        $this->requestParam = $_REQUEST;
+    {    
+        $this->setRequestMethod();
+        $this->setRequest();
+        $this->setPost();
+        $this->setGet();
+        $this->setFiles();
+        $this->setServer();
+        $this->setRedirect();
+        $this->functions();
+        $this->loadLanguage();
+        $this->setting = new Setting;
     }
+
+    protected function executeMiddleware($request, $middlewares) {
+        // Create instances of middleware
+        $middlewareInstances = [];
+
+        // Create an instance of the controller
+        
+        foreach ($middlewares as $middlewareClass) {
+            $Class = '\\app\\controllers\\middleware\\' . $middlewareClass;
+            
+            $middlewareInstances[] = new $Class;
+        }
+
+        // Create a middleware pipeline with the middleware in the desired order
+        $pipeline = new MiddlewarePipeline($middlewareInstances);
+
+        // Execute the middleware pipeline
+        return $pipeline->handle($request);
+    }
+
+
 }

@@ -122,3 +122,49 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+
+.modal.rightModal .modal-dialog {
+  position: fixed;
+  margin: auto;
+  width: 320px;
+  height: 100%;
+  -webkit-transform: translate3d(0%, 0, 0);
+  -ms-transform: translate3d(0%, 0, 0);
+  -o-transform: translate3d(0%, 0, 0);
+  transform: translate3d(0%, 0, 0);
+}
+
+.modal.rightModal .btn-close {
+  transform: translate(0px, 0px);
+}
+
+.modal.rightModal .modal-content {
+  height: 100%;
+  overflow-y: auto;
+  border-radius: 0px;
+}
+
+.modal.rightModal .modal-body {
+  padding: 15px 15px 80px;
+}
+
+
+/*Right*/
+
+.modal.rightModal.fade .modal-dialog {
+  right: 0;
+  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+  transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+  right: 0;
+}
+
+ul.navbar-nav.flex-row.align-items-center.ms-auto.pb-2 {
+  display: inline-flex;
+  justify-content: space-between;
+}

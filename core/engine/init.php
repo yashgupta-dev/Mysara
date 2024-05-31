@@ -2,20 +2,21 @@
 
 namespace core\engine;
 
-require_once APP . 'helpers/SeoTrait.php';
+require_once APP . 'traits/SeoTrait.php';
 require_once APP . 'functions/function.lang.php';
 
 // get languages
 $language = include_once(RESOURCES . 'lang/en-gb/en-gb.php');
 
-use app\helpers\SeoTrait as HelpersSeoTrait;
+use core\engine\Session;
+use app\traits\SeoTrait as traitsSeoTrait;
 
 /**
  * init
  */
 class init
 {
-    use HelpersSeoTrait;
+    use traitsSeoTrait;
 
     /**
      * __construct
@@ -26,6 +27,8 @@ class init
     {
         spl_autoload_register([$this, 'autoload']);
 
+        Session::start();
+        
         $this->parseRequest();
 
         $this->route();

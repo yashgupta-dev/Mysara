@@ -1,9 +1,13 @@
 <?php
 
-namespace app\helpers;
+namespace app\traits;
 
 use app\core\DB;
 use app\core\Tygh;
+use app\core\Request;
+use app\core\Redirect;
+use app\core\Registry;
+// use app\core\SessionManager;
 
 trait SeoTrait
 {
@@ -27,7 +31,7 @@ trait SeoTrait
      *
      * @var array
      */
-    private $pramater;
+    private $pramater = [];
 
     /**
      * type
@@ -50,6 +54,7 @@ trait SeoTrait
      */
     protected $flag = 0;
 
+    public $registry;
     /**
      * parseRequest
      *
@@ -57,7 +62,23 @@ trait SeoTrait
      */
     private function parseRequest()
     {
+        $this->registry = new Registry();
+        $this->registryLoad();
+        // $sessionManager = new SessionManager(DB::get());
+        // session_start();  
+              
         $this->reWriteUrl();
+    }
+    
+    /**
+     * registryLoad
+     *
+     * @return void
+     */
+    public function registryLoad() {
+
+        // $this->registry->set('redirect', new Redirect());
+        // $this->registry->set('request', new Request());
     }
 
     /**
@@ -121,19 +142,34 @@ trait SeoTrait
             
             // Include the controller file
 
-            include(APP . 'controllers/' . $this->type . '/' .  $this->myController . ".php");
-
+            $file = APP . 'controllers/' . $this->type . '/' .  $this->myController . ".php";
             // Create an instance of the controller
             $this->myController = str_replace('/', '\\', $this->myController);
             
             $controllerClass = '\\app\\controllers\\' . $this->type . '\\' . $this->myController;
 
-            $CallingtheController = new $controllerClass();
-
-            // Call the specified method
-            if (method_exists($CallingtheController, $this->myMethod)) {
-                call_user_func_array([$CallingtheController, $this->myMethod], [$this->pramater]);
+            // Initialize the class
+            if (is_file($file)) {
+                include_once($file);
+                
+                $controller = new $controllerClass();
             } else {
+                // Handle method not found
+                Tygh::assign("title", '500 | Internal server');
+                Tygh::assign("code", '500');
+                Tygh::assign("btn_text", 'Go to homepage');
+                Tygh::assign("msg", 'Error: Could not call ' . $this->myController . '/' . $this->myMethod . '!');
+
+                Tygh::display('errors/500.tpl');
+            }
+            
+            // $CallingtheController = new $controllerClass($this->registry);
+            $reflection = new \ReflectionClass($controller);
+            
+            if ($reflection->hasMethod($this->myMethod) && $reflection->getMethod($this->myMethod)->getNumberOfRequiredParameters() <= count($this->pramater)) {
+                return call_user_func_array(array($controller, $this->myMethod), $this->pramater);
+            } else {
+                
                 // Handle method not found
                 Tygh::assign("title", '500 | Internal server');
                 Tygh::assign("code", '500');

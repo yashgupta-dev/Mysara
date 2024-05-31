@@ -25,16 +25,16 @@
                         <img src="{asset path='public/assets/img/bg-img/blog1.jpg'}" alt="">
                         <!-- Post Title -->
                         <div class="post-title">
-                            <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                         </div>
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <!-- Post Title -->
                             <div class="hover-post-title">
-                                <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                                <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus purus dignissim convallis.</p>
-                            <a href="{route path="blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -45,16 +45,16 @@
                         <img src="{asset path='public/assets/img/bg-img/blog2.jpg'}" alt="">
                         <!-- Post Title -->
                         <div class="post-title">
-                            <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                         </div>
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <!-- Post Title -->
                             <div class="hover-post-title">
-                                <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                                <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus purus dignissim convallis.</p>
-                            <a href="{route path="blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -65,16 +65,16 @@
                         <img src="{asset path='public/assets/img/bg-img/blog3.jpg'}" alt="">
                         <!-- Post Title -->
                         <div class="post-title">
-                            <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                         </div>
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <!-- Post Title -->
                             <div class="hover-post-title">
-                                <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                                <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus purus dignissim convallis.</p>
-                            <a href="{route path="blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -85,16 +85,16 @@
                         <img src="{asset path='public/assets/img/bg-img/blog4.jpg'}" alt="">
                         <!-- Post Title -->
                         <div class="post-title">
-                            <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                         </div>
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <!-- Post Title -->
                             <div class="hover-post-title">
-                                <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                                <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus purus dignissim convallis.</p>
-                            <a href="{route path="blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -105,16 +105,16 @@
                         <img src="{asset path='public/assets/img/bg-img/blog5.jpg'}" alt="">
                         <!-- Post Title -->
                         <div class="post-title">
-                            <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                         </div>
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <!-- Post Title -->
                             <div class="hover-post-title">
-                                <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                                <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus purus dignissim convallis.</p>
-                            <a href="{route path="blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -125,16 +125,16 @@
                         <img src="{asset path='public/assets/img/bg-img/blog6.jpg'}" alt="">
                         <!-- Post Title -->
                         <div class="post-title">
-                            <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                         </div>
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <!-- Post Title -->
                             <div class="hover-post-title">
-                                <a href="{route path="blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
+                                <a href="{route path="blog/blog/view?blog_id=10"}">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus purus dignissim convallis.</p>
-                            <a href="{route path="blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
+                            <a href="{route path="blog/blog/view?blog_id=10"}">Continue reading <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>

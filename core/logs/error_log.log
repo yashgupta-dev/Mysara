@@ -1,0 +1,4 @@
+2024-05-19 04:59:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = 'payments_cod_status', value = 'D'' at line 1
+2024-05-19 04:59:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = 'payments_cod_total', value = ''' at line 1
+2024-05-19 05:00:34 Field 'serialized' doesn't have a default value
+2024-05-19 05:00:34 Field 'serialized' doesn't have a default value

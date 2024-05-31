@@ -8,13 +8,6 @@ use app\core\Tygh;
 class Checkout extends BaseController
 {    
     /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-    
-    /**
      * language
      *
      * @var array

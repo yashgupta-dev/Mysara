@@ -1,3 +1,4 @@
+{assign var="categories" value=$func->fn_get_Categories()}
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
         <!-- Classy Menu -->
@@ -18,51 +19,27 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="#">Shop</a>
-                            <div class="megamenu">
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Women's Collection</li>
-                                    <li><a href="{route path="product/category?search=dresses"}">Dresses</a></li>
-                                    <li><a href="{route path="product/category?search=Blouses"}">Blouses &amp; Shirts</a></li>
-                                    <li><a href="{route path="product/category?search=T-shirt"}">T-shirts</a></li>
-                                    <li><a href="{route path="product/category?search=Rompers"}">Rompers</a></li>
-                                    <li><a href="{route path="product/category?search=Bras"}">Bras &amp; Panties</a></li>
-                                </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Men's Collection</li>
-                                    <li><a href="{route path="product/category"}">T-Shirts</a></li>
-                                    <li><a href="{route path="product/category?search=Polo"}">Polo</a></li>
-                                    <li><a href="{route path="product/category?search=Shirts"}">Shirts</a></li>
-                                    <li><a href="{route path="product/category?search=Jackets"}">Jackets</a></li>
-                                    <li><a href="{route path="product/category?search=Trench"}">Trench</a></li>
-                                </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Kid's Collection</li>
-                                    <li><a href="{route path="product/category?search=Dresses"}">Dresses</a></li>
-                                    <li><a href="{route path="product/category?search=Shirts"}">Shirts</a></li>
-                                    <li><a href="{route path="product/category"}">T-shirts</a></li>
-                                    <li><a href="{route path="product/category?search=Jackets"}">Jackets</a></li>
-                                    <li><a href="{route path="product/category?search=Trench"}">Trench</a></li>
-                                </ul>
-                                <div class="single-mega cn-col-4">
-                                    <img src="{asset path='public/assets/img/bg-img/bg-6.jpg'}" alt="">
+                    {foreach from=$categories item=category key=index}
+                            
+                            {if $category.children}
+                                <li><a href="#">{$category.name}</a>
+                                {$chunkedData = array_chunk($category.children, $category.column|default:"5")}
+                                
+                                <div class="megamenu">
+                                    {foreach from=$chunkedData item=item key=key}
+                                        <ul class="single-mega cn-col-4">                                            
+                                        {foreach from=$item item=child}
+                                            <li><a href="{route path="product/category?search=dresses"}">{$child.name}</a></li>
+                                        {/foreach}
+                                        </ul>                                        
+                                    {/foreach}
                                 </div>
-                            </div>
-                        </li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="{route path="welcome"}">Home</a></li>
-                                <li><a href="{route path="product/category"}">Shop</a></li>
-                                <li><a href="{route path="product/product?product_id=2323"}">Product Details</a></li>
-                                <li><a href="{route path="checkout/checkout"}">Checkout</a></li>
-                                <li><a href="{route path="blog/blog"}">Blog</a></li>
-                                <li><a href="{route path="blog/blog/view?blog_id=10"}">Single Blog</a></li>
-                                <li><a href="#">Regular Page</a></li>
-                                <li><a href="{route path="welcome/contact"}">Contact</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{route path="blog/blog"}">Blog</a></li>
-                        <li><a href="{route path="welcome/contact"}">Contact</a></li>
+                                </li>
+                            {else}
+                                <li><a href="{route path="blog/blog"}">{$category.name}</a></li>
+                            {/if}
+                        {/foreach}
+                        
                     </ul>
                 </div>
                 <!-- Nav End -->

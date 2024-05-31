@@ -8,13 +8,6 @@ use app\core\Tygh;
 class Category extends BaseController
 {    
     /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-    
-    /**
      * language
      *
      * @var array

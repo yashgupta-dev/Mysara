@@ -3,9 +3,8 @@
 namespace core\engine;
 
 use app\core\Tygh;
-use core\engine\Database;
 use app\core\Redirect;
-use app\core\Session;
+use core\engine\Session;
 
 /**
  * startup
@@ -70,6 +69,8 @@ class startup
     {
         spl_autoload_register([$this, 'autoload']);
 
+        Session::start();
+        
         $this->parseRequest();
 
         $this->route();

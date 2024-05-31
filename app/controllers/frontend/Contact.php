@@ -9,13 +9,6 @@ use app\core\validation\Validation;
 class Contact extends BaseController
 {    
     /**
-     * error
-     *
-     * @var array
-     */
-    private $error = array();
-
-    /**
      * __construct
      *
      * @return void
