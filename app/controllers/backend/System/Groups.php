@@ -103,7 +103,8 @@ class Groups extends BaseController
         if ($this->requestMethod == 'POST') {
 
             Validation::validate([
-                'name'     =>  'required|string|unique:roles.name'
+                'name'     =>  'required|string|unique:roles.name',
+                'group_type' => 'required|string'
 
             ], $this->requestParam);
 

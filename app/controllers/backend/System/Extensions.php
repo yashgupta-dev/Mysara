@@ -49,7 +49,7 @@ class Extensions extends BaseController
                     $categoriesExtension = explode($dir, $file)[1] ?? $file;
 
                     $data[] = array(
-                        'name'      => $categoriesExtension,
+                        'name'      => basename($categoriesExtension),
                         'icon'      => substr(strtoupper($categoriesExtension),0,1),
                         'code'      => strtolower($categoriesExtension),
                         'count'     => count(glob($dir . $categoriesExtension.'/*')) .' '. strtolower($categoriesExtension),

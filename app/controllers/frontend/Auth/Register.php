@@ -7,6 +7,7 @@ use app\core\Tygh;
 use app\core\Email;
 use app\core\Response;
 use app\model\AuthModel;
+use app\core\Notification;
 use app\controllers\BaseController;
 use app\core\validation\Validation;
 
@@ -23,14 +24,15 @@ class Register extends BaseController
         parent::__construct();
         $this->model = new AuthModel();
     }
-    
+
     /**
      * index
      *
      * @return void
      */
-    public function index() {
-        if($this->requestMethod === 'POST') {
+    public function index()
+    {
+        if ($this->requestMethod === 'POST') {
 
             Validation::validate([
                 'firstname' =>  'required|string|regex:[a-zA-z]',
@@ -38,17 +40,17 @@ class Register extends BaseController
                 'email'     =>  'required|email|unique:users.email',
                 'phone'     =>  'required|phone|unique:users.phone',
                 'password'  =>  'required',
-                'confirm_password'  =>  'required|equals:'.$this->requestParam['password']                
+                'confirm_password'  =>  'required|equals:' . $this->requestParam['password']
 
-            ],$this->requestParam);
+            ], $this->requestParam);
 
             // get errors
-            if (Validation::getErrors() !== true) {        
-                
+            if (Validation::getErrors() !== true) {
+
                 foreach (Validation::getErrors() as $key => $value) {
                     $this->error[$key] = $value;
                 }
-                if(isset($this->requestParam['is_ajax'])) {
+                if (isset($this->requestParam['is_ajax'])) {
                     $response = ['errors' => $this->error];
                 }
             } else {
@@ -62,6 +64,8 @@ class Register extends BaseController
                 Email::subject('Mysara:: Register notification');
                 Email::message($template);
                 Email::sendEmail();
+
+                $response = ['success' => true, 'redirect_url' => $this->redirect->link('welcome')];
             }
 
             Response::json(Json::encode($response));

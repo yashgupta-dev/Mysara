@@ -1,4 +1,32 @@
-2024-05-19 04:59:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = 'payments_cod_status', value = 'D'' at line 1
-2024-05-19 04:59:15 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = 'payments_cod_total', value = ''' at line 1
-2024-05-19 05:00:34 Field 'serialized' doesn't have a default value
-2024-05-19 05:00:34 Field 'serialized' doesn't have a default value
+2024-06-01 09:27:09 Field 'created_at' doesn't have a default value
+2024-06-01 09:27:18 Field 'created_at' doesn't have a default value
+2024-06-01 09:27:21 Field 'created_at' doesn't have a default value
+2024-06-01 10:17:09 DELETE FROM extension WHERE 1 AND type = "Shippings" AND code = "backend/Extension/Shippings/Offline" 
+2024-06-01 10:17:09 DELETE FROM settings WHERE 1 AND code = "shippings_backend/extension/shippings/offline" 
+2024-06-02 03:07:02 DELETE FROM settings WHERE 1 AND store_id = 0 AND code = "modules_gdpr" 
+2024-06-02 03:07:54 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "backend/Extension/Modules/Gdpr" 
+2024-06-02 03:07:54 DELETE FROM settings WHERE 1 AND code = "modules_backend/extension/modules/gdpr" 
+2024-06-02 03:08:24 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "backend/Extension/Modules/Gdpr" 
+2024-06-02 03:08:24 DELETE FROM settings WHERE 1 AND code = "modules_backend/extension/modules/gdpr" 
+2024-06-02 03:08:45 DELETE FROM settings WHERE 1 AND store_id = 0 AND code = "modules_gdpr" 
+2024-06-02 03:08:48 Data too long for column 'code' at row 1
+2024-06-02 03:08:53 Data too long for column 'code' at row 1
+2024-06-02 03:08:56 DELETE FROM extension WHERE 1 AND type = "Payments" AND code = "backend/Extension/Payments/Cod" 
+2024-06-02 03:08:56 DELETE FROM settings WHERE 1 AND code = "payments_backend/extension/payments/cod" 
+2024-06-02 03:09:06 DELETE FROM extension WHERE 1 AND type = "Payments" AND code = "backend/Extension/Payments/Cod" 
+2024-06-02 03:09:06 DELETE FROM settings WHERE 1 AND code = "payments_backend/extension/payments/cod" 
+2024-06-02 03:09:22 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "backend/Extension/Modules/Gdpr" 
+2024-06-02 03:09:22 DELETE FROM settings WHERE 1 AND code = "modules_backend/extension/modules/gdpr" 
+2024-06-03 08:19:14 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "backend/Extension/Modules/Gdpr" 
+2024-06-03 08:19:14 DELETE FROM settings WHERE 1 AND code = "modules_backend/extension/modules/gdpr" 
+2024-06-03 08:21:02 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "backend/Extension/Modules/Gdpr" 
+2024-06-03 08:21:02 DELETE FROM settings WHERE 1 AND code = "modules_backend/extension/modules/gdpr" 
+2024-06-03 08:24:28 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "Gdpr" 
+2024-06-03 08:24:28 DELETE FROM settings WHERE 1 AND code = "modules_gdpr" 
+2024-06-03 08:24:38 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "Gdpr" 
+2024-06-03 08:24:38 DELETE FROM settings WHERE 1 AND code = "modules_gdpr" 
+2024-06-03 08:24:46 DELETE FROM settings WHERE 1 AND store_id = 0 AND code = "modules_gdpr" 
+2024-06-03 08:25:00 DELETE FROM extension WHERE 1 AND type = "Modules" AND code = "Gdpr" 
+2024-06-03 08:25:00 DELETE FROM settings WHERE 1 AND code = "modules_gdpr" 
+2024-06-03 08:25:16 DELETE FROM sessions WHERE 1 AND user_id = "3" 
+2024-06-03 08:25:35 DELETE FROM settings WHERE 1 AND store_id = 0 AND code = "modules_gdpr" 

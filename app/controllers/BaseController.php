@@ -18,20 +18,20 @@ class BaseController
      * @var mixed
      */
     protected $error;
-    
+
     /**
      * model
      *
      * @var mixed
      */
     protected $model;
-    
+
     /**
      * BaseController constructor.
      *
      */
     public function __construct()
-    {    
+    {
         $this->setRequestMethod();
         $this->setRequest();
         $this->setPost();
@@ -44,15 +44,16 @@ class BaseController
         $this->setting = new Setting;
     }
 
-    protected function executeMiddleware($request, $middlewares) {
+    protected function executeMiddleware($request, $middlewares)
+    {
         // Create instances of middleware
         $middlewareInstances = [];
 
         // Create an instance of the controller
-        
+
         foreach ($middlewares as $middlewareClass) {
             $Class = '\\app\\controllers\\middleware\\' . $middlewareClass;
-            
+
             $middlewareInstances[] = new $Class;
         }
 
@@ -63,5 +64,14 @@ class BaseController
         return $pipeline->handle($request);
     }
 
-
+    /**
+     * @param array $runMode
+     *
+     * @return void
+     */
+    protected function setNoPage()
+    {
+        // $url = fn_url('_no_page?' . http_build_query(array('page' => $_SERVER['REQUEST_URI'])), 'rel');
+        // $_REQUEST['redirect_url'] = $url;
+    }
 }

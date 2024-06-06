@@ -3,6 +3,7 @@
 namespace app\core;
 
 use core\engine\Session;
+use app\traits\DirectoryTrait;
 
 class Language
 {
@@ -11,8 +12,13 @@ class Language
     {
         $lang = !empty(Session::get('language')) ? Session::get('language') : 'en-gb'; // Default language
 
-        if (file_exists(RESOURCES . 'lang/' . $lang . '/' . strtolower($controllerName) . '.php')) {
-            return include_once(RESOURCES . 'lang/' . $lang . '/' . strtolower($controllerName) . '.php');
+        
+        $controllerName = explode("controllers\\",$controllerName)[1] ?? $controllerName;
+        
+        $languagePath = RESOURCES . 'lang/' . $lang . '/' . strtolower(str_replace('\\','/',$controllerName)) . '.php';
+        if (file_exists($languagePath)) {
+            
+            return include_once($languagePath);
         }
 
 

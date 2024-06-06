@@ -46,7 +46,7 @@ class CategoryModel extends BaseModel
         $extra[] = " ORDER BY c.sort_order";
         $extra[] = " LCASE(cd.name)";
 
-        return $this->query('category c','mysqli_fetch_all', $fields, $join, $conditions, $extra);
+        return $this->query('category c','rows', $fields, $join, $conditions, $extra);
         
     }
 

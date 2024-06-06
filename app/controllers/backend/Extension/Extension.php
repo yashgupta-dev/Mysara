@@ -62,7 +62,7 @@ class Extension extends BaseController
                 foreach ($files as $file) {
                     $extension = basename($file, '.php');
 
-                    $categoriesExtension = explode(APP . 'controllers/backend/Extension/' . $this->requestParam['code'] . '/', $file)[1] ?? $file;
+                    $categoriesExtension = explode(APP . 'controllers/', $file)[1] ?? $file;
                     $categoriesExtension = explode('.php', $categoriesExtension)[0] ?? $categoriesExtension;
 
                     $lang = Language::load($categoriesExtension);
@@ -88,12 +88,12 @@ class Extension extends BaseController
 
 
                     $data['extensions'][] = array(
-                        'name'      => $lang['text_heading'] ?? $categoriesExtension,
+                        'name'      => $lang['text_heading'] ?? basename($categoriesExtension),
                         'code'      => substr($categoriesExtension, 0, 1),
                         'status'    => ($this->setting->get(\strtolower($this->requestParam['code'] . '_' . $extension . '_status')) == 'A') ? $this->language['text_enabled'] : $this->language['text_disabled'],
                         'module'    => $module_data,
-                        'install'   => $this->redirect->link('admin.php?dispatch=extension.extension.install', '&extension=' . $categoriesExtension . '&code=' . $this->requestParam['code']),
-                        'uninstall' => $this->redirect->link('admin.php?dispatch=extension.extension.uninstall', '&extension=' . $categoriesExtension . '&code=' . $this->requestParam['code']),
+                        'install'   => $this->redirect->link('admin.php?dispatch=extension.extension.install', '&extension=' . basename($categoriesExtension) . '&code=' . $this->requestParam['code']),
+                        'uninstall' => $this->redirect->link('admin.php?dispatch=extension.extension.uninstall', '&extension=' . basename($categoriesExtension) . '&code=' . $this->requestParam['code']),
                         'installed' => in_array($extension, $extensions),
                         'edit'      => $this->redirect->link('admin.php?dispatch=extension.' . \strtolower($this->requestParam['code'] . '.' . $extension))
                     );

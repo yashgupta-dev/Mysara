@@ -32,6 +32,7 @@
                                             <th><input type="checkbox" onclick="$(document).find('#customer_ids').attr('checked',true);"/> </th>
                                             <th>{$lang.column_id}</th>
                                             <th>{$lang.column_name}</th>
+                                            <th>{$lang.column_type}</th>
                                             <th>{$lang.column_created_at}</th>
                                             <th>{$lang.column_updated_at}</th>
                                             <th>&nbsp;</th>
@@ -45,6 +46,7 @@
                                                 </td>
                                                 <td>{$group.id}</td>
                                                 <td>{$group.name}</td>
+                                                <td>{$func->getStat($group.type)}</td>
                                                 <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$group.created_at)}</td>
                                                 <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$group.updated_at)}</td>
                                                 <td>

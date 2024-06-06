@@ -25,6 +25,8 @@
                         {include file="backend/common/filter.tpl" title="Filter" content="backend/customers/components/filter.tpl"}
                         
                         <!-- Responsive Table -->
+                        {include file="backend/common/pagination.tpl" save_current_page=true save_current_url=true div_id=''}
+
                         <div class="card">                            
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
@@ -74,6 +76,8 @@
                                 </table>
                             </div>
                         </div>
+                        
+                        {include file="backend/common/pagination.tpl" save_current_page=true save_current_url=true div_id=''}
                         <!--/ Responsive Table -->
                     </div>
                     <!-- / Content -->

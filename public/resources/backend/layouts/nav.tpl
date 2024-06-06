@@ -32,7 +32,7 @@
                   </div>
                   <div class="flex-grow-1">
                     <span class="fw-medium d-block">{$session.auth.firstname}</span>
-                    <small class="text-muted">{'Admin'}</small>
+                    <small class="text-muted">{$lang.text_admin}</small>
                   </div>
                 </div>
               </a>
@@ -43,13 +43,14 @@
             <li>
               <a class="dropdown-item" href="{route path="admin.php?dispatch=profile.account"}">
                 <i class="bx bx-user me-2"></i>
-                <span class="align-middle">{'My Profile'}</span>
+                <span class="align-middle">{$lang.text_profile}</span>
               </a>
             </li>
+
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="{route path="admin.php?dispatch=profile.setting"}">
                 <i class="bx bx-cog me-2"></i>
-                <span class="align-middle">{'Settings'}</span>
+                <span class="align-middle">{$lang.text_setting_menu}</span>
               </a>
             </li>
             

@@ -350,6 +350,7 @@ class Validation
                         if(!empty($not) && !empty($notValue)) {
                             $column = explode(',',$column)[0] ?? $column;
                         }
+
                         $sql = '';
                         $sql .= 'SELECT count(' . $column . ')  as count';
                         $sql .= ' FROM ' . $table;
@@ -515,7 +516,7 @@ class Validation
                 case 'in_array':
 
                     if (!empty($data[$field])) {                        
-
+                        
                         if (!in_array($data[$field], explode(',', $ruleValue))) {
                             $valid = false;
                         }

@@ -6,21 +6,6 @@ return [
     "text.filter"   => 'Filter',
     "text.text_save"   => 'Save Changes',
     
-    // login auth [page]
-    'sign.text_title' => 'Sign In',
-    'sign.text_heading' => 'Welcome back! Log in to your account.',
-    'sign.text_forget'  => 'Forgot Your Password?',
-    'sign.text_create_account' => 'You don\'t have any account?',
-
-    // register auth [page]
-    'register.text_firstname' => 'Firstname',
-    'register.text_lastname' => 'Lastname',
-    'register.text_email' => 'Email',
-    'register.text_phone' => 'Phone',
-    'register.text_password' => 'Password',
-    'register.text_confirm_password' => 'Confirm password',
-    'register.text_create_account'  => 'Create account',
-    
     'text_back' => 'Previous',
     'text_success' => 'Changes successfully saved.',
     'text_filter'   => 'Filter',
@@ -28,6 +13,7 @@ return [
     'text_edit' => 'Edit',
     'text_delete' => 'Delete',
     'text_btn_save' => 'Save changes',
+    'text_btn_cancel' => 'Cancel',
     'text_none'     => '--- none ---',
 
     'text_enabled'  => 'Active',
@@ -39,5 +25,10 @@ return [
     'text_add'  => '<i class="bx bx-plus"></i> Add',
     'text_status'   => 'Status',
 
-    'text_no_result'    => 'No results found.'
+    'text_admin'    => 'Adminstrator',
+    'text_profile'  => 'My Profile',
+    'text_setting_menu'  => 'Settings',
+    
+    'text_no_result'    => 'No results found.',
+    'text_per_page'     => 'per page',
 ];

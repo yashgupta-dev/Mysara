@@ -32,7 +32,7 @@ class ExtensionModel extends BaseModel
         $condition = $join = [];
 
         $condition['type']  = $code;
-        $results =  $this->select('extension', ['*'], $condition, 'mysqli_fetch_all');
+        $results =  $this->select('extension', ['*'], $condition, 'rows');
 
         $extension_data = [];
         foreach ($results as $result) {
@@ -87,7 +87,7 @@ class ExtensionModel extends BaseModel
     public function getSettings($code, $store_id = 0) {
         $setting_data = array();
 
-        $results = $this->select('settings',['*'],['store_id' => $store_id, 'code' => $code],'mysqli_fetch_all');
+        $results = $this->select('settings',['*'],['store_id' => $store_id, 'code' => $code],'rows');
 
 		foreach ($results as $result) {
             

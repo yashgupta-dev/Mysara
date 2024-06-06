@@ -1,5 +1,4 @@
 {assign var="title" value=$lang.text_heading}
-
 {include file="backend/layouts/header.tpl"}
 
 {block name="backend_page"}
@@ -28,7 +27,9 @@
                         {include file="backend/common/filter.tpl" title=$lang.text_filter color="dark" content='backend/system/components/users-filter.tpl'}
                         
                         <!-- Responsive Table -->
+                        {include file="backend/common/pagination.tpl" save_current_page=true save_current_url=true div_id=''}
                         <div class="card">
+
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>
@@ -84,7 +85,12 @@
                                     </tbody>
                                 </table>
                             </div>
+                            
+                            {* {include file="backend/common/pagination.tpl" pagination=$search} *}
                         </div>
+
+                        {include file="backend/common/pagination.tpl" save_current_page=true save_current_url=true div_id=''}
+
                         <!--/ Responsive Table -->
                     </div>
                     <!-- / Content -->

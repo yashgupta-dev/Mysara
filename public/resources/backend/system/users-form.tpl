@@ -59,7 +59,7 @@
 
                             <div class="form-group mb-3">
                                 <label class="form-label" for="elm_phone">{$lang.text_phone}</label>
-                                <input id="phone" type="phone"  {if !empty($user)} value="{$user.phone}" {/if}  class="form-control" name="phone" />
+                                <input id="phone" type="phone" {if !empty($user)} value="{$user.phone}" {/if}  class="form-control" name="phone" />
                             </div>
 
                             <div class="form-group mb-3">
@@ -70,6 +70,14 @@
                             <div class="form-group mb-3">
                                 <label class="form-label" for="elm_confirm_password">{$lang.text_confirm_password}</label>
                                 <input id="confirm_password" type="password" class="form-control" name="confirm_password" />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="elm_user_status">{$lang.text_status}</label>
+                                <select class="form-control" name="user_status" id="elm_user_status">
+                                    <option value="A" {if !empty($user) && $user.active == 'A'} selected {/if}>{$lang.text_enabled}</option>
+                                    <option value="D" {if !empty($user) && $user.active == 'D'} selected {/if}>{$lang.text_disabled}</option>
+                                </select>
                             </div>
 
 

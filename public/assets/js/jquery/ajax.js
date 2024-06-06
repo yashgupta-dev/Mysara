@@ -88,7 +88,7 @@
         if (res.success) {
           // thisForm.querySelector('.sent-message').innerHTML = res.message;
           // thisForm.querySelector('.sent-message').classList.add('d-block');
-          thisForm.reset();
+          // thisForm.reset();
           toastr.success('Success', res.message);
         }
 
@@ -222,6 +222,22 @@
       html += `</div>`;
   });
     $(document).find('#modules-list').append(html);
+  }
+  $(function(){
+    showPermission($('#elm_group_type').val());
+  });
+  
+  $('#elm_group_type').on('change',function(){
+      showPermission($(this).val());
+  });
+
+  function showPermission(type) {
+    console.log(type);
+    if(type == 'A') {
+      $('#permission_group_A').css('display','block');
+    } else {
+      $('#permission_group_A').css('display','none');
+    }
   }
 
 })();

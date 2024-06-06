@@ -2,6 +2,7 @@
 
 namespace app\model\Backend;
 
+use app\core\Setting;
 use app\model\BaseModel;
 
 /**
@@ -28,7 +29,13 @@ class CustomerModel extends BaseModel
      * @return array
      */
     public function getCustomers($request = array()) {
-        $conditions = [];
+        $conditions = $sorting = [];
+
+        if (!empty($request['items_per_page'])) {
+            $itemsPerPage = $request['items_per_page'];
+        } else {
+            $itemsPerPage = Setting::getConfig('config_pagination');
+        }
         
         $fields = [
             'id',
@@ -66,10 +73,17 @@ class CustomerModel extends BaseModel
             // }
         }
 
+        if(!empty($request['page'])) {
+            $page = $request['page'];
+        } else  {
+            $page = 1;
+        }
 
         $conditions['user_type'] = 'C';
 
-        $customers = $this->select('users',implode(',',$fields),$conditions,'mysqli_fetch_all');
+        $request = array_merge($request, $this->pagination('users', array('count(*) as total_items'), $conditions, 'row', [], $itemsPerPage, $page));
+
+        $customers = $this->select('users',implode(',',$fields),$conditions,'rows', $sorting, $request);
         return [$customers, $request];
     }
 
