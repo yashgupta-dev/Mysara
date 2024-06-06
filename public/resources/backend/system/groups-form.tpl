@@ -35,6 +35,15 @@
 
                             </div>
                             <div class="form-group mb-3">
+                                <label class="form-label" for="elm_group_type">{'Type'}</label>
+                                <select class="form-control" name="group_type" id="elm_group_type">
+                                    <option value="A" {if !empty($groups) && $groups.type eq 'A'} selected {/if}>{'Admin'}</option>
+                                    <option value="C" {if !empty($groups) && $groups.type eq 'C'} selected {/if}>{'Customer'}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="" id="permission_group_A">
+                            <div class="form-group mb-3">
                                 <label class="form-label">{'Access Permissions'}</label>
                                 <div class="form-control">
                                     <div class="well well-sm" style="height: 150px; overflow: auto;">
@@ -90,6 +99,7 @@
                                         onclick="$(this).parent().find(':checkbox').prop('checked', false);"
                                         class="btn btn-link">{'Unselect all'}</button>
                                 </div>
+                            </div>
                             </div>
 
                             <div class="mb-3">

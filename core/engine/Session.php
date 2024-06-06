@@ -2,8 +2,19 @@
 
 namespace core\engine;
 
+use app\core\DatabaseSessionHandler;
+
 class Session
 {
+    protected static $handler;
+
+    public static function init()
+    {
+        self::$handler = new DatabaseSessionHandler();
+        session_set_save_handler(self::$handler, true);
+        self::start();
+    }
+
     public static function start()
     {
         session_start();
@@ -24,6 +35,10 @@ class Session
         if (isset($_SESSION[$key])) {
             unset($_SESSION[$key]);
         }
+    }
+
+    public static function getSessionId() {
+        return session_id();
     }
 
     public static function destroy()

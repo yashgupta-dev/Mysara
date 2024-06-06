@@ -6,11 +6,16 @@ use app\core\Tygh;
 use app\core\Redirect;
 use core\engine\Session;
 
+require_once APP . 'traits/DirectoryTrait.php';
+
+use app\traits\DirectoryTrait;
+
 /**
  * startup
  */
 class startup
 {
+    use DirectoryTrait;
     /**
      * myController
      *
@@ -69,10 +74,9 @@ class startup
     {
         spl_autoload_register([$this, 'autoload']);
 
-        Session::start();
-        
+        // Session::start();     
+        Session::init();
         $this->parseRequest();
-
         $this->route();
     }
 
@@ -101,18 +105,18 @@ class startup
 
         if (!empty($urlParts['query'])) {
             $urlExplode = (strpos('dispatch=', $urlParts['query']) === true) ? explode('dispatch=', $urlParts['query']) : explode('dispatch=', $urlParts['query']);
-            
+
             $this->urlExplode = !empty($urlExplode[1]) ? $urlExplode[1] : '';
-            
+
             // paramater ( & )
             $pramater = explode('&', $this->urlExplode);
 
             // dispatch
-            $routeData = str_replace('.','/',$pramater[0]);
-            
+            $routeData = str_replace('.', '/', $pramater[0]);
+
             $urlExplode = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$routeData);
             $urlExplodeArray = explode('/', $urlExplode);
-    
+
             // Capitalize the first character of each element in the exploded array
             foreach ($urlExplodeArray as &$element) {
                 $element = ucfirst($element);
@@ -120,17 +124,15 @@ class startup
 
             // Break apart the route
             while ($urlExplodeArray) {
-                $file = APP . 'controllers/' . $this->type . '/'  . implode('/', $urlExplodeArray) . '.php';
-        
-                if (is_file($file)) {
-                    
-                    $this->myController = implode('/', $urlExplodeArray);						
+
+                if ($this->fileExists(APP . 'controllers/' . $this->type . '/', implode('/', $urlExplodeArray), '.php')) {
+
+                    $this->myController = implode('/', $urlExplodeArray);
                     break;
                 } else {
                     $this->myMethod = array_pop($urlExplodeArray);
                 }
             }
-
         } else {
 
             Redirect::url('admin.php?dispatch=auth.login');
@@ -144,18 +146,20 @@ class startup
      */
     public function route()
     {
+        $path = APP . 'controllers/' . $this->type . '/';
+        $controllerPath = $this->fileExists($path, $this->myController, '.php');
 
-        if (!file_exists(APP . 'controllers/' . $this->type . '/' . $this->myController . '.php')) {
+        if (!$controllerPath) {
             $this->flag++;
         }
 
         if ($this->flag == 0) {
             // Include the controller file
-            include(APP . 'controllers/' . $this->type . '/' . $this->myController . ".php");
-
+            include($controllerPath);
+            // $this->myController = explode('.php',explode($path,$controllerPath)[1] ?? $controllerPath)[0] ?? $controllerPath;
             // Create an instance of the controller
             $this->myController = str_replace('/', '\\', $this->myController);
-            
+
             // Create an instance of the controller
             $controllerClass = '\\app\\controllers\\' . $this->type . '\\' . $this->myController;
 
@@ -165,7 +169,6 @@ class startup
             if (method_exists($CallingtheController, $this->myMethod)) {
                 call_user_func_array([$CallingtheController, $this->myMethod], [$this->pramater]);
             } else {
-                // Handle method not found
                 // Handle method not found
                 Tygh::assign("title", '500 | Internal server');
                 Tygh::assign("code", '500');

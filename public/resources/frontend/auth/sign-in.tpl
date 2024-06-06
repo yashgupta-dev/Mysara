@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{__('sign.text_title')}</title>
+  <title>{$lang.text_title}</title>
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
@@ -36,7 +36,7 @@
                       <img src="{asset path='public/assets/img/core-img/logo.png'}" alt="">
                     </a>
 
-                    <h5 class="text-muted font-weight-normal mb-4">{__('sign.text_heading')}</h5>
+                    <h5 class="text-muted font-weight-normal mb-4">{$lang.text_heading}</h5>
 
                     <form action="{route path="auth/login"}" method="post" role="form"
                       class="form-ajax forms-sample p-3 p-md-4">
@@ -59,12 +59,12 @@
                         
                           <div class="col-md-6">
                             <a class="d-block mt-3 text-muted" href="{route path="auth/forget"}">
-                              <small>{__('sign.text_forget')}</small>
+                              <small>{$lang.text_forget}</small>
                             </a>
                           </div>
                           <div class="col-md-6">
                             <a class="d-block mt-3 text-muted" href="{route path="auth/register"}">
-                              <small>{__('sign.text_create_account')}</small>
+                              <small>{$lang.text_create_account}</small>
                             </a>
                           </div>
                         

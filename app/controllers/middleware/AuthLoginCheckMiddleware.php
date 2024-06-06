@@ -9,7 +9,7 @@ class AuthLoginCheckMiddleware {
     public function handle($request) {
         // Check if user is authenticated
         
-        if ($request['dispatch'] != 'auth.logout' && $this->isAuthenticated()) {
+        if (!in_array($request['dispatch'],['auth.logout','auth.logout_all_device']) && $this->isAuthenticated()) {
             // If not authenticated, redirect to login page or return an error
             Redirect::url('admin.php?dispatch=dashboard');
         }

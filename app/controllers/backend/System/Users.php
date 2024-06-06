@@ -22,23 +22,24 @@ class Users extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->executeMiddleware($this->requestParam, ['AuthMiddleware','PermissionMiddleware','NotificationMiddleware']);
+        $this->executeMiddleware($this->requestParam, ['AuthMiddleware', 'PermissionMiddleware', 'NotificationMiddleware']);
         $this->model = new SettingModel();
     }
-    
+
     /**
      * index
      *
      * @return void
      */
-    public function index() {
+    public function index()
+    {
         list($users, $search) = $this->model->getUsers($this->requestParam);
         
-        Tygh::assign('users',$users);
-        Tygh::assign('search',$search);
+        Tygh::assign('users', $users);
+        Tygh::assign('search', $search);
         Tygh::display('backend/system/users');
     }
-    
+
     /**
      * add
      *
@@ -55,7 +56,7 @@ class Users extends BaseController
                 'phone'     =>  'required|phone|unique:users.phone',
                 'group'     =>  'required|in:roles.id',
                 'password'  =>  'required',
-                'confirm_password'  =>  'required|equals:'.$this->requestParam['password']
+                'confirm_password'  =>  'required|equals:' . $this->requestParam['password']
 
             ], $this->requestParam);
 
@@ -81,15 +82,15 @@ class Users extends BaseController
                     Notification::set('O', 'Success', $this->language['text_success']);
                     $response = ['success' => true, 'message' => $this->language['text_success'], 'redirect_url' => $this->redirect->link('admin.php?dispatch=system.users')];
                 } else {
-                    Notification::set('E', 'Error', sprintf($this->language['text_failed'],'add'));
-                    $response = ['errors' => sprintf($this->language['text_failed'],'add'), 'redirect_url' => $this->redirect->link('admin.php?dispatch=system.users.add')];
+                    Notification::set('E', 'Error', sprintf($this->language['text_failed'], 'add'));
+                    $response = ['errors' => sprintf($this->language['text_failed'], 'add'), 'redirect_url' => $this->redirect->link('admin.php?dispatch=system.users.add')];
                 }
             }
 
             Response::json(Json::encode($response));
         }
         list($groups) = $this->model->getGroups();
-        Tygh::assign('groups',$groups);
+        Tygh::assign('groups', $groups);
         Tygh::assign('route', 'admin.php?dispatch=system.users.add');
         Tygh::display('backend/system/users-form.tpl');
     }
@@ -107,13 +108,14 @@ class Users extends BaseController
                 'firstname' =>  'required|string|regex:[a-zA-z]',
                 'user_id'   =>  'required|in:users.id',
                 'lastname'  =>  'required|string|regex:[a-zA-z]',
-                'email'     =>  'required|email|not_in:users.email,id-'.$this->requestParam['user_id'],
-                'phone'     =>  'required|phone|not_in:users.phone,id-'.$this->requestParam['user_id'],
+                'email'     =>  'required|email|not_in:users.email,id-' . $this->requestParam['user_id'],
+                'phone'     =>  'required|phone|not_in:users.phone,id-' . $this->requestParam['user_id'],
                 'group'     =>  'required|in:roles.id',
-                'confirm_password'  =>  'equals:'.$this->requestParam['password']
+                'user_status'     =>  'required|in_array:A,D',
+                'confirm_password'  =>  'equals:' . $this->requestParam['password']
 
             ], $this->requestParam);
-            
+
             // get errors
             if (Validation::getErrors() !== true) {
 
@@ -136,8 +138,8 @@ class Users extends BaseController
                     Notification::set('O', 'Success', $this->language['text_success']);
                     $response = ['success' => true, 'message' => $this->language['text_success'], 'redirect_url' => $this->redirect->link('admin.php?dispatch=system.users')];
                 } else {
-                    Notification::set('E', 'Error', sprintf($this->language['text_failed'],'add'));
-                    $response = ['errors' => sprintf($this->language['text_failed'],'add'), 'redirect_url' => $this->redirect->link('admin.php?dispatch=system.users.add')];
+                    Notification::set('E', 'Error', sprintf($this->language['text_failed'], 'add'));
+                    $response = ['errors' => sprintf($this->language['text_failed'], 'add'), 'redirect_url' => $this->redirect->link('admin.php?dispatch=system.users.add')];
                 }
             }
 
@@ -146,8 +148,8 @@ class Users extends BaseController
         list($groups) = $this->model->getGroups();
         $user = $this->model->getUser($this->requestParam);
 
-        Tygh::assign('groups',$groups);
-        Tygh::assign('user',$user);
+        Tygh::assign('groups', $groups);
+        Tygh::assign('user', $user);
         Tygh::assign('route', 'admin.php?dispatch=system.users.update');
         Tygh::display('backend/system/users-form.tpl');
     }
@@ -179,7 +181,7 @@ class Users extends BaseController
                     Notification::set('O', 'Success', $this->language['text_success']);
                 } else {
 
-                    Notification::set('E', 'Error', sprintf($this->language['text_failed'],'delete'));
+                    Notification::set('E', 'Error', sprintf($this->language['text_failed'], 'delete'));
                 }
             }
 

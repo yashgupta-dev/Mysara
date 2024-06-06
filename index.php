@@ -1,4 +1,5 @@
 <?php
+
 require_once './vendor/autoload.php'; // Path to Composer autoloader
 
 use core\Web;

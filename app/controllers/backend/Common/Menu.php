@@ -54,6 +54,7 @@ class Menu extends BaseController
                 'child'     => [],
             ];
         }
+        
         // catalog
         $catalog = [];
         if (!empty($this->permission) && !empty(json_decode($this->permission['permission'], true)) && in_array('catalog.category', json_decode($this->permission['permission'], true)['access'])) {
@@ -63,14 +64,14 @@ class Menu extends BaseController
             ];
         }
 
-        if (!empty($this->permission) && !empty(json_decode($this->permission['permission'], true)) && in_array('catalog.products', json_decode($this->permission['permission'], true)['access'])) {
+        if (!empty($this->permission) && !empty(json_decode($this->permission['permission'], true)) && in_array('catalog.product', json_decode($this->permission['permission'], true)['access'])) {
             $catalog['catalog.products'] = [
                 'title'     => 'Product',
                 'link'      => $this->redirect->link('admin.php?dispatch=catalog.products'),
             ];
         }
 
-        if (!empty($this->permission) && !empty(json_decode($this->permission['permission'], true)) && in_array('catalog.options', json_decode($this->permission['permission'], true)['access'])) {
+        if (!empty($this->permission) && !empty(json_decode($this->permission['permission'], true)) && in_array('catalog.option', json_decode($this->permission['permission'], true)['access'])) {
             $catalog['catalog.options'] = [
                 'title'     => 'Option',
                 'link'      => $this->redirect->link('admin.php?dispatch=catalog.options'),
@@ -90,6 +91,25 @@ class Menu extends BaseController
                 'icon'  => 'bx-bullseye',
                 'sort'      => 1,
                 'child' => $catalog,
+            ];
+        }
+
+        // catalog
+        $sale = [];
+        if (!empty($this->permission) && !empty(json_decode($this->permission['permission'], true)) && in_array('sale.order', json_decode($this->permission['permission'], true)['access'])) {
+            $sale['sale.order'] = [
+                'title'     => 'Orders',
+                'link'      => $this->redirect->link('admin.php?dispatch=sale.order'),
+            ];
+        }
+
+        if ($sale) {
+            $this->menu['sale'] = [
+                'title' => 'Sale',
+                'link'  => 'javascript:;',
+                'icon'  => 'bx-store',
+                'sort'      => 1,
+                'child' => $sale,
             ];
         }
 

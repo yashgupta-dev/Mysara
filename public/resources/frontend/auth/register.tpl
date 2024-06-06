@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{__('sign.text_title')}</title>
+  <title>{$lang.text_title}</title>
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
@@ -36,49 +36,49 @@
                       <img src="{asset path='public/assets/img/core-img/logo.png'}" alt="">
                     </a>
 
-                    <h5 class="text-muted font-weight-normal mb-4">{__('sign.text_heading')}</h5>
+                    {* <h5 class="text-muted font-weight-normal mb-4">{$lang.text_heading}</h5> *}
 
                     <form action="{route path="auth/register"}" method="post" role="form"
                       class="form-ajax forms-sample p-3 p-md-4">
 
                       <div class="form-group">
-                        <label for="elm_firstname">{__('register.text_firstname')}</label>
+                        <label for="elm_firstname">{$lang.text_firstname}</label>
                         <input id="firstname" type="firstname" class="form-control" name="firstname" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_lastname">{__('register.text_lastname')}</label>
+                        <label for="elm_lastname">{$lang.text_lastname}</label>
                         <input id="lastname" type="lastname" class="form-control" name="lastname" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_email">{__('register.text_email')}</label>
+                        <label for="elm_email">{$lang.text_email}</label>
                         <input id="email" type="email" class="form-control" name="email" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_phone">{__('register.text_phone')}</label>
+                        <label for="elm_phone">{$lang.text_phone}</label>
                         <input id="phone" type="phone" class="form-control" name="phone" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_password">{__('register.text_password')}</label>
+                        <label for="elm_password">{$lang.text_password}</label>
                         <input id="password" type="password" class="form-control" name="password" />
                       </div>
 
                       <div class="form-group">
-                        <label for="elm_confirm_password">{__('register.text_confirm_password')}</label>
+                        <label for="elm_confirm_password">{$lang.text_confirm_password}</label>
                         <input id="confirm_password" type="password" class="form-control" name="confirm_password" />
                       </div>
 
                       <div class="mt-3">
-                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">{__('register.text_create_account')}</button>
+                        <button type="submit" name="button" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">{$lang.text_create_account}</button>
                       </div>
                       <div class="form-row">
 
                         <div class="col-md-6">
                           <a class="d-block mt-3 text-muted" href="{route path="auth/login"}">
-                            <small>{__('register.text_back')}</small>
+                            <small>{$lang.text_back}</small>
                           </a>
                         </div>
                       </div>

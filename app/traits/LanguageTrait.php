@@ -25,6 +25,7 @@ trait LanguageTrait
     protected function loadLanguage()
     {
         $controllerName = $this->getControllerName();
+        
         $files = [
             $controllerName,
             'en-gb'
@@ -48,7 +49,7 @@ trait LanguageTrait
     protected function getControllerName()
     {
         // Get the name of the current controller
-        return (new ReflectionClass($this))->getShortName();
+        return (new ReflectionClass($this))->getName();
     }
 
 }

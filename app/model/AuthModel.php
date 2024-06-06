@@ -41,7 +41,9 @@ class AuthModel extends BaseModel
                 'password'   => password_hash($data['confirm_password'],PASSWORD_DEFAULT),
                 'email'      => $data['email'],
                 'phone'      => $data['phone'],
-                'active'     => 'A'
+                'active'     => 'D',
+                'created_at' => TIME,
+                'updated_at' => TIME
             ];
 
             return $this->replace('users',$_array);            
@@ -58,22 +60,43 @@ class AuthModel extends BaseModel
      * @return array
      */
     public function selectUser(string $email, $user_type = "C") {
-        $fileds = [
-            'id',
-            'firstname',
-            'lastname',
-            'user_type',
-            'username',
-            'email',
-            'password',
-            'phone',
-            'active',
-            'last_updated_password_at',
-            'custom_fields',
-            'created_at',
-            'updated_at',
+        
+        $conditions = $join = [];
+
+        $fields = [
+            'u.id',
+            'u.firstname',
+            'u.lastname',
+            'u.user_type',
+            'u.username',
+            'u.email',
+            'u.password',
+            'u.phone',
+            'u.active',
+            // 'u.last_updated_password_at',
+            // 'u.custom_fields',
+            'u.created_at',
+            'u.updated_at',  
+            'ru.notification',
+            'ru.role_id',
+            'r.type',
+            'r.name as role',
         ];
-        return $this->select('users', $fileds, array('email' => $email,'user_type' => $user_type),'mysqli_fetch_assoc');
+
+        $join[] = "users u ";
+        $join[] = "LEFT JOIN role_user ru ON (ru.user_id = u.id) ";
+        $join[] = "LEFT JOIN roles r ON (r.id = ru.role_id) ";
+
+        $conditions['u.user_type'] = $user_type;
+        
+        $conditions['u.username'] = $email;        
+
+        // $res = $this->select(implode(' ',$join),implode(',',$fields),$conditions,'row');
+
+        $res = $this->select(implode(' ',$join),implode(',',$fields),$conditions);
+        $res['notification']  = json_decode($res['notification'], true);
+
+        return $res;
     }
     
     /**
@@ -102,6 +125,15 @@ class AuthModel extends BaseModel
             'recovery_key' => '',
             'last_updated_password_at' => TIME
         ),array('email' => $data['email']));
+    }
+
+    /**
+     * deleteSession
+     *
+     * @return bool
+     */
+    public function deleteSession($data) {
+        return $this->delete('sessions',array('user_id' => $data['user_id']));
     }
     
     /**

@@ -2,7 +2,9 @@
 
 namespace app\controllers\middleware;
 
+use app\core\Json;
 use app\core\Redirect;
+use app\core\Response;
 use app\model\AuthModel;
 
 class PermissionMiddleware
@@ -12,7 +14,11 @@ class PermissionMiddleware
         // Check if user is access
         if (!$this->isPermission($request)) {
             // If user don't have access, redirect to error page page
-            Redirect::url('admin.php?dispatch=errors.access');
+            if(!empty($request['is_ajax'])) {
+                Response::json(Json::encode(['errors' => 'You don\'t have access to this page.']));
+            } else {
+                Redirect::url('admin.php?dispatch=errors.access');
+            }
         }
 
         // If user have access, pass the request to the next middleware or controller

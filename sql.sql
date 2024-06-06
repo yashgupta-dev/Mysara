@@ -5,6 +5,47 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE `attribute` (
+  `attribute_id` int NOT NULL AUTO_INCREMENT,
+  `attribute_group_id` int NOT NULL,
+  `sort_order` int NOT NULL,
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+TRUNCATE `attribute`;
+
+DROP TABLE IF EXISTS `attribute_description`;
+CREATE TABLE `attribute_description` (
+  `attribute_id` int NOT NULL,
+  `lang_id` int NOT NULL,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`attribute_id`,`lang_id`),
+  CONSTRAINT `attribute_description_ibfk_2` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`attribute_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+TRUNCATE `attribute_description`;
+
+DROP TABLE IF EXISTS `attribute_group`;
+CREATE TABLE `attribute_group` (
+  `attribute_group_id` int NOT NULL AUTO_INCREMENT,
+  `sort_order` int NOT NULL,
+  PRIMARY KEY (`attribute_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
+TRUNCATE `attribute_group`;
+
+DROP TABLE IF EXISTS `attribute_group_description`;
+CREATE TABLE `attribute_group_description` (
+  `attribute_group_id` int NOT NULL,
+  `lang_id` int NOT NULL,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`attribute_group_id`,`lang_id`),
+  CONSTRAINT `attribute_group_description_ibfk_2` FOREIGN KEY (`attribute_group_id`) REFERENCES `attribute_group` (`attribute_group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+TRUNCATE `attribute_group_description`;
+
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int NOT NULL AUTO_INCREMENT,
@@ -203,30 +244,47 @@ CREATE TABLE `extension` (
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb3;
 
 TRUNCATE `extension`;
 INSERT INTO `extension` (`extension_id`, `type`, `code`) VALUES
 (76,	'Payments',	'Cod'),
+(83,	'Modules',	'Gdpr'),
 (69,	'Shippings',	'Offline'),
 (70,	'Themes',	'Mysara');
 
 SET NAMES utf8mb4;
 
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE `notifications` (
+  `notification_id` bigint NOT NULL AUTO_INCREMENT,
+  `message` text NOT NULL,
+  `user_id` bigint NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`notification_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+TRUNCATE `notifications`;
+
 DROP TABLE IF EXISTS `role_user`;
 CREATE TABLE `role_user` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int unsigned NOT NULL,
-  `user_id` int unsigned NOT NULL,
+  `user_id` bigint NOT NULL,
+  `notification` text COLLATE utf8mb4_unicode_ci,
   `created_at` bigint DEFAULT NULL,
   `updated_at` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `role_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 TRUNCATE `role_user`;
-INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(2,	9,	3,	1716101560,	1716101560),
-(11,	11,	18,	1716101560,	1716101560);
+INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `notification`, `created_at`, `updated_at`) VALUES
+(2,	9,	3,	'{\"account_update\":\"Y\",\"login\":\"Y\",\"password_update\":\"N\",\"new_customer_add\":\"Y\",\"permission_update\":\"N\",\"permission_created\":\"Y\",\"permission_deleted\":\"N\"}',	1716101560,	1716101560),
+(13,	11,	19,	'',	NULL,	NULL);
 
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
@@ -234,15 +292,17 @@ CREATE TABLE `roles` (
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `permission` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'A',
   `created_at` bigint NOT NULL,
   `updated_at` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 TRUNCATE `roles`;
-INSERT INTO `roles` (`id`, `name`, `description`, `permission`, `created_at`, `updated_at`) VALUES
-(9,	'Adminstrator',	'',	'{\"access\":[\"customers\",\"dashboard\",\"profile.account\",\"catalog.category\",\"extension.extension\",\"extension.extension.install\",\"extension.extension.uninstall\",\"extension.modules.banners\",\"extension.payments.bank\",\"extension.payments.cod\",\"extension.payments.cod.save\",\"extension.shippings.offline\",\"extension.themes.mysara\",\"system.extensions\",\"system.groups\",\"system.groups.update\",\"system.groups.add\",\"system.groups.delete\",\"system.setting\",\"system.users\",\"system.users.add\",\"system.users.update\",\"system.users.delete\"],\"modify\":[\"customers\",\"dashboard\",\"profile.account\",\"catalog.category\",\"extension.extension\",\"extension.extension.install\",\"extension.extension.uninstall\",\"extension.modules.banners\",\"extension.payments.bank\",\"extension.payments.cod\",\"extension.payments.cod.save\",\"extension.shippings.offline\",\"extension.themes.mysara\",\"system.extensions\",\"system.groups\",\"system.groups.update\",\"system.groups.add\",\"system.groups.delete\",\"system.setting\",\"system.users\",\"system.users.add\",\"system.users.update\",\"system.users.delete\"]}',	1716101560,	1716076208),
-(11,	'Team',	'',	'{\"access\":[\"dashboard\",\"profile.account\",\"system.users\"]}',	1716101560,	1716101560);
+INSERT INTO `roles` (`id`, `name`, `description`, `permission`, `type`, `created_at`, `updated_at`) VALUES
+(9,	'Adminstrator',	'',	'{\"access\":[\"customers\",\"dashboard\",\"profile.account\",\"profile.setting\",\"catalog.attribute\",\"catalog.attribute.group_list\",\"catalog.category\",\"catalog.group\",\"catalog.group.add\",\"catalog.option\",\"catalog.product\",\"extension.extension\",\"extension.extension.install\",\"extension.extension.uninstall\",\"extension.modules.banners\",\"extension.modules.gdpr\",\"extension.modules.gdpr.save\",\"extension.payments.bank\",\"extension.payments.cod\",\"extension.payments.cod.save\",\"extension.shippings.offline\",\"extension.themes.mysara\",\"sale.order\",\"system.extensions\",\"system.groups\",\"system.groups.update\",\"system.groups.add\",\"system.groups.delete\",\"system.setting\",\"system.users\",\"system.users.add\",\"system.users.update\",\"system.users.delete\"],\"modify\":[\"customers\",\"dashboard\",\"profile.account\",\"profile.setting\",\"catalog.attribute\",\"catalog.attribute.group_list\",\"catalog.category\",\"catalog.group\",\"catalog.group.add\",\"catalog.option\",\"catalog.product\",\"extension.extension\",\"extension.extension.install\",\"extension.extension.uninstall\",\"extension.modules.banners\",\"extension.modules.gdpr\",\"extension.modules.gdpr.save\",\"extension.payments.bank\",\"extension.payments.cod\",\"extension.payments.cod.save\",\"extension.shippings.offline\",\"extension.themes.mysara\",\"sale.order\",\"system.extensions\",\"system.groups\",\"system.groups.update\",\"system.groups.add\",\"system.groups.delete\",\"system.setting\",\"system.users\",\"system.users.add\",\"system.users.update\",\"system.users.delete\"]}',	'A',	1716101560,	1717384821),
+(11,	'Team',	'',	'{\"access\":[\"dashboard\",\"profile.account\",\"profile.logout_all_device\",\"system.users\",\"system.users.update\"],\"modify\":[\"profile.account\",\"profile.logout_all_device\",\"system.users\",\"system.users.update\"]}',	'A',	1716101560,	1716675951),
+(13,	'Default',	NULL,	'[]',	'C',	1716686508,	1716691075);
 
 DROP TABLE IF EXISTS `seo`;
 CREATE TABLE `seo` (
@@ -261,22 +321,20 @@ INSERT INTO `seo` (`seo_id`, `seo_url`, `seo_origin`, `status`) VALUES
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
-  `id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint unsigned DEFAULT NULL,
-  `admin_user_id` bigint unsigned DEFAULT NULL,
-  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text,
+  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `last_activity` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `sessions_user_id_index` (`user_id`),
-  KEY `sessions_admin_user_id_index` (`admin_user_id`),
-  KEY `sessions_last_activity_index` (`last_activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 TRUNCATE `sessions`;
-INSERT INTO `sessions` (`id`, `user_id`, `admin_user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('qaa5n16pmfvvf5qna9h7mbj2qv',	NULL,	NULL,	NULL,	NULL,	'',	1713599796);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('7gioptik2e62bh293qaiel4c2k',	0,	'127.0.0.1',	'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',	'',	1717258061),
+('9cc5g39ndddla6hgt9ctnmml06',	3,	'127.0.0.1',	'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',	'YXV0aHxhOjE1OntzOjI6ImlkIjtzOjE6IjMiO3M6OToiZmlyc3RuYW1lIjtzOjQ6Illhc2giO3M6ODoibGFzdG5hbWUiO3M6NToiZ3VwdGEiO3M6OToidXNlcl90eXBlIjtzOjE6IkEiO3M6ODoidXNlcm5hbWUiO3M6MTU6ImFkbWluQGdtYWlsLmNvbSI7czo1OiJlbWFpbCI7czoxNToiYWRtaW5AZ21haWwuY29tIjtzOjg6InBhc3N3b3JkIjtzOjYwOiIkMnkkMTAkUXkvbnR5T1lLejVUeGJ6ZW0wVUJvdVJ0ZjNTTC9uSDI4eWsvQmguUUh1bnI4ai92VnJKRjIiO3M6NToicGhvbmUiO3M6MTA6Ijg0NDc0NDEyNDYiO3M6NjoiYWN0aXZlIjtzOjE6IkEiO3M6MTA6ImNyZWF0ZWRfYXQiO3M6MTA6IjE3MTYxMDE1NjAiO3M6MTA6InVwZGF0ZWRfYXQiO3M6MTA6IjE3MTY2OTE3MTAiO3M6MTI6Im5vdGlmaWNhdGlvbiI7YTo3OntzOjE0OiJhY2NvdW50X3VwZGF0ZSI7czoxOiJZIjtzOjU6ImxvZ2luIjtzOjE6IlkiO3M6MTU6InBhc3N3b3JkX3VwZGF0ZSI7czoxOiJOIjtzOjE2OiJuZXdfY3VzdG9tZXJfYWRkIjtzOjE6IlkiO3M6MTc6InBlcm1pc3Npb25fdXBkYXRlIjtzOjE6Ik4iO3M6MTg6InBlcm1pc3Npb25fY3JlYXRlZCI7czoxOiJZIjtzOjE4OiJwZXJtaXNzaW9uX2RlbGV0ZWQiO3M6MToiTiI7fXM6Nzoicm9sZV9pZCI7czoxOiI5IjtzOjQ6InR5cGUiO3M6MToiQSI7czo0OiJyb2xlIjtzOjEyOiJBZG1pbnN0cmF0b3IiO31pc0F1dGh8YjoxOw==',	1717429557),
+('gto693ihr9hejnknu3kvp05qde',	3,	'127.0.0.1',	'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',	'YXV0aHxhOjE1OntzOjI6ImlkIjtzOjE6IjMiO3M6OToiZmlyc3RuYW1lIjtzOjQ6Illhc2giO3M6ODoibGFzdG5hbWUiO3M6NToiZ3VwdGEiO3M6OToidXNlcl90eXBlIjtzOjE6IkEiO3M6ODoidXNlcm5hbWUiO3M6MTU6ImFkbWluQGdtYWlsLmNvbSI7czo1OiJlbWFpbCI7czoxNToiYWRtaW5AZ21haWwuY29tIjtzOjg6InBhc3N3b3JkIjtzOjYwOiIkMnkkMTAkUXkvbnR5T1lLejVUeGJ6ZW0wVUJvdVJ0ZjNTTC9uSDI4eWsvQmguUUh1bnI4ai92VnJKRjIiO3M6NToicGhvbmUiO3M6MTA6Ijg0NDc0NDEyNDYiO3M6NjoiYWN0aXZlIjtzOjE6IkEiO3M6MTA6ImNyZWF0ZWRfYXQiO3M6MTA6IjE3MTYxMDE1NjAiO3M6MTA6InVwZGF0ZWRfYXQiO3M6MTA6IjE3MTY2OTE3MTAiO3M6MTI6Im5vdGlmaWNhdGlvbiI7YTo3OntzOjE0OiJhY2NvdW50X3VwZGF0ZSI7czoxOiJZIjtzOjU6ImxvZ2luIjtzOjE6IlkiO3M6MTU6InBhc3N3b3JkX3VwZGF0ZSI7czoxOiJOIjtzOjE2OiJuZXdfY3VzdG9tZXJfYWRkIjtzOjE6IlkiO3M6MTc6InBlcm1pc3Npb25fdXBkYXRlIjtzOjE6Ik4iO3M6MTg6InBlcm1pc3Npb25fY3JlYXRlZCI7czoxOiJZIjtzOjE4OiJwZXJtaXNzaW9uX2RlbGV0ZWQiO3M6MToiTiI7fXM6Nzoicm9sZV9pZCI7czoxOiI5IjtzOjQ6InR5cGUiO3M6MToiQSI7czo0OiJyb2xlIjtzOjEyOiJBZG1pbnN0cmF0b3IiO31pc0F1dGh8YjoxOw==',	1717433367);
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
@@ -287,15 +345,15 @@ CREATE TABLE `settings` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=585 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=602 DEFAULT CHARSET=utf8mb3;
 
 TRUNCATE `settings`;
 INSERT INTO `settings` (`setting_id`, `store_id`, `code`, `name`, `value`, `serialized`) VALUES
-(538,	0,	'config',	'config_site_url',	' http://manage.northernindiatour.org ',	0),
+(538,	0,	'config',	'config_site_url',	'http://localhost:8000/',	0),
 (539,	0,	'config',	'config_store_name',	'Northern India Tourism',	0),
 (540,	0,	'config',	'config_loder_type',	'text',	0),
 (541,	0,	'config',	'config_loder_name',	'N_I_T',	0),
-(542,	0,	'config',	'config_pagination',	'20',	0),
+(542,	0,	'config',	'config_pagination',	'10',	0),
 (543,	0,	'config',	'config_store_address',	'Office No. 102 , building, No. 3/102, Lalita Park, \r\nLaxmi Nagar\r\nIndia, Delhi, Delhi - 110092\r\nLandmark: Behind Gurudwara,',	0),
 (544,	0,	'config',	'config_store_contact',	'+91 892-959-0666',	0),
 (545,	0,	'config',	'config_store_email',	'info@northernindiatour.org',	0),
@@ -305,8 +363,9 @@ INSERT INTO `settings` (`setting_id`, `store_id`, `code`, `name`, `value`, `seri
 (555,	0,	'config',	'config_mime_type',	'[\"jpg\",\"jpeg\",\"png\",\"xml\",\"sql\"]',	0),
 (556,	0,	'config',	'config_max_upload_size',	'30000',	0),
 (560,	0,	'config',	'config_other_devices',	'1',	0),
-(584,	0,	'payments_cod',	'payments_cod_total',	'',	0),
-(583,	0,	'payments_cod',	'payments_cod_status',	'A',	0);
+(601,	0,	'modules_gdpr',	'modules_gdpr_status',	'D',	0),
+(594,	0,	'payments_cod',	'payments_cod_total',	'100',	0),
+(593,	0,	'payments_cod',	'payments_cod_status',	'A',	0);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -325,14 +384,22 @@ CREATE TABLE `users` (
   `created_at` bigint NOT NULL,
   `updated_at` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 TRUNCATE `users`;
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `user_type`, `username`, `password`, `email`, `phone`, `recovery_key`, `active`, `last_updated_password_at`, `custom_fields`, `created_at`, `updated_at`) VALUES
-(1,	'Yash',	'Gupta',	'C',	'customer@example.com',	'$2y$10$OdvYQfiZ.fLE1PqVUIwKXuqx0t1Mo2L/p1KpEpj8SjSywZISLk7Va',	'customer@example.com',	'8447441246',	'',	'A',	1716101560,	NULL,	1716101560,	1716101560),
+(1,	'Yash',	'Gupta',	'C',	'customer@example.com',	'$2y$10$OdvYQfiZ.fLE1PqVUIwKXuqx0t1Mo2L/p1KpEpj8SjSywZISLk7Va',	'customer@example.com',	'8447441249',	'',	'A',	1716101560,	NULL,	1716101560,	1716101560),
 (2,	'Yash',	'gupta',	'C',	'yash121999@gmail.com',	'$2y$10$MIW7YolQVdrGQndxu6muDufXUdPFzxzExLek9Ae8vUoyNRshcq/yy',	'yash121999@gmail.com',	'8447441247',	'',	'A',	NULL,	NULL,	1716101560,	1716101560),
-(3,	'Yash',	'gupta',	'A',	'admin@gmail.com',	'$2y$10$Qy/ntyOYKz5Txbzem0UBouRtf3SL/nH28yk/Bh.QHunr8j/vVrJF2',	'admin@gmail.com',	'8447441243',	'',	'A',	1716101560,	NULL,	1716101560,	1716101560),
+(3,	'Yash',	'gupta',	'A',	'admin@gmail.com',	'$2y$10$Qy/ntyOYKz5Txbzem0UBouRtf3SL/nH28yk/Bh.QHunr8j/vVrJF2',	'admin@gmail.com',	'8447441246',	'',	'A',	1716101560,	NULL,	1716101560,	1716691710),
 (4,	'Muskan',	'Jaiswal',	'C',	'mjaiswal@gmail.com',	'$2y$10$OqIkV3nkaRwOTxr0fJFVcOb3O2OyLAjdyQwAqx8Q4qHqtAc9lDY1q',	'mjaiswal@gmail.com',	'9090909000',	'',	'A',	NULL,	NULL,	1716101560,	1716101560),
-(18,	'Test',	'tEts',	'A',	'asdaadmin@gmail.com',	'$2y$10$0FIx24H7VSrECKzdQmkizOruubCQPIR1EECZz0rvV92N4zmDBCT2q',	'asdaadmin@gmail.com',	'7878787878',	'',	'A',	NULL,	NULL,	1716101560,	1716101560);
+(19,	'test',	'test',	'A',	'asadasadmin@gmail.com',	'$2y$10$NZCRzkE/JcLMb993fpF.Nes0TglV.Ccl/kMl9iXOX8IB5v6DykJgy',	'asadasadmin@gmail.com',	'7889678989',	NULL,	'A',	NULL,	NULL,	1716668389,	1716676211),
+(20,	'manu',	'jaiswal',	'C',	'manu@example.com',	'$2y$10$//5eXxDnOMnJZO8Mqn9y4.nVawyrbpQXIf3o57UMGmYdJMVUlypW.',	'manu@example.com',	'9089786756',	NULL,	'D',	NULL,	NULL,	1717214420,	1717214420),
+(21,	'Chiku',	'jaiswal',	'C',	'chiku@example.com',	'$2y$10$tQ768mOYBE4chSLrDuFJuOLS6Xl32BVrLRoOXuZsddEKaCTUKush6',	'chiku@example.com',	'9089786790',	NULL,	'D',	NULL,	NULL,	1717214626,	1717214626),
+(22,	'Nakshu',	'jaiswal',	'C',	'nakshu@example.com',	'$2y$10$CCVrftujKfRmviNpCuXcAOPhvEMSWlJfeZnH8enLv89ZHq4LqnUV2',	'nakshu@example.com',	'9089780989',	NULL,	'D',	NULL,	NULL,	1717214861,	1717214861),
+(23,	'shivam',	'jaiswal',	'C',	'shivam@gmail.com',	'$2y$10$1FWlb1wOpVyddW7.9uIlfu02Mqw/PLkse1BElh8SlqwVdP9P4RwhK',	'shivam@gmail.com',	'7890677808',	NULL,	'D',	NULL,	NULL,	1717275321,	1717275321),
+(24,	'rakesh',	'gupta',	'C',	'rakesh@example.com',	'$2y$10$EswqLnyNF5Tv/EG6gbsb5.tyCKW0enLxjXzfDfiwNoXzxKGV6nHya',	'rakesh@example.com',	'6789567889',	NULL,	'D',	NULL,	NULL,	1717275376,	1717275376),
+(25,	'shivam',	'rathi',	'C',	'rathi@hotmail.com',	'$2y$10$YhvP8lwUhno1HsOoZ6S.2ecBNMkU/6bGNPGsCjj6Rgw1sxtQrQikK',	'rathi@hotmail.com',	'8978564434',	NULL,	'D',	NULL,	NULL,	1717275406,	1717275406),
+(26,	'irra',	'ketan',	'C',	'irra@robotics.in',	'$2y$10$7T23xb/k9W.9QKVXVawi0e/WfViaJCcMeqI756ixcCri2ifKpJQ.a',	'irra@robotics.in',	'8967281289',	NULL,	'D',	NULL,	NULL,	1717275437,	1717275437),
+(27,	'meera',	'jaiswal',	'C',	'meera@apallo.com',	'$2y$10$1diqSMuWKr2dG2OMs9YGoeoD0fn47tjss7Jthj1dp/AjR8ucHQla6',	'meera@apallo.com',	'8978560867',	NULL,	'D',	NULL,	NULL,	1717275469,	1717275469);
 
--- 2024-05-19 12:08:54
+-- 2024-06-06 16:35:33

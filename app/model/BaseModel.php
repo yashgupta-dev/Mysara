@@ -2,13 +2,14 @@
 
 namespace app\model;
 
-use app\core\DB;
+use app\controllers\BaseController;
 use Exception;
+use app\core\DB;
 
 /**
  * BaseModel
  */
-class BaseModel
+class BaseModel extends BaseController
 {
 
     /**
@@ -17,11 +18,13 @@ class BaseModel
     public $logFile = CORE . '/logs/error_log.log';
 
     /**
-     * conn
+     * setting
      *
-     * @var mixed
+     * @var array|object|string
      */
-    private $conn;
+    protected $setting;
+
+    protected $redirect;
 
     /**
      * __construct
@@ -40,7 +43,7 @@ class BaseModel
      * @param  array $where
      * @return array
      */
-    public function select($table = '', $selection = array(), $where = array(), $func = 'mysqli_fetch_assoc')
+    public function select($table = '', $selection = array(), $where = array(), $func = 'row', $sorting = [], $request = array())
     {
 
         try {
@@ -67,6 +70,18 @@ class BaseModel
                     $query .= "AND $column $constraint $value ";
                 }
             }
+            // sorting
+            if (!empty($sorting)) {
+                $query .= implode(' ', $sorting);
+            }   
+
+            // pagination
+            if (!empty($request['items_per_page']) || !empty($request['offset'])) {
+                
+                $query .= " LIMIT " . (int)$request['offset'] . "," . (int)$request['items_per_page'];
+            }
+            
+            $func = $this->getMysqlFetch($func);
 
             if ($func == 'mysqli_fetch_all') {
                 return $func(DB::get()->get->query($query), MYSQLI_ASSOC);
@@ -135,8 +150,8 @@ class BaseModel
 
         try {
 
-            DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
-            return ['success' => true, 'message' => 'Changes successfully saved.'];
+            return DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
+            // return ['success' => true, 'message' => 'Changes successfully saved.'];
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
             return ['success' => false, 'message' => $e->getMessage()];
@@ -198,9 +213,9 @@ class BaseModel
 
         try {
 
-            DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
+            return DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
 
-            return ['success' => true, 'message' => 'Changes successfully saved.'];
+            // return ['success' => true, 'message' => 'Changes successfully saved.'];
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
             return ['success' => false, 'message' => $e->getMessage()];
@@ -280,9 +295,9 @@ class BaseModel
             }
 
             try {
-
-                $response = DB::get()->get->query($query . '' . $condition);
-                return ['success' => true, 'message' => 'Changes successfully saved.'];
+                $this->_writeLog($this->logFile, $query . '' . $condition);
+                return DB::get()->get->query($query . '' . $condition);
+                // return ['success' => true, 'message' => 'Changes successfully saved.'];
             } catch (\Exception $e) {
                 $this->_writeLog($this->logFile, $e->getMessage());
                 return ['success' => false, 'message' => $e->getMessage()];
@@ -310,6 +325,8 @@ class BaseModel
             $sql .= implode(' ', $conditions);
             $sql .= implode(', ', $other);
 
+            $func = $this->getMysqlFetch($func);
+            
             if ($func == 'mysqli_fetch_all') {
                 return $func(DB::get()->get->query($sql), MYSQLI_ASSOC);
             } else {
@@ -356,5 +373,61 @@ class BaseModel
         $contents = date("Y-m-d h:i:s") . " " . $contents . "\n";
         fwrite($file, $contents);
         fclose($file);
+    }
+    
+    /**
+     * getMysqlFetch
+     *
+     * @param  mixed $key
+     * @return string
+     */
+    private function getMysqlFetch($key) {
+        switch ($key) {
+            case 'row':
+                return 'mysqli_fetch_assoc';
+                break;
+
+            case 'rows':
+                return 'mysqli_fetch_all';
+                break;
+            
+            default:
+                return 'mysqli_fetch_assoc';
+                break;
+        }
+    }
+    
+    /**
+     * pagination
+     *
+     * @param  mixed $table
+     * @param  mixed $selection
+     * @param  mixed $where
+     * @param  mixed $func
+     * @param  mixed $sorting
+     * @param  mixed $items_per_page
+     * @return array
+     */
+    public function pagination($table = '', $selection = array(), $where = array(), $func = 'row', $sorting = [], $items_per_page = 0, $page = 1) {
+        $params = [];        
+        $response = $this->select($table, $selection, $where, $func, $sorting);
+        
+        if(!empty($response)) {
+            $totalItems = $response['total_items'] ?? 0;
+            $params['items_per_page'] = $items_per_page;
+            $params['page'] = $page;
+            $params['total_items'] = $totalItems;
+            if (!empty($page)) {
+                $page = $page;
+                if (($page - 1) * $items_per_page >= $totalItems) {
+
+                    $page = ceil($totalItems / $items_per_page);
+                }
+                $offset = (($page - 1) * $items_per_page);
+            }
+            $params['offset'] = $offset ?? 0;
+        }
+
+        return $params;
     }
 }

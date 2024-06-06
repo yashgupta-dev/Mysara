@@ -24,7 +24,7 @@ class Setting extends BaseModel{
      */
     public function getAll() {
 
-        $query = $this->select('settings',array('value'),array(),'mysqli_fetch_assoc');
+        $query = $this->select('settings',array('value'),array(),'row');
         foreach ($query as $result) {
 			if (!$result['serialized']) {
 				$this->config[$result['key']] = $result['value'];
@@ -44,7 +44,7 @@ class Setting extends BaseModel{
      */
     public function get($key) {
         $conditions['name'] = $key;
-        $value = $this->select('settings',array('value','serialized'),$conditions,'mysqli_fetch_assoc');
+        $value = $this->select('settings',array('value','serialized'),$conditions,'row');
         if (!empty($value)) {
             if (!$value['serialized']) {
                 return $value['value'];
@@ -52,6 +52,17 @@ class Setting extends BaseModel{
                 return json_decode($value['value'],true);
             }
         }
+    }
+
+    /**
+     * getConfig
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public static function getConfig(string $key) {
+        $instance = new self();
+        return $instance->get($key);
     }
 
 

@@ -58,16 +58,20 @@ class Auth extends BaseController
                 // verify password
                 $res = $this->verifyPassword($this->requestParam);
                 if($res) {
-                    Session::set('auth',$res);    
-                    Session::set('isAuth',1);    
+                    Session::set('auth',$res);                    
+                    Session::set('isAuth',true);    
                                     
                     // email send
-                    $template = Tygh::fetch('frontend/auth/mail/login');
+                    if(Session::get('auth')['notification']['login'] == 'Y') {
 
-                    Email::to($this->requestParam['email']);
-                    Email::subject('Mysara:: Login alert!!!');
-                    Email::message($template);
-                    Email::sendEmail();
+                        $template = Tygh::fetch('frontend/auth/mail/login');
+
+                        Email::to($this->requestParam['email']);
+                        Email::subject('Mysara:: Login alert!!!');
+                        Email::message($template);
+                        Email::sendEmail();
+                    }
+
                     Notification::set(Notification::TYPE_INFO,'Welcome',sprintf($this->language['text_welcome'],$res['firstname']));
 
                     $response = ['success' => true,'redirect_url' => $this->redirect->link('admin.php?dispatch=dashboard')];
@@ -94,6 +98,40 @@ class Auth extends BaseController
     public function logout() {
         Session::destroy();
         $this->redirect->url('admin.php?dispatch=auth.login');
+    }
+
+    /**
+     * logout_all_device
+     *
+     * @return void
+     */
+    public function logout_all_device() {
+        if ($this->requestMethod == 'GET') {
+
+            Validation::validate([
+                'user_id'     =>  'required|in:users.id'
+
+            ], $this->requestParam);
+
+            // get errors
+            if (Validation::getErrors() !== true) {
+
+                foreach (Validation::getErrors() as $key => $value) {
+
+                    Notification::set('E', 'Error', $value);
+                }
+            } else {
+                $res = $this->model->deleteSession($this->requestParam);
+                if ($res) {
+                    Notification::set('O', 'Success', $this->language['text_success']);
+                } else {
+
+                    Notification::set('E', 'Error', sprintf($this->language['text_failed_logout']));
+                }
+            }
+
+            $this->redirect->url('admin.php?dispatch=profile.account');
+        }
     }
 
     /**
