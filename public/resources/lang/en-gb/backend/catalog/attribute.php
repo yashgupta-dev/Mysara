@@ -9,4 +9,8 @@ return [
     'column_group_name'                 => 'Attribute group name',
     'column_sort'                       => 'Sort',
 
+    'text_group_name'                   => 'Attribute Group',
+    'text_name'                   => 'Enter name',
+    'text_sort'                   => 'Sort',
+
 ];

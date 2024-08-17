@@ -43,7 +43,8 @@ class ProfileModel extends BaseModel
             'r.name as role',
             'r.id as role_id',
             'r.type',
-            'ru.notification'
+            'ru.notification',
+            'u.profile'
             // 'profile_id'          
         ];
 
@@ -98,6 +99,7 @@ class ProfileModel extends BaseModel
                 'username'   => $data['email'],
                 'email'      => $data['email'],
                 'phone'      => $data['phone'],
+                'profile'    => $data['f_image'] ?? '',
             ];
 
             if(!empty($data['confirm_password'])) {

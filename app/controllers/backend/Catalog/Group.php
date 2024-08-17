@@ -41,7 +41,12 @@ class Group extends BaseController
 
         Tygh::display('backend/catalog/attribute/attribute_group/attribute_groups.tpl');
     }
-
+    
+    /**
+     * add
+     *
+     * @return json
+     */
     public function add()
     {
         if ($this->requestMethod === 'POST') {
@@ -61,7 +66,6 @@ class Group extends BaseController
                     $response = ['errors' => $this->error];
                 }
             } else {
-                // verify password
                 $res = $this->model->addGroup($this->requestParam);
                 if ($res) {
                     
@@ -69,7 +73,7 @@ class Group extends BaseController
 
                     $response = ['success' => true, 'redirect_url' => $this->redirect->link('admin.php?dispatch=catalog.group')];
                 } else {
-                    $response = ['errors' => sprintf($this->language['text_invalid_creds'],'create')];
+                    $response = ['errors' => sprintf($this->language['text_error'],'create attribute group')];
                 }
             }
 
