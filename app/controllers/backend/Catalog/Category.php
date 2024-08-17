@@ -3,6 +3,7 @@
 namespace app\controllers\backend\Catalog;
 
 use app\controllers\BaseController;
+use app\core\Tygh;
 use app\model\Backend\CategoryModel;
 
 class Category extends BaseController
@@ -31,6 +32,22 @@ class Category extends BaseController
      */
     public function index()
     {
+        Tygh::assign('search',[]);
+        Tygh::display('backend/catalog/category/list');
+
+    }
+    
+    /**
+     * add
+     *
+     * @return json
+     */
+    public function add() {
+
+        Tygh::display('backend/catalog/category/update');
+    }
+
+    public function edit() {
         
     }
 

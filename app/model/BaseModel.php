@@ -76,13 +76,12 @@ class BaseModel extends BaseController
             }   
 
             // pagination
-            if (!empty($request['items_per_page']) || !empty($request['offset'])) {
-                
-                $query .= " LIMIT " . (int)$request['offset'] . "," . (int)$request['items_per_page'];
+            if (!empty($request['items_per_page']) && (!empty($request['offset']) && is_numeric($request['offset']) && $request['offset'] >= 0)) {
+               $query .= " LIMIT " . (int)$request['offset'] . "," . (int)$request['items_per_page'];
             }
-            
-            $func = $this->getMysqlFetch($func);
 
+            $func = $this->getMysqlFetch($func);
+            
             if ($func == 'mysqli_fetch_all') {
                 return $func(DB::get()->get->query($query), MYSQLI_ASSOC);
             } else {
@@ -212,7 +211,7 @@ class BaseModel extends BaseController
         }
 
         try {
-
+            
             return DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
 
             // return ['success' => true, 'message' => 'Changes successfully saved.'];
@@ -423,8 +422,10 @@ class BaseModel extends BaseController
 
                     $page = ceil($totalItems / $items_per_page);
                 }
+
                 $offset = (($page - 1) * $items_per_page);
             }
+            
             $params['offset'] = $offset ?? 0;
         }
 

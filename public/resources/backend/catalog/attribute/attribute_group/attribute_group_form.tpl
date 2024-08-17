@@ -37,7 +37,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <button class="btn btn-primary d-grid w-100" type="submit" name="button">{'Save changes'}</button>
+                                        <button class="btn btn-primary d-grid w-100" type="submit" name="button">{$lang.text_btn_save}</button>
                                     </div>
                                     
                                 </form>

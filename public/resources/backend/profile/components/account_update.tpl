@@ -1,28 +1,19 @@
 <div class="card mb-4">
     <h5 class="card-header">{$lang.title}</h5>
     <!-- Account -->
-    <div class="card-body">
-        <div class="d-flex align-items-start align-items-sm-center gap-4">
-            <img src="{asset path='public/resources/backend/assets/img/avatars/1.png'}" alt="user-avatar"
-                class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
-            <div class="button-wrapper">
-                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                    <span class="d-none d-sm-block">{$lang.text_upload_photo}</span>
-                    <i class="bx bx-upload d-block d-sm-none"></i>
-                    <input type="file" id="upload" class="account-file-input" hidden />
-                </label>
-                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                    <i class="bx bx-reset d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">{$lang.text_reset}</span>
-                </button>
+    <form id="formAccountSettings" method="POST" action="{route path="admin.php?dispatch=profile.account"}"
+        class="form-ajax">
+        <div class="card-body">
+            <div class="d-flex align-items-start align-items-sm-center gap-4">
+<img src="{if $user.profile}{$user.profile}{else}public/assets/filemanager/default.png{/if}" alt="user-avatar" class="d-block rounded f_image" height="100" width="100"
+                    id="open-file-manager" />
+                <input name="f_image" value="{if $user.profile}{$user.profile}{else}public/assets/filemanager/default.png{/if}" type="hidden">
             </div>
         </div>
-    </div>
-    <hr class="my-0" />
+        <hr class="my-0" />
 
-    <div class="card-body">
-        <form id="formAccountSettings" method="POST" action="{route path="admin.php?dispatch=profile.account"}"
-            class="form-ajax">
+        <div class="card-body">
+
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="elm_firstname" class="form-label">{$lang.text_firstname}</label>
@@ -77,7 +68,7 @@
             <div class="mt-2">
                 <button type="submit" name="button" class="btn btn-primary me-2">{$lang.text_btn_save}</button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
     <!-- /Account -->
 </div>

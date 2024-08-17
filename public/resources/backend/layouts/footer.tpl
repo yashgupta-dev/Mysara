@@ -1,4 +1,7 @@
 <!-- Core JS -->
+{* filemanager *}
+{include file="backend/common/filemanager.tpl"}
+{* end filemanager *}
 <!-- build:js assets/vendor/js/core.js -->
 
 <script src="{asset path='public/resources/backend/assets/vendor/libs/jquery/jquery.js'}"></script>
@@ -17,6 +20,7 @@
 <script src="{asset path='public/resources/backend/assets/js/main.js'}"></script>
 <script src="{asset path='public/assets/vendor/toaster/toastr.min.js'}"></script>
 <script src="{asset path="public/assets/js/jquery/ajax.js"}"></script>
+<script src="{asset path="public/assets/js/filemanager.js"}"></script>
 <script>
     {if !empty($notifications)}
         {foreach from=$notifications item=item key=key}

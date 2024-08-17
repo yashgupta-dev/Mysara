@@ -378,3 +378,9 @@ a.pagination-selector.btn.dropdown-toggle {
       visibility: hidden;
   }
 }
+
+.avatar img{
+  height: 100% !important;
+  object-fit: scale-down !important;
+  background: #144c5e91 !important;
+}

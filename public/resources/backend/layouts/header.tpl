@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{asset path='public/resources/backend/assets/vendor/libs/apex-charts/apex-charts.css'}" />
 
     <link rel="stylesheet" href="{asset path='public/assets/vendor/toaster/toastr.min.css'}">
+    <link rel="stylesheet" href="{asset path='public/assets/css/filemanager.css'}">
 
     <!-- Page CSS -->
     {block name="style"}{/block}

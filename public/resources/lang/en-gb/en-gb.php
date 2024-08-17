@@ -31,4 +31,6 @@ return [
     
     'text_no_result'    => 'No results found.',
     'text_per_page'     => 'per page',
+
+    'text_error'        => 'Failed to %s',
 ];

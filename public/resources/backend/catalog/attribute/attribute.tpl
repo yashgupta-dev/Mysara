@@ -43,19 +43,45 @@
                                                     onclick="$(document).find('#customer_ids').attr('checked',true);" />
                                             </th>
                                             <th>{$lang.column_name}</th>
-                                            <th>{$lang.column_group_name}<th>                                            
-                                            <th>{$lang.column_sort}<th>                                            
+                                            <th>{$lang.column_group_name}</th>
+                                            <th>{$lang.column_sort}</th>                                            
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
+                                    {foreach from=$lists item=list key=key}
+                                        <tr>
+                                            <td scope="row">
+                                                <input type="checkbox" value="{$list.attribute_id}" name="ids" id="list_ids"/>                                                    
+                                            </td>
+                                            <td>{$list.name}</td>
+                                            <td>{$list.group_name}</td>
+                                            <td>{$list.sort_order}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                                                    <div class="dropdown-menu"  data-popper-placement="top-end">
+                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> {$lang.text_edit}</a>
+                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> {$lang.text_delete}</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {foreachelse}
+                                        <tr>
+                                            <td colspan="5" class="text-center">{$lang.text_no_result}</td>
+                                        </tr>
+
+                                    {/foreach}
                                     </tbody>
                                 </table>
                             </div>
                             {* form end *}
 
                         </div>
+
+                        {include file="backend/common/pagination.tpl" save_current_page=true save_current_url=true div_id=''}
 
                     </div>
 

@@ -13,7 +13,6 @@ After setup run composer install command to install required libraries.
     - Core
     - Functions
     - Model
-    - Middleware
 
 - Core
     - engine
