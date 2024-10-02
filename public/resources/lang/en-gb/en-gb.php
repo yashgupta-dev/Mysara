@@ -28,6 +28,9 @@ return [
     'text_admin'    => 'Adminstrator',
     'text_profile'  => 'My Profile',
     'text_setting_menu'  => 'Settings',
+
+    'text_filemanager'  => 'File Manager',
+    'text_filemanager_upload'  => 'Upload File',
     
     'text_no_result'    => 'No results found.',
     'text_per_page'     => 'per page',

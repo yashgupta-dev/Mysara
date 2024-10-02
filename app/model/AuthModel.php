@@ -42,6 +42,7 @@ class AuthModel extends BaseModel
                 'email'      => $data['email'],
                 'phone'      => $data['phone'],
                 'active'     => 'D',
+                // 'profile'    => $data['profile'],
                 'created_at' => TIME,
                 'updated_at' => TIME
             ];
@@ -73,6 +74,7 @@ class AuthModel extends BaseModel
             'u.password',
             'u.phone',
             'u.active',
+            'u.profile',
             // 'u.last_updated_password_at',
             // 'u.custom_fields',
             'u.created_at',

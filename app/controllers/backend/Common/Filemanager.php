@@ -80,7 +80,7 @@ class Filemanager extends BaseController
     {
         $folder = isset($this->requestParam['folder']) ? rtrim($this->requestParam['folder'], '/') . '/' : $this->uploadDir;
         $page = isset($this->requestParam['page']) ? (int)$this->requestParam['page'] : 1;
-        $itemsPerPage = 10; // Number of items per page
+        $itemsPerPage = 20; // Number of items per page
         $offset = ($page - 1) * $itemsPerPage;
 
         if (!is_dir($folder)) {

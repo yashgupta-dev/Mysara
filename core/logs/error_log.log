@@ -5,3 +5,7 @@
 2024-06-07 10:05:08 Incorrect integer value: '' for column 'sort_order' at row 1
 2024-06-30 07:33:32 DELETE FROM sessions WHERE 1 AND user_id = "3" 
 2024-08-17 11:06:09 DELETE FROM sessions WHERE 1 AND user_id = "3" 
+2024-08-17 04:41:25 Incorrect integer value: '' for column 'sort_order' at row 1
+2024-08-17 04:41:27 Incorrect integer value: '' for column 'sort_order' at row 1
+2024-08-17 04:41:31 Incorrect integer value: 'en' for column 'lang_id' at row 1
+2024-08-17 04:41:42 Incorrect integer value: 'en' for column 'lang_id' at row 1
