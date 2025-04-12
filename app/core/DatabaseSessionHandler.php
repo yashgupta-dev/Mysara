@@ -49,7 +49,7 @@ class DatabaseSessionHandler extends BaseModel implements \SessionHandlerInterfa
     {
         $stmt = $this->select($this->table, ['payload'], ['id' => $sessionId]);
 
-        if ($stmt) {
+        if (!empty($stmt['payload'])) {
             return base64_decode($stmt['payload']);
         }
         return '';

@@ -8,13 +8,6 @@ use app\core\Tygh;
 class Category extends BaseController
 {    
     /**
-     * language
-     *
-     * @var array
-     */
-    private $language = [];
-
-    /**
      * __construct
      *
      * @param  mixed $mode

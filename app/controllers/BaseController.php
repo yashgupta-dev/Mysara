@@ -13,13 +13,6 @@ class BaseController
     use DefaultTrait, LanguageTrait;
 
     /**
-     * error
-     *
-     * @var mixed
-     */
-    protected $error;
-
-    /**
      * model
      *
      * @var mixed
