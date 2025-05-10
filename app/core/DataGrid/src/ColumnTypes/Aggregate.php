@@ -27,10 +27,10 @@ class Aggregate extends Column
             }
         } else {
             if (is_string($requestedValues)) {
-                $conditions[] = "{$this->columnName} LIKE %{$requestedValues}%";
+                $conditions[] = "{$this->columnName} LIKE '%{$requestedValues}%'";
             } elseif (is_array($requestedValues)) {
                 foreach ($requestedValues as $value) {
-                    $conditions[] = "{$this->columnName} LIKE %{$value}%";
+                    $conditions[] = "{$this->columnName} LIKE '%{$value}%'";
                 }
             } else {
                 throw new InvalidColumnExpressionException('Only string and array are allowed for text filter.');

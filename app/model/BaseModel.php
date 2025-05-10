@@ -416,7 +416,7 @@ class BaseModel extends BaseController
         $params = [];        
         $response = $this->select($table, $selection, $where, $func, $sorting);
         
-        if(!empty($response)) {
+        if(!empty($response['total_items'])) {
             $totalItems = $response['total_items'] ?? 0;
             $params['items_per_page'] = $items_per_page;
             $params['page'] = $page;

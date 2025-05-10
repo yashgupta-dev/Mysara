@@ -56,8 +56,7 @@ class CategoryDataGrid extends DataGrid
             'index'              => 'cd.status',
             'label'              => 'Status',
             'type'               => 'integer',
-            'sortable'           => true,
-            'searchable'         => true,    
+            'sortable'           => true,    
             'filterable'         => true,
             'filterable_type'    => 'dropdown',
             'filterable_options' => [

@@ -34,11 +34,11 @@ class Text extends Column
 
         // Use LIKE match for others
         if (is_string($requestedValues)) {
-            $conditions[] = " AND {$this->columnName} LIKE %$requestedValues%";
+            $conditions[] = " AND {$this->columnName} LIKE '%$requestedValues%'";
         } elseif (is_array($requestedValues)) {
             $orConditions = [];
             foreach ($requestedValues as $value) {
-                $orConditions[] = "{$this->columnName} LIKE %$value%";
+                $orConditions[] = "{$this->columnName} LIKE '%$value%'";
             }
             $conditions[] = ' AND (' . implode(' OR ', $orConditions) . ')';
         } else {

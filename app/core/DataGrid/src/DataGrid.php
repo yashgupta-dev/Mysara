@@ -452,7 +452,7 @@ abstract class DataGrid extends BaseModel
     protected function validatedRequest(): array
     {
         $request = $_REQUEST;
-
+        
         $validated = [
             'filters'    => [],
             'sort'       => [],
@@ -497,7 +497,6 @@ abstract class DataGrid extends BaseModel
         }
 
         $this->queryBuilder = array_merge($this->queryBuilder, $_REQUEST);
-
         return $validated;
     }
 
@@ -541,7 +540,7 @@ abstract class DataGrid extends BaseModel
         }
 
         if (!empty($request['sort_order'])) {
-            if ($request['sort_order'] == 'desc') {
+            if (strtolower($request['sort_order']) == 'desc') {
                 $this->sortOrder = 'asc';
             } else {
                 $this->sortOrder = 'desc';
@@ -597,7 +596,7 @@ abstract class DataGrid extends BaseModel
                             $column->getSearchable()
                             && !in_array($column->getType(), [ColumnTypeEnum::BOOLEAN, ColumnTypeEnum::AGGREGATE])
                         ) {
-                            $subConditions[] = "{$column->getColumnName()} LIKE %{$value}%";
+                            $subConditions[] = "{$column->getColumnName()} LIKE '%{$value}%'";
                         }
                     }
 
@@ -827,11 +826,14 @@ abstract class DataGrid extends BaseModel
             if (!empty($params['items_per_page'])) {
                 $params = array_merge($params, $this->pagination($tablename . $join, array('count(*) as total_items'), $conditions, 'row', [],  $params['items_per_page'], $params['page']));
 
-                $limit = " LIMIT {$params['offset']}, {$params['items_per_page']}";
+                $offset = $params['offset'] ?? 0;
+
+                $limit = " LIMIT {$offset}, {$params['items_per_page']}";
             }
 
             $sql = "SELECT {$select_fields} FROM {$tablename} {$join} WHERE 1 {$condition} {$group} {$sorting} {$limit}";
-
+            echo $sql;
+            
             $records = mysqli_fetch_all(DB::get()->get->query($sql), MYSQLI_ASSOC);
             // Convert each record to an object
             $records = array_map(function ($record) {
@@ -906,8 +908,6 @@ abstract class DataGrid extends BaseModel
     {
         $reflection = new \ReflectionClass($this);
         $datagridName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $reflection->getShortName())); // Convert to snake_case
-
-        fn_set_hook("datagrid_{$datagridName}_{$eventName}", $payload);
     }
 
 

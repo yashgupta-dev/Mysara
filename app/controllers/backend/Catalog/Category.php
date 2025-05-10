@@ -44,12 +44,12 @@ class Category extends BaseController
      */
     public function index()
     {
-        // list($results, $search) = fn_datagrid(CategoryDataGrid::class)->process();
+        list($results, $search) = fn_datagrid(CategoryDataGrid::class)->process();
 
-        // echo "<pre>";
-        // print_r($results);
-        // echo "</pre>";
-        // die;
+        echo "<pre>";
+        print_r($results['records']);
+        echo "</pre>";
+        die;
         list($results, $search) = $this->model->categories($this->requestParam);
         
         Tygh::assign('search',$search);
