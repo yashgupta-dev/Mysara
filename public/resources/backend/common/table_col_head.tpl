@@ -1,0 +1,1 @@
+<th>{$lang.column_name}</th>

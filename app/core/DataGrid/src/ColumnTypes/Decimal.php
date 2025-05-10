@@ -43,15 +43,15 @@ class Decimal extends Column
         if (preg_match('/^([<>]=?|=)\s*(-?[\d.]+)$/', $value, $matches)) {
             $operator = $matches[1];
             $decimalValue = (float) $matches[2];
-            $conditions[] = db_quote("{$this->columnName} {$operator} ?d", $decimalValue);
+            $conditions[] = "{$this->columnName} {$operator} {$decimalValue}";
 
         } elseif (preg_match('/^(-?[\d.]+)\s*-\s*(-?[\d.]+)$/', $value, $matches)) {
             $min = (float) $matches[1];
             $max = (float) $matches[2];
-            $conditions[] = db_quote("{$this->columnName} BETWEEN ?f AND ?f", $min, $max);
+            $conditions[] = "{$this->columnName} BETWEEN ".$min." AND ".$max;
 
         } elseif (is_numeric($value)) {
-            $conditions[] = db_quote("{$this->columnName} = ?d", (float) $value);
+            $conditions[] = "{$this->columnName} = ".(float)$value;
         }
     }
 }

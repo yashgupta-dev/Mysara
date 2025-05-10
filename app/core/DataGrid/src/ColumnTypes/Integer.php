@@ -43,15 +43,15 @@ class Integer extends Column
         if (preg_match('/^([<>]=?|=)\s*(-?\d+)$/', $value, $matches)) {
             $operator = $matches[1];
             $intValue = (int) $matches[2];
-            $conditions[] = db_quote("{$this->columnName} {$operator} ?d", $intValue);
+            $conditions[] = "{$this->columnName} {$operator} {$intValue}";
             
         } elseif (preg_match('/^(-?\d+)\s*-\s*(-?\d+)$/', $value, $matches)) {
             $min = (int) $matches[1];
             $max = (int) $matches[2];
-            $conditions[] = db_quote("{$this->columnName} BETWEEN ?d AND ?d", $min, $max);
+            $conditions[] = "{$this->columnName} BETWEEN ".$min." AND ".$max;
 
         } elseif (is_numeric($value)) {
-            $conditions[] = db_quote("{$this->columnName} = ?i", (int)$value);
+            $conditions[] = "{$this->columnName} = ". (int)$value;
         }
     }
 }

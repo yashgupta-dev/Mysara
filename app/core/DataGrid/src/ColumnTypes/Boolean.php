@@ -57,10 +57,10 @@ class Boolean extends Column
         $conditions = [];
 
         if (is_string($requestedValues)) {
-            $conditions[] = db_quote("{$this->columnName} = ?s", $requestedValues);
+            $conditions[] = "{$this->columnName} = $requestedValues";
         } elseif (is_array($requestedValues)) {
             foreach ($requestedValues as $value) {
-                $conditions[] = db_quote("{$this->columnName} = ?s", $value);
+                $conditions[] = "{$this->columnName} =  $value";
             }
         } else {
             throw new InvalidColumnExpressionException('Only string and array are allowed for boolean column type.');

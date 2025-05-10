@@ -69,7 +69,7 @@ class Date extends Column
             }
 
             if ($from && $to) {
-                $conditions[] = db_quote("{$this->columnName} BETWEEN ?s AND ?s", fn_parse_date($from), fn_parse_date($to));
+                $conditions[] = "{$this->columnName} BETWEEN ".fn_parse_date($from)." AND ".fn_parse_date($to);
             }
         } else {
             throw new InvalidColumnExpressionException('Only string and array are allowed for date column type.');

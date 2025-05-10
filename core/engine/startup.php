@@ -8,6 +8,7 @@ use core\engine\Session;
 
 require_once APP . 'traits/DirectoryTrait.php';
 require_once APP . 'controllers/helpers/functions_helper.php';
+require_once(APP.'core/DataGrid/src/Http/helpers.php');
 
 use app\traits\DirectoryTrait;
 

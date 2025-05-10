@@ -17,20 +17,20 @@ class Aggregate extends Column
 
         if ($this->filterableType === FilterTypeEnum::DROPDOWN) {
             if (is_string($requestedValues)) {
-                $conditions[] = db_quote("{$this->columnName} = ?s", $requestedValues);
+                $conditions[] = "{$this->columnName} = $requestedValues";
             } elseif (is_array($requestedValues)) {
                 foreach ($requestedValues as $value) {
-                    $conditions[] = db_quote("{$this->columnName} = ?s", $value);
+                    $conditions[] = "{$this->columnName} = $value";
                 }
             } else {
                 throw new InvalidColumnExpressionException('Only string and array are allowed for dropdown filter.');
             }
         } else {
             if (is_string($requestedValues)) {
-                $conditions[] = db_quote("{$this->columnName} LIKE ?l", "%{$requestedValues}%");
+                $conditions[] = "{$this->columnName} LIKE %{$requestedValues}%";
             } elseif (is_array($requestedValues)) {
                 foreach ($requestedValues as $value) {
-                    $conditions[] = db_quote("{$this->columnName} LIKE ?l", "%{$value}%");
+                    $conditions[] = "{$this->columnName} LIKE %{$value}%";
                 }
             } else {
                 throw new InvalidColumnExpressionException('Only string and array are allowed for text filter.');

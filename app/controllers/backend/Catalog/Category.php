@@ -2,6 +2,7 @@
 
 namespace app\controllers\backend\Catalog;
 
+use app\controllers\backend\Datagrid\CategoryDataGrid;
 use app\core\Json;
 use app\core\Tygh;
 use app\core\Response;
@@ -43,6 +44,12 @@ class Category extends BaseController
      */
     public function index()
     {
+        // list($results, $search) = fn_datagrid(CategoryDataGrid::class)->process();
+
+        // echo "<pre>";
+        // print_r($results);
+        // echo "</pre>";
+        // die;
         list($results, $search) = $this->model->categories($this->requestParam);
         
         Tygh::assign('search',$search);

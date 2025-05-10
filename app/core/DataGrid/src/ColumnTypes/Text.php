@@ -18,11 +18,11 @@ class Text extends Column
         // Use exact match for dropdown
         if ($this->filterableType === FilterTypeEnum::DROPDOWN) {
             if (is_string($requestedValues)) {
-                $conditions[] = db_quote(" AND {$this->columnName} = ?s", $requestedValues);
+                $conditions[] = " AND {$this->columnName} = {$requestedValues}";
             } elseif (is_array($requestedValues)) {
                 $orConditions = [];
                 foreach ($requestedValues as $value) {
-                    $orConditions[] = db_quote("{$this->columnName} = ?s", $value);
+                    $orConditions[] = "{$this->columnName} = {$value}";
                 }
                 $conditions[] = ' AND (' . implode(' OR ', $orConditions) . ')';
             } else {
@@ -34,11 +34,11 @@ class Text extends Column
 
         // Use LIKE match for others
         if (is_string($requestedValues)) {
-            $conditions[] = db_quote(" AND {$this->columnName} LIKE ?l", "%$requestedValues%");
+            $conditions[] = " AND {$this->columnName} LIKE %$requestedValues%";
         } elseif (is_array($requestedValues)) {
             $orConditions = [];
             foreach ($requestedValues as $value) {
-                $orConditions[] = db_quote("{$this->columnName} LIKE ?l", "%$value%");
+                $orConditions[] = "{$this->columnName} LIKE %$value%";
             }
             $conditions[] = ' AND (' . implode(' OR ', $orConditions) . ')';
         } else {

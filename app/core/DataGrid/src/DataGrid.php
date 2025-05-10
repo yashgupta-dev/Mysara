@@ -3,14 +3,16 @@
 namespace app\core\DataGrid\src;
 
 use Exception;
+use app\core\DB;
+use app\model\BaseModel;
 use app\core\DataGrid\src\Action;
 use app\core\DataGrid\src\Column;
 use app\core\DataGrid\src\MassAction;
 use app\core\DataGrid\src\Enums\ColumnTypeEnum;
 use app\core\DataGrid\src\Exports\DataGridExport;
 
-abstract class DataGrid
-{    
+abstract class DataGrid extends BaseModel
+{
     /**
      * Prefix
      *
@@ -222,7 +224,6 @@ abstract class DataGrid
     {
 
         $this->columns[] = Column::resolveType($column);
-
     }
 
     /**
@@ -256,7 +257,6 @@ abstract class DataGrid
             $action['class'] ?? '',
             $action['type'] ?? 'list',
         );
-
     }
 
     /**
@@ -290,7 +290,6 @@ abstract class DataGrid
             $massAction['options'] ?? [],
             $massAction['class'] ?? '',
         );
-
     }
 
     /**
@@ -332,7 +331,6 @@ abstract class DataGrid
                 break;
             }
         }
-
     }
 
     /**
@@ -404,7 +402,7 @@ abstract class DataGrid
      */
     public function getExportFileNameWithExtension(): string
     {
-        return $this->getExportFileName().'.'.$this->getExportFileExtension();
+        return $this->getExportFileName() . '.' . $this->getExportFileExtension();
     }
 
     /**
@@ -415,7 +413,7 @@ abstract class DataGrid
     public function downloadExportFile()
     {
 
-        return $this->getExporter()->exportData($this->formatRecords($this->queryBuilder, true),$this->getExportFileNameWithExtension(), $this->getExportFileExtension());
+        return $this->getExporter()->exportData($this->formatRecords($this->queryBuilder, true), $this->getExportFileNameWithExtension(), $this->getExportFileExtension());
     }
 
     /**
@@ -462,7 +460,7 @@ abstract class DataGrid
             'export'     => false,
             'format'     => '',
         ];
-        
+
         // Validate filters
         if (!empty($request['filters']) && is_array($request['filters'])) {
             // check filter under keys have values or not
@@ -472,7 +470,7 @@ abstract class DataGrid
                 }
             }
 
-            if(empty($request['filters']) && !empty($request['q'])) {
+            if (empty($request['filters']) && !empty($request['q'])) {
                 $request['filters']['all'][] = $request['q'];
             }
 
@@ -502,47 +500,48 @@ abstract class DataGrid
 
         return $validated;
     }
-    
+
     /**
      * createFilters
      *
      * @param  mixed $request
      * @return array
      */
-    public function createFilters($request) {
+    public function createFilters($request)
+    {
 
         $filtersRange = [];
-        if(!empty($request['period']) && $request['period'] != 'A') {
+        if (!empty($request['period']) && $request['period'] != 'A') {
             $filtersRange['period'] = $request['period'];
 
-            if(!empty($request['time_from'])) {
+            if (!empty($request['time_from'])) {
                 $filtersRange['from'] = $request['time_from'];
             }
 
-            if(!empty($request['time_to'])) {
+            if (!empty($request['time_to'])) {
                 $filtersRange['to'] = $request['time_to'];
             }
         }
 
         return $filtersRange;
-
     }
-    
+
     /**
      * createSorting
      *
      * @param  mixed $request
      * @return array
      */
-    public function createSorting($request) {
+    public function createSorting($request)
+    {
         // Validate sorting
 
-        if(!empty($request['sort_by'])) {
+        if (!empty($request['sort_by'])) {
             $this->sortColumn = $request['sort_by'];
         }
 
-        if(!empty($request['sort_order'])) {            
-            if($request['sort_order'] == 'desc') {
+        if (!empty($request['sort_order'])) {
+            if ($request['sort_order'] == 'desc') {
                 $this->sortOrder = 'asc';
             } else {
                 $this->sortOrder = 'desc';
@@ -554,21 +553,22 @@ abstract class DataGrid
 
         return $validated;
     }
-    
+
     /**
      * createPagination
      *
      * @param  mixed $request
      * @return array
      */
-    public function createPagination($request) {
+    public function createPagination($request)
+    {
         // Validate pagination
         $page = 1;
-        if(!empty($request['page'])) {
+        if (!empty($request['page'])) {
             $page = intval($request['page']);
         }
 
-        if(!empty($request['items_per_page'])) {
+        if (!empty($request['items_per_page'])) {
             $this->itemsPerPage = intval($request['items_per_page']);
         }
 
@@ -589,26 +589,26 @@ abstract class DataGrid
         foreach ($requestedFilters as $requestedColumn => $requestedValues) {
             if ($requestedColumn === 'all') {
                 foreach ($requestedValues as $value) {
-                    
+
                     $subConditions = [];
-    
+
                     foreach ($this->columns as $column) {
                         if (
                             $column->getSearchable()
                             && !in_array($column->getType(), [ColumnTypeEnum::BOOLEAN, ColumnTypeEnum::AGGREGATE])
                         ) {
-                            $subConditions[] = db_quote("{$column->getColumnName()} LIKE ?l", "%{$value}%");
+                            $subConditions[] = "{$column->getColumnName()} LIKE %{$value}%";
                         }
                     }
-    
+
                     if (!empty($subConditions)) {
                         $whereConditions[] = 'AND (' . implode(' OR ', $subConditions) . ')';
                     }
                 }
             } else {
                 $filteredColumn = null;
-                
-                foreach ($this->columns as $column) {                    
+
+                foreach ($this->columns as $column) {
                     if ($column->getIndex() === $requestedColumn) {
                         $filteredColumn = $column;
                         break;
@@ -617,22 +617,21 @@ abstract class DataGrid
 
                 if ($filteredColumn && !empty($requestedValues)) {
                     $result = $filteredColumn->processFilter($requestedValues); // <-- Returns ['condition' => [...]]
-                    
+
                     if (!empty($result)) {
                         $whereConditions = array_merge($whereConditions, $result);
                     }
                 }
             }
         }
-        
+
         // Store the result into your query array builder
         if (!isset($this->queryBuilder['conditions'])) {
             $this->queryBuilder['conditions'] = [];
         }
-        
-        $this->queryBuilder['conditions'] = array_merge($this->queryBuilder['conditions'], $whereConditions);    
-    
-    }    
+
+        $this->queryBuilder['conditions'] = array_merge($this->queryBuilder['conditions'], $whereConditions);
+    }
 
     /**
      * Process requested sorting.
@@ -645,10 +644,9 @@ abstract class DataGrid
         if (! $this->sortColumn) {
             $this->sortColumn = $this->primaryColumn;
         }
-        
+
         $this->queryBuilder['column']   = $requestedSort['column'] ?? $this->sortColumn;
         $this->queryBuilder['order']    = $requestedSort['order']  ?? $this->sortOrder;
-        
     }
 
     /**
@@ -660,7 +658,6 @@ abstract class DataGrid
         $this->queryBuilder['per_page']     = $requestedPagination['per_page'] ?? $this->itemsPerPage;
         $this->queryBuilder['page']         = $requestedPagination['page'] ?? 1;
         $this->queryBuilder['total_items']  = $requestedPagination['total_items'] ?? 0;
-
     }
 
     /**
@@ -674,7 +671,6 @@ abstract class DataGrid
         $this->setExportFileName(substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 36)), 0, 36));
 
         $this->setExportFileExtension($exportFileExtension);
-
     }
 
     /**
@@ -699,7 +695,6 @@ abstract class DataGrid
         isset($requestedParams['export']) && (bool) $requestedParams['export']
             ? $this->processRequestedExport($requestedParams['format'] ?? null)
             : $this->processRequestedPagination($requestedParams['pagination'] ?? []);
-
     }
 
     /**
@@ -731,7 +726,7 @@ abstract class DataGrid
      * Format columns.
      */
     protected function formatColumns(): array
-    {   
+    {
         $columns = [];
         foreach ($this->columns as $column) {
             $columns[] = $column->toArray();
@@ -749,7 +744,7 @@ abstract class DataGrid
         foreach ($this->actions as $action) {
             $actions[] = $action->toArray();
         }
-        
+
         return $actions;
     }
 
@@ -762,7 +757,7 @@ abstract class DataGrid
         foreach ($this->massActions as $action) {
             $massActions[] = $action->toArray();
         }
-        
+
         return $massActions;
     }
 
@@ -773,8 +768,8 @@ abstract class DataGrid
     {
         // Update last view
 
-        if($this->save_search){
-            $params = LastView::instance()->update($this->save_search, $params);
+        if ($this->save_search) {
+            // $params = $this->update('view', $this->save_search, $params);
             $this->queryBuilder = $params;
         }
 
@@ -782,12 +777,12 @@ abstract class DataGrid
         try {
             $default_params = [
                 'page' => $params['page'] ?? 1,
-                'items_per_page' => $params['per_page'] ?? Registry::get('settings.Appearance.admin_elements_per_page'),
+                'items_per_page' => $params['per_page'] ?? $this->itemsPerPage,
             ];
 
             $params = array_merge($default_params, $this->queryBuilder);
 
-            if(!empty($this->queryBuilder['condition'])) {
+            if (!empty($this->queryBuilder['condition'])) {
                 $params['conditions'] = array_merge($params['conditions'], $this->queryBuilder['condition']);
             }
 
@@ -806,63 +801,58 @@ abstract class DataGrid
             // Build JOINs
             foreach ($joins as $j) {
                 $join .= " $j ";
-            }            
+            }
 
             // Example conditions (you can extend as needed)
             foreach ($conditions as $c) {
-                $condition .= db_quote($c);
+                $condition .= $c;
             }
 
             // Example conditions (you can extend as needed)
             foreach ($groups as $g) {
-                $group .= db_quote($g);
+                $group .= $g;
             }
 
-            if($group) {
+            if ($group) {
                 $group = " GROUP BY $group";
             }
-            
+
             // Sorting
             $sort_column    = $params['column'];
             $sort_order     = $params['order'];
             $sorting        = " ORDER BY {$sort_column} {$sort_order}";
-        
-            // Pagination
-            if (!empty($params['items_per_page'])) {                    
-                $params['total_items'] = db_get_field(
-                    "SELECT COUNT(*) FROM {$tablename} $join WHERE 1 {$condition} {$group}"
-                );
-                if(empty($isExport) && !$isExport) {                    
-                    $limit = db_paginate($params['page'], $params['items_per_page'], $params['total_items']);
-                }
-                
-            }
-            // Final query
-            $records = db_get_array(
-                "SELECT {$select_fields} FROM {$tablename} {$join} WHERE 1 {$condition} {$group} {$sorting} {$limit}"
-            );
 
+
+            // Pagination
+            if (!empty($params['items_per_page'])) {
+                $params = array_merge($params, $this->pagination($tablename . $join, array('count(*) as total_items'), $conditions, 'row', [],  $params['items_per_page'], $params['page']));
+
+                $limit = " LIMIT {$params['offset']}, {$params['items_per_page']}";
+            }
+
+            $sql = "SELECT {$select_fields} FROM {$tablename} {$join} WHERE 1 {$condition} {$group} {$sorting} {$limit}";
+
+            $records = mysqli_fetch_all(DB::get()->get->query($sql), MYSQLI_ASSOC);
             // Convert each record to an object
             $records = array_map(function ($record) {
                 return (object) $record;
             }, $records);
-           
 
-            if(!empty($records)) {
+            if (!empty($records)) {
                 foreach ($records as $record) {
                     $record = $this->sanitizeRow($record);
-        
+
                     foreach ($this->columns as $column) {
                         if ($closure = $column->getClosure()) {
                             $record->{$column->getIndex()} = $closure($record);
                         }
                     }
-        
+
                     $record->actions = [];
-        
+
                     foreach ($this->actions as $index => $action) {
                         $getUrl = $action->url;
-                        
+
                         $record->actions[] = [
                             'index' => !empty($action->index) ? $action->index : 'action_' . ($index + 1),
                             'icon'   => $action->icon,
@@ -883,7 +873,6 @@ abstract class DataGrid
             $this->paginator['primary_column']  = $this->primaryColumn;
 
             return ['records' => $records, 'meta' => $this->paginator];
-
         } catch (\Exception $e) {
             throw new Exception($e->getMessage(), 1);
         }
@@ -903,7 +892,7 @@ abstract class DataGrid
         ];
 
         $collection = array_merge($collection, $this->formatRecords($this->queryBuilder));
-        
+
         $_REQUEST = array_merge($_REQUEST, $collection['meta'] ?? []); // append the requests into $_REQUEST
         $_REQUEST = array_merge($_REQUEST, ['sort_order_rev' => $this->queryBuilder['order'], 'sort_by' => $this->queryBuilder['column']]); // append the requests into $_REQUEST
         return [json_decode(json_encode($collection), true), $_REQUEST];
@@ -917,10 +906,10 @@ abstract class DataGrid
     {
         $reflection = new \ReflectionClass($this);
         $datagridName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $reflection->getShortName())); // Convert to snake_case
-    
+
         fn_set_hook("datagrid_{$datagridName}_{$eventName}", $payload);
     }
-    
+
 
     /**
      * Prepare all the setup for datagrid.
@@ -953,5 +942,4 @@ abstract class DataGrid
          */
         $this->processRequest();
     }
-
 }
