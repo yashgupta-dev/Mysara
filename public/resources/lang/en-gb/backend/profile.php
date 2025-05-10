@@ -1,6 +1,6 @@
 <?php
 return [
-    'heading_title' => 'Dasahboard | Profile',
+    'title' => 'Dasahboard | Profile',
     'heading_title_tab' => 'Dashboard | Profile setting',
     'title' => 'Profile Details',
     'text_upload_photo' => 'Upload profile',

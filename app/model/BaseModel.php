@@ -43,7 +43,7 @@ class BaseModel extends BaseController
      * @param  array $where
      * @return array
      */
-    public function select($table = '', $selection = array(), $where = array(), $func = 'row', $sorting = [], $request = array())
+    public function select($table = '', $selection = array(), $where = array(), $func = 'row', $sorting = [], $request = array(), $groupBy = [])
     {
 
         try {
@@ -70,22 +70,28 @@ class BaseModel extends BaseController
                     $query .= "AND $column $constraint $value ";
                 }
             }
+
+            // group
+            if (!empty($groupBy)) {
+                $query .= " GROUP BY ";
+                $query .= implode(' ', $groupBy);
+            }  
+
             // sorting
             if (!empty($sorting)) {
                 $query .= implode(' ', $sorting);
             }   
 
             // pagination
-            if (!empty($request['items_per_page']) && (!empty($request['offset']) && is_numeric($request['offset']) && $request['offset'] >= 0)) {
+            if (!empty($request['items_per_page']) && (isset($request['offset']) && $request['offset'] >= 0)) {
                $query .= " LIMIT " . (int)$request['offset'] . "," . (int)$request['items_per_page'];
             }
 
             $func = $this->getMysqlFetch($func);
             
-            if ($func == 'mysqli_fetch_all') {
+            if ($func == 'mysqli_fetch_all') {                
                 return $func(DB::get()->get->query($query), MYSQLI_ASSOC);
             } else {
-
                 return $func(DB::get()->get->query($query));
             }
         } catch (\Exception $e) {
@@ -148,8 +154,8 @@ class BaseModel extends BaseController
         }
 
         try {
-
-            return DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
+            DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
+            return true;
             // return ['success' => true, 'message' => 'Changes successfully saved.'];
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());
@@ -213,7 +219,6 @@ class BaseModel extends BaseController
         try {
             
             return DB::get()->get->query($query . '' . $setParams . ' ' . $condition);
-
             // return ['success' => true, 'message' => 'Changes successfully saved.'];
         } catch (\Exception $e) {
             $this->_writeLog($this->logFile, $e->getMessage());

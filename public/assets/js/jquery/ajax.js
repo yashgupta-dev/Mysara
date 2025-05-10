@@ -240,4 +240,91 @@
     }
   }
 
+  // data-table="category_description"
+  // data-select_columns="[category_id, name]"
+  // data-search_column="name"
+  // data-id="parent_id" />
+
+    $('input[autocomplete="dropdown"]').on('input', function() {
+        const $input = $(this);
+        const container = $input.closest('.col-sm-10');
+
+        // Check if .autocomplete-results already exists, if not, create it
+        if (container.find('.autocomplete-results').length === 0) {
+          const $resultsBox = $('<div>', {
+              class: 'autocomplete-results form-control',
+              css: {
+                  display: 'none',
+                  position: 'absolute',
+                  zIndex: 1000,
+                  background: '#fff',
+                  border: '1px solid #ccc',
+                  width: '65%',
+                  maxHeight: '200px',
+                  overflow: 'auto'
+              }
+          });
+          container.append($resultsBox);
+        }
+
+        var table = $(this).data('table');
+        var select_columns = $(this).data('select_columns');
+        var search_column = $(this).data('search_column');
+        var id = $(this).data('id');
+        var query = $(this).val();
+ 
+        const $resultsBox = container.find('.autocomplete-results');
+        if (query.length < 2) {
+          $resultsBox.hide();
+          return;
+        }
+        if (query.length >= 3) {  // Start fetching results after 2 characters
+            $.ajax({
+                url: 'admin.php?dispatch=common.autocomplete.autocomplete',  // Modify the URL based on your route
+                type: 'get',
+                data: { 
+                  table: table, 
+                  select_columns: select_columns, 
+                  search_column: search_column, 
+                  query: query, 
+                  id: id
+                },
+                success: function(response) {
+                  var data = JSON.parse(response);
+                  if (data.length) {
+                      let html = '';
+                      data.forEach(item => {
+                          html += `<div class="autocomplete-suggestion" style="cusror:pointer;" data-id="${item.id}" data-name="${item.name}">${item.name}</div>`;
+                      });
+                      $resultsBox.html(html).show();
+                  } else {
+                      $resultsBox.html('<div class="autocomplete-suggestion disabled">No results found</div>').show();
+                  }                    
+                }
+            });
+        } else {
+            $('#autocomplete-results').hide();
+        }
+    });
+
+    // On select
+    $(document).on('click', '.autocomplete-suggestion:not(.disabled)', function () {
+      
+      const $item = $(this);
+      const $container = $item.closest('.col-sm-10');
+      const $input = $container.find('input[autocomplete="dropdown"]');
+      const targetId = $input.data('target');
+
+      $input.val($item.data('name'));
+      $('#' + targetId).val($item.data('id'));
+      $container.find('.autocomplete-results').hide();
+    });
+
+    // Optional: Hide on click outside
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.col-sm-10').length) {
+            $('.autocomplete-results').hide();
+        }
+    });
+
 })();

@@ -30,7 +30,7 @@ class Filemanager extends BaseController
     {
         parent::__construct();
 
-        $this->executeMiddleware($this->requestParam, ['AuthMiddleware', 'PermissionMiddleware', 'NotificationMiddleware']);
+        // $this->executeMiddleware($this->requestParam, ['AuthMiddleware', 'PermissionMiddleware', 'NotificationMiddleware']);
         $this->uploadDir = RESOURCES . '../storage/uploads/';
     }
 

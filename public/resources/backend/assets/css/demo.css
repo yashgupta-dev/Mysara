@@ -384,3 +384,13 @@ a.pagination-selector.btn.dropdown-toggle {
   object-fit: scale-down !important;
   background: #144c5e91 !important;
 }
+
+/*  */
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
+  height: 200px;
+}
+
+.autocomplete-suggestion {
+  font-size: 16px;
+  padding: 5px 0 5px 10px;
+}

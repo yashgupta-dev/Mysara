@@ -7,6 +7,7 @@ use app\core\Redirect;
 use core\engine\Session;
 
 require_once APP . 'traits/DirectoryTrait.php';
+require_once APP . 'controllers/helpers/functions_helper.php';
 
 use app\traits\DirectoryTrait;
 

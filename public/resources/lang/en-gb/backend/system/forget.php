@@ -1,6 +1,6 @@
 <?php
 return [
-    'text_heading'          => 'Forget Password',
+    'title'          => 'Forget Password',
     'text_email_address'    => 'E-Mail Address',
     'text_forget'           => 'Forget password?',
 

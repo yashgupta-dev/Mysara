@@ -6,6 +6,7 @@ use app\core\Setting;
 use core\engine\Session;
 use app\traits\DefaultTrait;
 use app\controllers\middleware\MiddlewarePipeline;
+use app\model\Common;
 use app\traits\LanguageTrait;
 
 class BaseController
@@ -18,6 +19,10 @@ class BaseController
      * @var mixed
      */
     protected $model;
+
+    protected $common;
+
+    protected $setting;
 
     /**
      * BaseController constructor.
@@ -35,6 +40,7 @@ class BaseController
         $this->functions();
         $this->loadLanguage();
         $this->setting = new Setting;
+        $this->common  = new Common;
     }
 
     protected function executeMiddleware($request, $middlewares)

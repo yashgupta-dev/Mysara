@@ -4,7 +4,7 @@
         <!-- Classy Menu -->
         <nav class="classy-navbar" id="essenceNav">
             <!-- Logo -->
-            <a class="nav-brand" href="{route path="welcome"}"><img src="{asset path='public/assets/img/core-img/logo.png'}"
+            <a class="nav-brand" href="/"><img src="{asset path='public/assets/img/core-img/logo.png'}"
                     alt=""></a>
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
@@ -22,21 +22,21 @@
                     {foreach from=$categories item=category key=index}
                             
                             {if $category.children}
-                                <li><a href="#">{$category.name}</a>
+                                <li><a href="{route path="`$category.href`"}">{$category.name}</a>
                                 {$chunkedData = array_chunk($category.children, $category.column|default:"5")}
                                 
                                 <div class="megamenu">
                                     {foreach from=$chunkedData item=item key=key}
                                         <ul class="single-mega cn-col-4">                                            
                                         {foreach from=$item item=child}
-                                            <li><a href="{route path="product/category?search=dresses"}">{$child.name}</a></li>
+                                            <li><a href="{route path="`$category.href`"}">{$child.name}</a></li>
                                         {/foreach}
                                         </ul>                                        
                                     {/foreach}
                                 </div>
                                 </li>
                             {else}
-                                <li><a href="{route path="blog/blog"}">{$category.name}</a></li>
+                                <li><a href="{route path="`$category.href`"}">{$category.name}</a></li>
                             {/if}
                         {/foreach}
                         

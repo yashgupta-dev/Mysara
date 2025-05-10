@@ -1,6 +1,6 @@
 <?php
 return [
-    'text_heading'          => 'User Groups',
+    'title'          => 'User Groups',
 
     'text_add_group'        => 'Add group',
     'column_id'             => '#ID',

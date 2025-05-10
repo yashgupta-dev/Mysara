@@ -3,7 +3,7 @@
 namespace app\traits;
 
 use app\core\Tygh;
-use app\controllers\function\functions;
+use app\controllers\functions\functions;
 use app\core\Redirect;
 use app\core\Setting;
 

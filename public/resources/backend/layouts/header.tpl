@@ -7,8 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-    <title>{$title}</title>
+    <title>{$lang.title}</title>
 
     <meta name="description" content="" />
 
@@ -33,7 +32,8 @@
 
     <link rel="stylesheet" href="{asset path='public/assets/vendor/toaster/toastr.min.css'}">
     <link rel="stylesheet" href="{asset path='public/assets/css/filemanager.css'}">
-
+    <!-- Include CKEditor CDN -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
     <!-- Page CSS -->
     {block name="style"}{/block}
 

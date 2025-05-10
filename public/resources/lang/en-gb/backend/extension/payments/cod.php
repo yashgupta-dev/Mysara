@@ -1,6 +1,6 @@
 <?php
 return [
-    'text_heading'          => 'Cash on delivery',
+    'title'          => 'Cash on delivery',
     'text_total'            => 'Total'
 
 ];

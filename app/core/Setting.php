@@ -4,7 +4,7 @@ namespace app\core;
 
 use app\model\BaseModel;
 
-class Setting extends BaseModel{
+class Setting extends BaseModel {
 
     protected $config = [];
     /**

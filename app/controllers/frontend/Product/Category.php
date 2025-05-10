@@ -24,7 +24,6 @@ class Category extends BaseController
      * @return void
      */
     public function index() {
-       
         Tygh::display('frontend/product/category');
         
     }
