@@ -35,12 +35,12 @@
                                                 <td>{$user.name}</td>
                                                 <td><a href="mailto:{$user.email}">{$user.email}</a></td>
                                                 <td><a href="tel:{$user.phone}">{$user.phone}</a></td>
-                                                <td>{$func->fn_get_status($user.active)}</td>
+                                                <td>{fn_get_status($user.active)}</td>
                                                 <td><span class="btn btn-xs btn-dark">{$user.role}</span></td>
 
                                                 {* <td>{$user.profile_id}</td> *}
-                                                <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$user.created_at)}</td>
-                                                {* <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$user.updated_at)}</td> *}
+                                                <td>{fn_get_human_readable_date('d M, Y h:i:s',$user.created_at)}</td>
+                                                {* <td>{fn_get_human_readable_date('d M, Y h:i:s',$user.updated_at)}</td> *}
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

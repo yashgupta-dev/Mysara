@@ -1,4 +1,4 @@
-{assign var="categories" value=$func->fn_get_Categories()}
+{assign var="categories" value=fn_get_categories()}
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
         <!-- Classy Menu -->

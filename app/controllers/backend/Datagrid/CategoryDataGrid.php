@@ -5,7 +5,7 @@ use app\core\DataGrid\src\DataGrid;
 
 class CategoryDataGrid extends DataGrid
 {
-    protected $primaryColumn = 'c.category_id';
+    protected $primaryColumn = 'category_id';
 
     protected $save_search = 'categories';
 
@@ -20,6 +20,7 @@ class CategoryDataGrid extends DataGrid
             ],
             'fields'    => [
                 'c.category_id',
+                'c.date_added',
                 'cd.name',
                 'cd.description',
                 'cd.meta_title',
@@ -47,13 +48,23 @@ class CategoryDataGrid extends DataGrid
             'index'              => 'cd.meta_title',
             'label'              => 'Meta Title',
             'type'               => 'string',
-            'sortable'           => true,
+            'sortable'           => false,
             'searchable'         => true,            
             'filterable'         => true
         ]);
 
         $this->addColumn([
-            'index'              => 'cd.status',
+            'index'              => 'c.date_added',
+            'label'              => 'Created At',
+            'type'               => 'date',
+            'sortable'           => true,
+            'searchable'         => false,            
+            'filterable'         => true,
+            'filtereable_type'   => 'date_range',
+        ]);
+
+        $this->addColumn([
+            'index'              => 'c.status',
             'label'              => 'Status',
             'type'               => 'integer',
             'sortable'           => true,    
@@ -74,13 +85,24 @@ class CategoryDataGrid extends DataGrid
 
     public function prepareActions() {
         $this->addAction([
-            'icon'   => 'ty-icon-delete',
+            'icon'   => 'bx-trash',
             'title'  => 'delete',
             'class'  => 'cm-ajax cm-confirm',
             'method' => 'POST',
             'type'   => 'delete',
             'url'    => function ($row) {                
-                return "products.delete?product_id=" . $row->category_id;
+                return fn_link("catalog.category.delete&category_id=" . $row->category_id);
+            },
+        ]);
+
+        $this->addAction([
+            'icon'   => 'bx-pencil',
+            'title'  => 'Edit',
+            'class'  => '',
+            'method' => 'GET',
+            'type'   => 'list',
+            'url'    => function ($row) {                
+                return fn_link("catalog.category.update&category_id=" . $row->category_id);
             },
         ]);
     }
@@ -88,18 +110,18 @@ class CategoryDataGrid extends DataGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'title'     => 'Add',
-            'icon'      => 'icon-plus',
-            'dispatch'  => 'products.add',
+            'icon'      => 'bx-plus',
+            'dispatch'  => fn_link('catalog.category.add'),
             'type'      => 'action',
             'method'    => 'GET'
         ]);
 
         $this->addMassAction([
             'title'     => 'More',
-            'icon'      => 'icon-plus',                        
+            'icon'      => 'bx-plus',                        
             'method'    => 'GET',            
             'options' => [
-                ['label' => 'Label Name', 'value' => 'Label Value', 'type' => 'update'],
+                ['label' => 'Bulk Delete', 'value' => fn_link('catalog.category.m_delete'), 'type' => 'delete'],
             ],
         ]);
     }

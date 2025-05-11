@@ -55,8 +55,8 @@
                 <div class="mb-3 col-md-6">
                     <label class="form-label" for="elm_status">Status</label>
                     <div class="input-group input-group-merge">
-                        <input type="text" class="form-control" disabled value="{$func->fn_get_status($user.active)}"
-                            placeholder="{$func->fn_get_status($user.active)}" />
+                        <input type="text" class="form-control" disabled value="{fn_get_status($user.active)}"
+                            placeholder="{fn_get_status($user.active)}" />
                     </div>
                     <div class="">
                         <a

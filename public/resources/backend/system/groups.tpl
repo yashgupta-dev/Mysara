@@ -26,9 +26,9 @@
                                                 </td>
                                                 <td>{$group.id}</td>
                                                 <td>{$group.name}</td>
-                                                <td>{$func->getStat($group.type)}</td>
-                                                <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$group.created_at)}</td>
-                                                <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$group.updated_at)}</td>
+                                                <td>{getStat($group.type)}</td>
+                                                <td>{fn_get_human_readable_date('d M, Y h:i:s',$group.created_at)}</td>
+                                                <td>{fn_get_human_readable_date('d M, Y h:i:s',$group.updated_at)}</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>

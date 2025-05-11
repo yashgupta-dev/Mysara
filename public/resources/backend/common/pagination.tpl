@@ -1,6 +1,6 @@
 {assign var="id" value=$div_id|default:"pagination_contents"}
 {assign var="c_url" value=$current_url|default:$smarty.request.dispatch}
-{assign var="pagination" value=$func->fn_generate_pagination($search)}
+{assign var="pagination" value=fn_generate_pagination($search)}
 
 {$show_pagination_open = $show_pagination_open|default:true}
 {$show_pagination_open = $show_pagination_open scope=parent}
@@ -40,7 +40,7 @@
                                 <li class="{if !$pagination.prev_page}disabled{/if} mobile-hide">
                                     <a data-ca-scroll=".cm-pagination-container"
                                         class="{if $pagination.prev_page}cm-ajax{/if} pagination-item" {if $pagination.prev_page}
-                                    href="{$func->fn_url('&page=1')}" data-ca-page="1" data-ca-target-id="{$id}" {/if}>
+                                    href="{fn_url('&page=1')}" data-ca-page="1" data-ca-target-id="{$id}" {/if}>
                                     <i class='bx bx-chevrons-left'></i>
                                 </a>
                             </li>
@@ -49,7 +49,7 @@
                             <li class="{if !$pagination.prev_page}disabled{/if}">
                                 <a data-ca-scroll=".cm-pagination-container"
                                     class="{if $pagination.prev_page}cm-ajax{/if} pagination-item" {if $pagination.prev_page}
-                                    href="{$func->fn_url("&page=`$pagination.prev_page`")}" data-ca-page="{$pagination.prev_page}"
+                                    href="{fn_url("&page=`$pagination.prev_page`")}" data-ca-page="{$pagination.prev_page}"
                                 data-ca-target-id="{$id}" {/if}>
                                 <i class='bx bx-chevron-left'></i>
                             </a>
@@ -69,12 +69,12 @@
                         {if $pg == $pagination.current_page}
                             {* {capture name="pagination_list"} *}
 
-                                {assign var="range_url" value=$func->fn_query_remove("items_per_page")}
+                                {assign var="range_url" value=fn_query_remove("items_per_page")}
                                 <ul id="tools_list_pagination_1535942676" class="dropdown-menu dropdown-menu-end cm-smart-position">
                                     {foreach from=$pagination.per_page_range item="step"}
                                         <li>
                                             <a data-ca-scroll=".cm-pagination-container" class="dropdown-item cm-ajax pagination-dropdown-per-page"
-                                                href="{$func->fn_url("&items_per_page=`$step`")}" data-ca-target-id="{$id}">
+                                                href="{fn_url("&items_per_page=`$step`")}" data-ca-target-id="{$id}">
                                                 {$step} {$lang.text_per_page}
                                             </a>
                                         </li>
@@ -95,7 +95,7 @@
                             <li class="{if !$pagination.next_page}disabled{/if} pagination-item">
                                 <a data-ca-scroll=".cm-pagination-container"
                                     class="{if $pagination.next_page}cm-ajax{/if} pagination-item" {if $pagination.next_page}
-                                    href="{$func->fn_url("&page=`$pagination.next_page`")}" data-ca-page="{$pagination.next_page}"
+                                    href="{fn_url("&page=`$pagination.next_page`")}" data-ca-page="{$pagination.next_page}"
                                 data-ca-target-id="{$id}" {/if}>
                                 <i class='bx bx-chevron-right'></i>
                             </a>
@@ -105,7 +105,7 @@
                         <li class="{if !$pagination.next_page}disabled{/if} mobile-hide">
                             <a data-ca-scroll=".cm-pagination-container"
                                 class="{if $pagination.next_page}cm-ajax{/if} pagination-item" {if $pagination.next_page}
-                                href="{$func->fn_url("&page=`$pagination.total_pages`")}"
+                                href="{fn_url("&page=`$pagination.total_pages`")}"
                             data-ca-page="{$pagination.total_pages}" data-ca-target-id="{$id}" {/if}>
                             <i class='bx bx-chevrons-right'></i>
                         </a>

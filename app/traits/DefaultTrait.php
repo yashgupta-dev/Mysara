@@ -127,7 +127,6 @@ trait DefaultTrait
      * @return object|array
      */
     public function functions() {
-        Tygh::assign('func',new functions);
         Tygh::assign('session',$_SESSION);
         Tygh::assign('config',new Setting);
     }

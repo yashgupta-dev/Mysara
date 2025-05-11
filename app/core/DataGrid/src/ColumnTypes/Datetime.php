@@ -70,7 +70,7 @@ class Datetime extends Column
             }
 
             if ($from && $to) {
-                $conditions[] = "{$this->columnName} BETWEEN ".fn_parse_date($from)." AND ".fn_parse_date($to);
+                $conditions[] = "{$this->columnName} BETWEEN ".strtotime($from)." AND ".strtotime($to);
             }
         } else {
             throw new InvalidColumnExpressionException('Only string and array are allowed for datetime column type.');

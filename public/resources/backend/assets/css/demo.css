@@ -394,3 +394,7 @@ a.pagination-selector.btn.dropdown-toggle {
   font-size: 16px;
   padding: 5px 0 5px 10px;
 }
+p.no-items {
+  text-align: center;
+  padding: 60px 0 30px 0;
+}

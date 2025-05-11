@@ -46,12 +46,6 @@ class Category extends BaseController
     {
         list($results, $search) = fn_datagrid(CategoryDataGrid::class)->process();
 
-        echo "<pre>";
-        print_r($results['records']);
-        echo "</pre>";
-        die;
-        list($results, $search) = $this->model->categories($this->requestParam);
-        
         Tygh::assign('search',$search);
         Tygh::assign('lists',$results);
         Tygh::display('backend/catalog/category/list');

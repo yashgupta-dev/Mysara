@@ -1,17 +1,15 @@
-{capture name="tools_list"}                             
+       
+<div class="dropdown">
+    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+        <i class="bx bx-cog"></i>
+    </button>                 
+    <div class="dropdown-menu"  data-popper-placement="top-end">
     {foreach from=$actions item=action}
-        {if $action.method eq "GET"}
-            <li>{btn type="list" text=$action.title href="`$action.url`"}</li>
+        {if $action.method eq "GET"}                
+            <a class="dropdown-item {$action.class|default:''}" href="{$action.url|default:'javascript:;'}"><i class="bx {$action.icon|default:''}"></i> {$action.title|default:''}</a>
         {else}
-            <li>
-            {btn type="`$action.type`"
-                text=$action.title
-                class="`$action.class`"
-                href="`$action.url`"
-                method=$action.method
-            }
-            </li>
+            <a class="dropdown-item {$action.class|default:''}" data-request-method="{$action.method|default:'POST'}" data-form="{$name}" href="{$action.url|default:'javascript:;'}"><i class="bx {$action.icon|default:''}"></i> {$action.title|default:''}</a>            
         {/if}
     {/foreach}
-{/capture}
-{dropdown content=$smarty.capture.tools_list}
+    </div>
+</div>

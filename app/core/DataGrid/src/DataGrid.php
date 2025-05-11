@@ -832,7 +832,6 @@ abstract class DataGrid extends BaseModel
             }
 
             $sql = "SELECT {$select_fields} FROM {$tablename} {$join} WHERE 1 {$condition} {$group} {$sorting} {$limit}";
-            echo $sql;
             
             $records = mysqli_fetch_all(DB::get()->get->query($sql), MYSQLI_ASSOC);
             // Convert each record to an object
