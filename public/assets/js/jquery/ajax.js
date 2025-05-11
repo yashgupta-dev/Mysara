@@ -327,4 +327,74 @@
         }
     });
 
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a[type="delete_selected"]').forEach(function (link) {
+          link.addEventListener('click', function (e) {
+              e.preventDefault();
+
+              const formId = link.getAttribute('form');
+              const form = document.getElementById(formId);
+            console.log(form);
+              if (!form) {                  
+                  toastr.error('Error', 'Form not found.');
+                  return;
+              }
+
+              const checkedBoxes = form.querySelectorAll('input[type="checkbox"]:checked');
+
+              if (checkedBoxes.length === 0) {                  
+                  toastr.error('Error', 'Please select at least one item to delete.');
+                  return;
+              }
+
+              // Optional confirmation
+              if (!confirm('Are you sure you want to delete selected items?')) {
+                  return;
+              }
+
+              form.setAttribute('action', link.getAttribute('dispatch'));
+              form.submit();
+          });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleAllCheckbox = document.querySelector('.bulkedit-toggler');
+      const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+  
+      if (!toggleAllCheckbox) return;
+  
+      // Select/Deselect all checkboxes
+      toggleAllCheckbox.addEventListener('change', function () {
+          rowCheckboxes.forEach(cb => {
+              cb.checked = toggleAllCheckbox.checked;
+              if (toggleAllCheckbox.checked) {
+                  cb.setAttribute('checked', 'checked');
+              } else {
+                  cb.removeAttribute('checked');
+              }
+          });
+      });
+  
+      // Update the "select all" checkbox based on individual selection
+      rowCheckboxes.forEach(cb => {
+          cb.addEventListener('change', function () {
+              if (!this.checked) {
+                  toggleAllCheckbox.checked = false;
+                  toggleAllCheckbox.removeAttribute('checked');
+              } else if (document.querySelectorAll('.row-checkbox:checked').length === rowCheckboxes.length) {
+                  toggleAllCheckbox.checked = true;
+                  toggleAllCheckbox.setAttribute('checked', 'checked');
+              }
+              // Reflect individual checkbox state
+              if (this.checked) {
+                  this.setAttribute('checked', 'checked');
+              } else {
+                  this.removeAttribute('checked');
+              }
+          });
+      });
+  });
+  
+
 })();

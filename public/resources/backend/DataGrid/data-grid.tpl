@@ -1,6 +1,6 @@
 {$c_url=fn_url('','A')}
 <div class="container-xxl flex-grow-1 container-p-y">
-    <form action="{$c_url}" method="post" name="{$name}" id="{$name}" data-ca-main-content-selector="[data-ca-main-content]">    
+     
         <div class="navbar-nav flex-row align-items-center ms-auto pb-2" style="justify-content: right;gap: 10px;">
             {* Get advanced search *}
             {include file="backend/DataGrid/components/search/search.tpl"
@@ -73,6 +73,7 @@
         {* table structure *}
         <div class="card mt-4">
             <div class="table-responsive text-nowrap">
+            <form action="{$c_url}" method="post" name="{$name}" id="{$name}" data-ca-main-content-selector="[data-ca-main-content]">   
                 {if $data.records}
                     <table width="100%"
                         class="table table-middle table--relative table-responsive table--overflow-hidden table--show-checkbox table-manage-orders">
@@ -89,10 +90,11 @@
                 {else}
                     <p class="no-items">{$lang.no_data}</p>
                 {/if}
+            </form>
             </div>
         </div>
         {* end *}
 
         {include file="backend/common/pagination.tpl" save_current_page=true save_current_url=true div_id=''}
-    </form>
+    
 </div>

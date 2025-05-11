@@ -5,7 +5,7 @@
             data-ca-id="{$result[$data.meta.primary_column]}">            
             
                 <td width="3%" class="left mobile-hide table__check-items-cell table__check-items-cell--show-checkbox">
-                    <input type="checkbox" name="{$data.meta.primary_column}[]" value="{$result[$data.meta.primary_column]}" class="cm-item"/>
+                    <input type="checkbox" class="row-checkbox cm-item" name="{$data.meta.primary_column}[]" value="{$result[$data.meta.primary_column]}"/>
                 </td>
             
 
