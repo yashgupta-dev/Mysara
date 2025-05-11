@@ -260,12 +260,23 @@ function fn_link($link, $area = 'A')
     return $url->link($pathExtension."dispatch=$link");
 }
 
-function fn_query_remove($params, $url = '')
+function fn_query_remove($url, $params = [])
 {
-    // echo "<pre>";
-    // print_r($url);
-    // echo "</pre>";
-    // die;
+    // remove parames from url
+    $url_parts = explode('?', $url);
+    if(!empty($url_parts[1]) && !empty($url_parts[1])) {
+        $url = $url_parts[0];
+        $query_string = $url_parts[1];
+        $query_params = [];
+        parse_str($query_string, $query_params);
+        foreach ($params as $param) {
+            unset($query_params[$param]);
+        }
+        $new_query_string = http_build_query($query_params);
+        $new_url = $url . '?' . $new_query_string;
+        return $new_url;
+    }
+    
 }
 
 function fn_href($url, $query, $store_id = 0, $language_id = 1)

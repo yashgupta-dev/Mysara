@@ -28,10 +28,11 @@
                         {elseif $column.type eq 'time'}
                             {fn_get_human_readable_date('d M, Y h:i:s',$result[$index_name])}
                         {else}
-                            {$result[$index_name]}
-                        {/if}
-                        {if $column.is_editable}
-                            <input type="text" name="update_data[{$result[$data.meta.primary_column]}][{$column.index}]" size="6" value="{$result[$index_name]}" class="input-small input-hidden" data-a-sep />
+                            {if $column.is_editable}
+                                <input type="text" name="update_data[{$result[$data.meta.primary_column]}][{$column.index}]" size="6" value="{$result[$index_name]}" class="input-small input-hidden form-control" data-a-sep />
+                            {else}
+                                {$result[$index_name]}
+                            {/if}
                         {/if}
                     </td>
 

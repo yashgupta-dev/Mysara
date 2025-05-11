@@ -24,7 +24,8 @@ class CategoryDataGrid extends DataGrid
                 'cd.name',
                 'cd.description',
                 'cd.meta_title',
-                'c.status'
+                'c.status',
+                'c.top'
             ],
             'groups'    => []
         ];
@@ -42,7 +43,8 @@ class CategoryDataGrid extends DataGrid
             'type'               => 'string',
             'sortable'           => true,
             'searchable'         => true,            
-            'filterable'         => true
+            'filterable'         => true,
+            'is_editable'        => true
         ]);
 
         $this->addColumn([
@@ -50,8 +52,27 @@ class CategoryDataGrid extends DataGrid
             'label'              => 'Meta Title',
             'type'               => 'string',
             'sortable'           => false,
-            'searchable'         => true,            
+            'searchable'         => false,            
             'filterable'         => true
+        ]);
+
+        $this->addColumn([
+            'index'              => 'c.top',
+            'label'              => 'Top category',
+            'type'               => 'boolean',
+            'sortable'           => true,
+            'searchable'         => false,
+            'closure' => function ($row) {                
+                return ($row->top) ? '<input type="checkbox" checked disabled>' : '<input type="checkbox" disabled>';
+            },
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => 'Yes', 
+                    'value' => '1'
+                ]
+            ],
         ]);
 
         $this->addColumn([
@@ -69,6 +90,7 @@ class CategoryDataGrid extends DataGrid
             'label'              => 'Status',
             'type'               => 'string',
             'sortable'           => true,    
+            'searchable'         => false,       
             'filterable'         => true,
             'closure' => function ($row) {                
                 return ($row->status  == 'A') ? 'Active' : 'Disabled';

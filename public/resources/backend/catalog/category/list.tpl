@@ -9,7 +9,8 @@
         dispatch="catalog.category" 
         search_label="Search"     
         product_search_form_prefix="category"
-        column_width=[10,20,20,30]
+        column_width=[30,20,20,20]
+        is_editable=true
     }
 {/capture}
 {include file="backend/layouts/layout.tpl"}

@@ -16,7 +16,8 @@ class CustomerDataGrid extends DataGrid
             'condition' => [],
             'fields'    => [
                 'id',
-                'CONCAT(firstname, " ", lastname) as firstname',
+                'firstname',
+                'lastname',
                 'email',
                 'phone',
                 'active',
@@ -32,7 +33,16 @@ class CustomerDataGrid extends DataGrid
     public function prepareColumns(): void {
         $this->addColumn([
             'index'              => 'firstname',
-            'label'              => 'Name',
+            'label'              => 'Firstname',
+            'type'               => 'string',
+            'sortable'           => true,
+            'searchable'         => true,            
+            'filterable'         => true
+        ]);
+
+        $this->addColumn([
+            'index'              => 'lastname',
+            'label'              => 'Lastname',
             'type'               => 'string',
             'sortable'           => true,
             'searchable'         => true,            

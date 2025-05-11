@@ -1,7 +1,34 @@
 {$c_url=fn_url('','A')}
 <div class="container-xxl flex-grow-1 container-p-y">
-     
-        <div class="navbar-nav flex-row align-items-center ms-auto pb-2" style="justify-content: right;gap: 10px;">
+
+    <div class="navbar-nav flex-row " style="justify-content: right;gap: 10px;">
+        <div class="">
+        {if !empty($smarty.get.q)}  
+            <a href="{fn_query_remove($c_url, ['q'])}" class="btn btn-sm p-1 btn-dark"><i class="bx bx-search"></i>&nbsp;{$smarty.get.q}<i class="bx bx-x"></i></a>
+        {/if}
+        {if !empty($smarty.get.filters)}
+            {foreach from=$smarty.get.filters item=filter key=filter_name}
+                {assign var="filter_data" value=$smarty.get.filters[$filter_name]}
+            
+                {* Handle date filter: must have period != 'A' and valid from/to *}
+                {if is_array($filter_data) && isset($filter_data.period)}
+                    {if $filter_data.period != 'A' && $filter_data.time_from && $filter_data.time_to}
+                        <a href="{fn_query_remove($c_url, [$filter_name])}" class="btn btn-sm p-1 btn-dark">
+                            {$filter_name}: {$filter_data} <i class="bx bx-x"></i>
+                        </a>
+                    {/if}
+            
+                {* Handle non-date filters: skip if value is empty or false *}
+                {elseif !is_array($filter_data) && $filter_data ne ''}
+                    <a href="{fn_query_remove($c_url, [$filter_name])}" class="btn btn-sm p-1 btn-dark">
+                        {$filter_name}: {$filter_data} <i class="bx bx-x"></i>
+                    </a>
+                {/if}
+            {/foreach}
+        {/if}
+        
+        </div>
+        <div class="navbar-nav flex-row align-items-center ms-auto pb-2" style="gap: 10px;">
             {* Get advanced search *}
             {include file="backend/DataGrid/components/search/search.tpl"
                 search=$search
@@ -61,14 +88,15 @@
                     {/foreach}
                 {include file="backend/common/dropdown.tpl" text=$lang.text_more btn_class="btn-dark"}
             {/if}
-            {if !empty($data.records) && !empty($is_editable)}
+            {if !empty($data.records) && !empty($is_editable)}                
                 {include file="backend/common/save.tpl"
-                but_name="dispatch[`$is_editable`]"
-                but_role="action"
-                but_target_form="`$name`"
-                but_meta="cm-submit"
+                    but_name="dispatch[`$dispatch`.m_save]"
+                    but_role="submit-button"
+                    but_target_form="`$name`"
+                    but_meta="cm-submit"
                 }
             {/if}
+        </div>
         </div>
         {* table structure *}
         <div class="card mt-4">

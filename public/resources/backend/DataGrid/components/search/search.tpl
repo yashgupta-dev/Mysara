@@ -11,9 +11,9 @@
             <div class="modal-header">                
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <form action="{fn_link($dispatch)}" name="{$product_search_form_prefix}_search_form" method="get" class="{$form_meta}" id="{$product_search_form_prefix}search_form">
+                <div class="modal-body">
 
-                <form action="{fn_link($dispatch)}" name="{$product_search_form_prefix}_search_form" method="get" class="{$form_meta}" id="{$product_search_form_prefix}search_form">
                     <input type="hidden" name="type" value="{$search_type|default:"simple"}" {if $autofocus}autofocus="autofocus"{/if} />
                     <input type="hidden" name="dispatch" value="{$dispatch}" />
                     
@@ -60,12 +60,11 @@
                             {/if}
                         {/if}
                     {/foreach}                    
-                    
-
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-md p-1">Search</button>                                        
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -7,9 +7,9 @@
 
 {if $but_role == "submit-button"}
     <button type="submit"
-            class="btn btn-primary {$but_meta}"
+            class="btn btn-primary {$but_meta} btn-md p-1"
             name="{$but_name}"
             form="{$but_target_form}">
-        <i class="bx {$icon}"></i>&nbsp;{$text}
+            {$text}
     </button>
 {/if}

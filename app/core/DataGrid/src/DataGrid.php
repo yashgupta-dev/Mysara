@@ -324,7 +324,7 @@ abstract class DataGrid extends BaseModel
     public function addFilter(string $datagridColumn, string $queryColumn): void
     {
 
-        foreach ($this->columns as $column) {            
+        foreach ($this->columns as $column) {
             if ($column->getIndex() === $datagridColumn) {
                 $column->setColumnName($queryColumn);
 
@@ -452,7 +452,7 @@ abstract class DataGrid extends BaseModel
     protected function validatedRequest(): array
     {
         $request = $_REQUEST;
-        
+
         $validated = [
             'filters'    => [],
             'sort'       => [],
@@ -465,12 +465,11 @@ abstract class DataGrid extends BaseModel
         if (!empty($request['filters']) && is_array($request['filters'])) {
             // check filter under keys have values or not
             foreach ($request['filters'] as $key => $value) {
-                if (!isset($value)) {
+                if (empty($value)) {
                     unset($request['filters'][$key]);
                 }
             }
-
-            if (empty($request['filters']) && !empty($request['q'])) {
+            if (!empty($request['q'])) {
                 $request['filters']['all'][] = $request['q'];
             }
 
@@ -600,7 +599,7 @@ abstract class DataGrid extends BaseModel
                     }
 
                     if (!empty($subConditions)) {
-                        $whereConditions[] = 'AND (' . implode(' OR ', $subConditions) . ')';
+                        $whereConditions[] = ' AND (' . implode(' OR ', $subConditions) . ')';
                     }
                 }
             } else {
@@ -823,16 +822,16 @@ abstract class DataGrid extends BaseModel
             // Pagination
             if (!empty($params['items_per_page'])) {
                 $sql = "SELECT count(*) as total_items FROM {$tablename} {$join} WHERE 1 {$condition} {$group}";
+
                 $total_items = mysqli_fetch_assoc(DB::get()->get->query($sql));
-                
-                $params = array_merge($params, $this->pagination($total_items, $params['items_per_page'], $params['page']));                
+
+                $params = array_merge($params, $this->pagination($total_items, $params['items_per_page'], $params['page']));
                 $offset = $params['offset'] ?? 0;
 
                 $limit = " LIMIT {$offset}, {$params['items_per_page']}";
             }
 
             $sql = "SELECT {$select_fields} FROM {$tablename} {$join} WHERE 1 {$condition} {$group} {$sorting} {$limit}";
-            
             $records = mysqli_fetch_all(DB::get()->get->query($sql), MYSQLI_ASSOC);
             // Convert each record to an object
             $records = array_map(function ($record) {
@@ -841,10 +840,10 @@ abstract class DataGrid extends BaseModel
 
             if (!empty($records)) {
                 foreach ($records as $record) {
-                    $record = $this->sanitizeRow($record);                    
+                    $record = $this->sanitizeRow($record);
                     foreach ($this->columns as $column) {
                         if ($closure = $column->getClosure()) {
-                            $index_name = explode('.',$column->getIndex())[1] ?? $column->getIndex();
+                            $index_name = explode('.', $column->getIndex())[1] ?? $column->getIndex();
                             $record->{$index_name} = $closure($record);
                         }
                     }
