@@ -1,0 +1,52 @@
+<?php
+// HTTPS / HTTP urls
+define('https','http://localhost:8000/');
+define('http','http://localhost:8000/');
+
+define('BASE_URL','http://localhost:8000/');
+
+define('ROOT', 'C:/wamp64/www/Mysara/');
+define('APP', ROOT . 'app/');
+define('CORE', ROOT . 'core/');
+define('LIB', CORE . 'library/');
+define('PUBLIC', ROOT . 'public/');
+define('RESOURCES', ROOT . 'public/resources/');
+define('CACHE', CORE . 'storage/');
+
+// frontend default controller
+define('Default_controller','welcome');
+define('Default_method','index');
+
+// admin default controller
+define('Default_controller_admin','dashboard');
+define('Default_method_admin','index');
+
+define('Parent_folder','Mysara/');
+define('TIME',strtotime(date('Y-m-d h:i:s')));
+
+// error reporting
+define('error_debbug', true);
+
+// panels
+define('FRONTEND','frontend');
+define('BACKEND','backend');
+
+// Database
+define('HOST','localhost');
+define('USERNAME','root');
+define('PASSWORD','');
+define('DATABASE','mvc');
+
+// SMTP;
+define('Host','');
+define('SMTPAuth',true);
+define('Username','');
+define('Password','');
+define('Port','2525');
+
+define('Mail_From','');
+define('Mailer_Name','');
+
+define('RECEIVE_MAIL','');
+
+

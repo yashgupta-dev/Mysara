@@ -7,7 +7,7 @@
             <!-- Other Browser Sessions -->
             {foreach from=$sesisons item=item key=key}
                 <div class="d-flex mb-3">
-                    {$agent = $func->getAgentInfo($item.user_agent)}
+                    {$agent = getAgentInfo($item.user_agent)}
                     <div class="device-style">
                         {if $agent.device == 'D'}
                             <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
@@ -38,7 +38,7 @@
                                         {$lang.text_this_device}
                                     </span>
                                 {else}
-                                    {$lang.text_last_activity} {$func->getTimeDiff($item.last_activity)}
+                                    {$lang.text_last_activity} {getTimeDiff($item.last_activity)}
                                 {/if}
                             </div>
                         </div>

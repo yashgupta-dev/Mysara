@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'heading_title'                     => 'Catalog | Attribute group manage',
+    'title'                     => 'Catalog | Attribute group manage',
     'text_list_attribute'               => 'List attributes',
     'text_group_attribute_group'        => 'Add group attributes',
     'column_name'                       => 'Group name',

@@ -1,26 +1,6 @@
-{assign var="title" value=$lang.text_heading}
-{include file="backend/layouts/header.tpl"}
-
-{block name="backend_page"}
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
-            {* {$menu} *}
-            {block name="menu"}
-                {include file="backend/common/menu.tpl"}
-            {/block}
-            <!-- Layout container -->
-            <div class="layout-page">
-                {block name="nav"}
-                    {include file="backend/layouts/nav.tpl"}
-                {/block}
-
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
-
+{capture assign='main_content'}
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        {include file="backend/common/breadcrumb.tpl" route=$smarty.request.dispatch}
+                        {* {include file="backend/common/breadcrumb.tpl" route=$smarty.request.dispatch} *}
                         
                         {include file="backend/common/btn.tpl" title=$lang.text_add color="primary" href="admin.php?dispatch=system.users.add"}
 
@@ -55,12 +35,12 @@
                                                 <td>{$user.name}</td>
                                                 <td><a href="mailto:{$user.email}">{$user.email}</a></td>
                                                 <td><a href="tel:{$user.phone}">{$user.phone}</a></td>
-                                                <td>{$func->fn_get_status($user.active)}</td>
+                                                <td>{fn_get_status($user.active)}</td>
                                                 <td><span class="btn btn-xs btn-dark">{$user.role}</span></td>
 
                                                 {* <td>{$user.profile_id}</td> *}
-                                                <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$user.created_at)}</td>
-                                                {* <td>{$func->fn_get_human_readable_date('d M, Y h:i:s',$user.updated_at)}</td> *}
+                                                <td>{fn_get_human_readable_date('d M, Y h:i:s',$user.created_at)}</td>
+                                                {* <td>{fn_get_human_readable_date('d M, Y h:i:s',$user.updated_at)}</td> *}
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -93,25 +73,5 @@
 
                         <!--/ Responsive Table -->
                     </div>
-                    <!-- / Content -->
-
-                    <!-- Footer -->
-                    {block name="footer_note"}
-                        {include file="backend/layouts/footer_note.tpl"}
-                    {/block}
-                    <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
-        </div>
-
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-{/block}
-
-{include file="backend/layouts/footer.tpl"}
+                {/capture}
+                {include file="backend/layouts/layout.tpl"}

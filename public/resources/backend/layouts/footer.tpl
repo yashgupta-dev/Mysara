@@ -39,6 +39,24 @@
 </script>
 <!-- Page JS -->
 <script src="{asset path='public/resources/backend/assets/js/dashboards-analytics.js'}"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('textarea[editor="ck-editor"]'),{
+            // Set height of the editor
+            height: 400,
+            toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', 'imageUpload', '|', 'undo', 'redo'],
+            // FileManager plugin for image upload (you can integrate any file manager for this purpose)
+            // simpleUpload: {
+            //     uploadUrl: 'common.filemanager.list', // Define the URL for the file manager API or endpoint
+            //     // headers: {
+            //     //     'X-CSRF-TOKEN': 'your-csrf-token-here', // If required, include CSRF tokens for security
+            //     // }
+            // },
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 </body>
 
 </html>

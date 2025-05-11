@@ -2,7 +2,7 @@
 {assign var="route_dropdown" value="."|explode:$route}
 
 {$route_dropdown =  $route_dropdown[0]}
-{assign var="menus" value=$func->fn_get_menus()}
+{assign var="menus" value=fn_get_menus()}
 
 {block name="menu"}
   <!-- Menu -->

@@ -1,7 +1,5 @@
-2024-06-07 09:47:45 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,a.sort_order FROM attribute a   LEFT JOIN attribute_description ad ON (ad.' at line 1
-2024-06-07 09:48:08 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,a.sort_order FROM attribute a   LEFT JOIN attribute_description ad ON(ad.a' at line 1
-2024-06-07 09:48:55 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,a.sort_order FROM attribute a   LEFT JOIN attribute_description ad ON (ad.' at line 1
-2024-06-07 09:49:17 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,a.sort_order FROM attribute a   LEFT JOIN attribute_description ad ON (ad.' at line 1
-2024-06-07 10:05:08 Incorrect integer value: '' for column 'sort_order' at row 1
-2024-06-30 07:33:32 DELETE FROM sessions WHERE 1 AND user_id = "3" 
-2024-08-17 11:06:09 DELETE FROM sessions WHERE 1 AND user_id = "3" 
+2025-05-11 06:51:32 DELETE FROM category_description WHERE 1 AND category_id = "58" 
+2025-05-11 06:51:32 DELETE FROM category_path WHERE 1 AND category_id = "58" AND level < "0" 
+2025-05-11 06:51:32 DELETE FROM category_path WHERE 1 AND category_id = "58" AND level < "1" 
+2025-05-11 06:51:32 DELETE FROM category_path WHERE 1 AND category_id = "58" AND level < "2" 
+2025-05-11 06:51:32 DELETE FROM seo WHERE 1 AND seo_origin = "category_id=58" 

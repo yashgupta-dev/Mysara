@@ -201,6 +201,8 @@ class Groups extends BaseController
         $controllerExclude = [
             'app\controllers\backend\auth',
             'app\controllers\backend\common\menu',
+            'app\controllers\backend\common\autocomplete',
+            'app\controllers\backend\common\filemanager',
             'app\controllers\backend\errors\access',
             'app\controllers\backend\errors\modify',
             'app\controllers\basecontroller'

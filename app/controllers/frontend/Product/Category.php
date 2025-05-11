@@ -8,13 +8,6 @@ use app\core\Tygh;
 class Category extends BaseController
 {    
     /**
-     * language
-     *
-     * @var array
-     */
-    private $language = [];
-
-    /**
      * __construct
      *
      * @param  mixed $mode
@@ -31,7 +24,6 @@ class Category extends BaseController
      * @return void
      */
     public function index() {
-       
         Tygh::display('frontend/product/category');
         
     }

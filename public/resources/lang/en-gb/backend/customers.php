@@ -1,5 +1,6 @@
 <?php
 return [
+    'title'                 => 'Customers',
     'text_heading'          => 'Customers',
 
     'column_name'           => 'Name',

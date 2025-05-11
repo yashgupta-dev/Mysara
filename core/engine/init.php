@@ -3,6 +3,7 @@
 namespace core\engine;
 
 require_once APP . 'traits/SeoTrait.php';
+require_once APP . 'controllers/functions/functions.php';
 
 use core\engine\Session;
 use app\traits\SeoTrait as traitsSeoTrait;

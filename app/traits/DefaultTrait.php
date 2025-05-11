@@ -3,7 +3,7 @@
 namespace app\traits;
 
 use app\core\Tygh;
-use app\controllers\function\functions;
+use app\controllers\functions\functions;
 use app\core\Redirect;
 use app\core\Setting;
 
@@ -127,7 +127,6 @@ trait DefaultTrait
      * @return object|array
      */
     public function functions() {
-        Tygh::assign('func',new functions);
         Tygh::assign('session',$_SESSION);
         Tygh::assign('config',new Setting);
     }

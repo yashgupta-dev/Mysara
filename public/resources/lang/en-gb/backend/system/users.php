@@ -1,6 +1,6 @@
 <?php
 return [
-    'text_heading'          => 'Users',
+    'title'          => 'Users',
 
     'text_add_user'        => 'Add user',
     'column_name'           => 'Name',

@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const openFileManagerBtn = document.getElementById("open-file-manager");
     const uploadInput = document.getElementById("upload");
-    const filePreview = document.getElementById("file-preview");
     const uploadForm = document.getElementById("upload-form");
     const fileGrid = document.getElementById("file-grid");
     const searchInput = document.getElementById("search-input");
     const paginationContainer = document.getElementById("pagination-container");
-    const folderNavigation = document.getElementById("folder-navigation");
     var openfile =  null;
     
     let currentPage = 1;
@@ -21,42 +19,43 @@ document.addEventListener("DOMContentLoaded", function () {
         loadFiles(); // Load files on modal open
     });
 
-    uploadInput.addEventListener("change", function (e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                filePreview.src = event.target.result;
-                filePreview.style.display = "block";
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    // Handle file input change event
+uploadInput.addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        
+        // Optional: Display a preview of the file (e.g., image)
+        reader.onload = function (event) {
+            // Assuming filePreview is an <img> or similar element for preview
+            filePreview.src = event.target.result;
+            filePreview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
 
-    uploadForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(this);
+        // Create FormData and send via fetch
+        const formData = new FormData(uploadForm);
+        formData.append("file", file); // Append the file to the form data
 
+        // Perform AJAX upload
         fetch("/admin.php?dispatch=common.filemanager.upload", {
             method: "POST",
             body: formData
         })
         .then(response => response.json())
         .then(data => {
-            
             if (data.success) {
                 loadFiles(); // Reload files after upload
-                filePreview.style.display = "none";
-                uploadInput.value = "";
+                uploadInput.value = ""; // Clear the file input
                 toastr.success('Success', data.message);
-            }
-
-            if(data.error) {
-                toastr.error('Error', data.message);   
+            } else if (data.error) {
+                toastr.error('Error', data.message);
             }
         })
         .catch(error => toastr.error('Error', error));
-    });
+    }
+});
+
 
     // Load files from server with pagination and folder navigation
     function loadFiles(page = 1) {
@@ -65,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             fileGrid.innerHTML = '';
             paginationContainer.innerHTML = '';
-            folderNavigation.innerHTML = '';
 
             // Handle folders
             if (data.folders) {
@@ -90,8 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.files) {
                 data.files.forEach(file => {
                     const fileGridItem = document.createElement('div');
-                    fileGridItem.className = 'file-grid-item';
-
+                    fileGridItem.className = 'file-grid-item choose-btn';
+                    
                     let thumbnailHtml = '';
 
                     if (file.type.startsWith('image/')) {
@@ -103,13 +101,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         url = file.thumbnail;
                     }
 
+                    // Set attributes using setAttribute method
+                    fileGridItem.setAttribute('data-url', url); // Example of a custom data attribute
+                    fileGridItem.setAttribute('data-name',file.name); // Example of a custom data attribute
+
+                      // <div>                            
+                        //     <button class="choose-btn btn btn-dark btn-sm" data-url="${url}" data-name="${file.name}">Choose</button>
+                        // <div><small>${file.name}</small></div>                     
+                        // </div>
                     fileGridItem.innerHTML = `
                         ${thumbnailHtml}
-                        <div>
-                            <a class="" href="${file.url}" target="_blank">View</a>
-                            
-                            <button class="choose-btn btn btn-dark btn-sm" data-url="${url}" data-name="${file.name}">Choose</button>
-                        </div>
                     `;
 
                     fileGrid.appendChild(fileGridItem);
@@ -121,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 for (let i = 1; i <= data.totalPages; i++) {
                     const pageBtn = document.createElement('button');
                     pageBtn.textContent = i;
-                    pageBtn.className = 'pagination-btn';
+                    pageBtn.className = 'btn btn-dark btn-sm pagination-btn';
                     if (i === page) pageBtn.classList.add('active');
                     pageBtn.addEventListener('click', () => loadFiles(i));
                     paginationContainer.appendChild(pageBtn);

@@ -1,6 +1,6 @@
 <?php
 return [
-    'text_heading'          => 'Dashboard | Sign-in',
+    'title'          => 'Dashboard | Sign-in',
     'text_welcome'          => 'Hey! %s',
     'text_invalid_creds'    => 'Warning! invalid Credentials',
     'text_wc_snpt'          => 'Welcome to Sneat! 👋',

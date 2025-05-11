@@ -55,7 +55,9 @@ class Email
         self::$mailer->Port = Port;
 
         // Set the sender's email and name
-        self::$mailer->setFrom(Mail_From, Mailer_Name);
+        if(!empty(Mail_From)) {
+            self::$mailer->setFrom(Mail_From, Mailer_Name);
+        }
     }
 
     /**

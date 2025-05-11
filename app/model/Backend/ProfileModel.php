@@ -38,6 +38,7 @@ class ProfileModel extends BaseModel
             'u.email',
             'u.phone',
             'u.active',
+            'u.user_type',
             'u.created_at',
             'u.updated_at',
             'r.name as role',

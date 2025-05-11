@@ -9,6 +9,7 @@
 <div class="modal rightModal fade " id="filter" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+
             <form method="get">
                 <div class="modal-header">
                     <h5 class="modal-title" id="filterTitle">{$title}</h5>
@@ -21,6 +22,7 @@
                     <button type="submit" class="btn btn-sm btn-secondary">{'Save changes'}</button>
                 </div>
             </form>
+            
         </div>
     </div>
 </div>

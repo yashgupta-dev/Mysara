@@ -5,7 +5,7 @@
         class="form-ajax">
         <div class="card-body">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
-<img src="{if $user.profile}{$user.profile}{else}public/assets/filemanager/default.png{/if}" alt="user-avatar" class="d-block rounded f_image" height="100" width="100"
+                <img src="{if $user.profile}{$user.profile}{else}public/assets/filemanager/default.png{/if}" alt="user-avatar" class="d-block rounded f_image" height="100" width="100"
                     id="open-file-manager" />
                 <input name="f_image" value="{if $user.profile}{$user.profile}{else}public/assets/filemanager/default.png{/if}" type="hidden">
             </div>
@@ -55,8 +55,8 @@
                 <div class="mb-3 col-md-6">
                     <label class="form-label" for="elm_status">Status</label>
                     <div class="input-group input-group-merge">
-                        <input type="text" class="form-control" disabled value="{$func->fn_get_status($user.active)}"
-                            placeholder="{$func->fn_get_status($user.active)}" />
+                        <input type="text" class="form-control" disabled value="{fn_get_status($user.active)}"
+                            placeholder="{fn_get_status($user.active)}" />
                     </div>
                     <div class="">
                         <a

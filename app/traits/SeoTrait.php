@@ -198,11 +198,40 @@ trait SeoTrait
      */
     protected function seoUrls()
     {
+
         $seoURL = explode('/', $this->urlExplode, 2)[1] ?? $this->urlExplode;
 
         // Now, you can use $conn to execute SQL queries and interact with the database
-        $res = DB::get()->get->query("SELECT `seo_origin` FROM `seo` WHERE `seo_url` = '" . (string)$seoURL . "' AND `status` = 1")->fetch_assoc();
+        $res = DB::get()->get->query("SELECT `seo_origin` FROM `seo` WHERE `seo_url` = '" . (string)
+        $seoURL . "' AND `status` = 1")->fetch_assoc();
+        
+        if(!empty($res['seo_origin'])){
+            
+            if(strpos($res['seo_origin'], '=') !== false){
+                $parts = explode('=', $res['seo_origin']);
+                parse_str($res['seo_origin'], $params); // Convert to array
+                // Assign all parameters to $_GET
+                foreach ($params as $key => $value) {
+                    $_REQUEST[$key] = $value;
+                }
+                
+                if(!empty($parts[0]) && $parts[0] === 'category_id'){
+                    $this->urlExplode = 'product/category';                    
+                } elseif(!empty($parts[0]) && $parts[0] === 'product_id'){
+                    $this->urlExplode = 'product/product';
+                } elseif(!empty($parts[0]) && $parts[0] === 'page_id'){
+                    $this->urlExplode = 'page/page';
+                } elseif(!empty($parts[0]) && $parts[0] === 'blog_id'){
+                    $this->urlExplode = 'blog/blog';
+                } elseif(!empty($parts[0]) && $parts[0] === 'article_id'){
+                    $this->urlExplode = 'article/article';
+                } else {
+                    $this->urlExplode = $res['seo_origin'];
+                }
 
-        $this->urlExplode = $res['seo_origin'] ?? $seoURL;
+            }
+        } else {
+            $this->urlExplode = $seoURL;
+        }
     }
 }
