@@ -30,6 +30,7 @@ class CategoryDataGrid extends DataGrid
         ];
 
         $this->addFilter('category_id', 'c.category_id');
+        $this->addFilter('status', 'c.status');
 
         return $queryBuilder;
     }
@@ -69,6 +70,9 @@ class CategoryDataGrid extends DataGrid
             'type'               => 'integer',
             'sortable'           => true,    
             'filterable'         => true,
+            'closure' => function ($row) {                
+                return $row->status ? 'Active' : 'Disabled';
+            },
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
                 [

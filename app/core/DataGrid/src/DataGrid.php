@@ -324,7 +324,7 @@ abstract class DataGrid extends BaseModel
     public function addFilter(string $datagridColumn, string $queryColumn): void
     {
 
-        foreach ($this->columns as $column) {
+        foreach ($this->columns as $column) {            
             if ($column->getIndex() === $datagridColumn) {
                 $column->setColumnName($queryColumn);
 
@@ -841,11 +841,11 @@ abstract class DataGrid extends BaseModel
 
             if (!empty($records)) {
                 foreach ($records as $record) {
-                    $record = $this->sanitizeRow($record);
-
+                    $record = $this->sanitizeRow($record);                    
                     foreach ($this->columns as $column) {
                         if ($closure = $column->getClosure()) {
-                            $record->{$column->getIndex()} = $closure($record);
+                            $index_name = explode('.',$column->getIndex())[1] ?? $column->getIndex();
+                            $record->{$index_name} = $closure($record);
                         }
                     }
 

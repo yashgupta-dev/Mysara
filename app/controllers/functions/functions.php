@@ -369,3 +369,24 @@ function fn_settings()
 {
     return new CoreSetting();
 }
+
+function fn_print_r(...$debugs) {
+    if(!empty($debugs)) {
+        foreach ($debugs as $debug) {
+            echo "<pre>";
+            print_r($debug);
+            echo "</pre>";
+        }
+    }
+}
+
+function fn_print_die(...$debugs) {
+    if(!empty($debugs)) {
+        foreach ($debugs as $debug) {
+            echo "<pre>";
+            print_r($debug);
+            echo "</pre>";
+        }
+    }
+    die;
+}

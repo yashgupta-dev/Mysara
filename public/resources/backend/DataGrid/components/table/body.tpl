@@ -16,11 +16,11 @@
 
                     <td width="{$column_width[$index]|default:10}%" data-th="{$column.label}">
                         {if $column.type eq 'date'}
-                            {$result[$index_name[1]]}
+                            {fn_get_human_readable_date('d M, Y',$result[$index_name[1]])}
                         {elseif $column.type eq 'datetime'}
-                            {$result[$index_name[1]]}
+                            {fn_get_human_readable_date('d M, Y h:i:s',$result[$index_name[1]])}
                         {elseif $column.type eq 'time'}
-                            {$result[$index_name[1]]}
+                            {fn_get_human_readable_date('d M, Y h:i:s',$result[$index_name[1]])}
                         {else}
                             {$result[$index_name[1]]}
                         {/if}
