@@ -107,12 +107,12 @@
                     <label class="col-sm-2 control-label" for="input-status">{$lang.entry_status}</label>
                     <div class="col-sm-10">
                         <select name="status" id="input-status" class="form-control">
-                            {if $category_description.status}
-                                <option value="1" selected="selected">{$lang.text_enabled}</option>
-                                <option value="0">{$lang.text_disabled}</option>
+                            {if $category_description.status eq 'A'}
+                                <option value="A" selected="selected">{$lang.text_enabled}</option>
+                                <option value="D">{$lang.text_disabled}</option>
                             {else}
-                                <option value="1">{$lang.text_enabled}</option>
-                                <option value="0" selected="selected">{$lang.text_disabled}</option>
+                                <option value="A">{$lang.text_enabled}</option>
+                                <option value="D" selected="selected">{$lang.text_disabled}</option>
                             {/if}
                         </select>
                     </div>

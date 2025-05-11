@@ -1,0 +1,5 @@
+2025-05-11 06:51:32 DELETE FROM category_description WHERE 1 AND category_id = "58" 
+2025-05-11 06:51:32 DELETE FROM category_path WHERE 1 AND category_id = "58" AND level < "0" 
+2025-05-11 06:51:32 DELETE FROM category_path WHERE 1 AND category_id = "58" AND level < "1" 
+2025-05-11 06:51:32 DELETE FROM category_path WHERE 1 AND category_id = "58" AND level < "2" 
+2025-05-11 06:51:32 DELETE FROM seo WHERE 1 AND seo_origin = "category_id=58" 

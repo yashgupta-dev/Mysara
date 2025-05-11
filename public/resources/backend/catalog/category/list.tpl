@@ -4,9 +4,9 @@
         data=$lists 
         name="category" 
         saved_search_name="my_search"
-        search_form_dispatch="admin.php?dispatch=catalog.category"
+        search_form_dispatch="catalog.category"
         export=true 
-        dispatch="admin.php?dispatch=catalog.category" 
+        dispatch="catalog.category" 
         search_label="Search"     
         product_search_form_prefix="category"
         column_width=[10,20,20,30]

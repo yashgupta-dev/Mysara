@@ -3,41 +3,35 @@ namespace app\controllers\backend\Datagrid;
 
 use app\core\DataGrid\src\DataGrid;
 
-class CategoryDataGrid extends DataGrid
+class CustomerDataGrid extends DataGrid
 {
-    protected $primaryColumn = 'category_id';
+    protected $primaryColumn = 'id';
 
-    protected $save_search = 'categories';
+    protected $save_search = 'customer';
 
     public function prepareQueryBuilder() {
         $queryBuilder = [
-            'tablename' => 'category c',
-            'joins'     => [
-                'LEFT JOIN category_description cd ON cd.category_id = c.category_id'
-            ],
-            'condition' => [
-                ' AND cd.language_id = 1'
-            ],
+            'tablename' => 'users',
+            'joins'     => [],
+            'condition' => [],
             'fields'    => [
-                'c.category_id',
-                'c.date_added',
-                'cd.name',
-                'cd.description',
-                'cd.meta_title',
-                'c.status'
+                'id',
+                'CONCAT(firstname, " ", lastname) as firstname',
+                'email',
+                'phone',
+                'active',
+                'created_at',
+                'updated_at'
             ],
             'groups'    => []
         ];
-
-        $this->addFilter('category_id', 'c.category_id');
-        $this->addFilter('status', 'c.status');
 
         return $queryBuilder;
     }
 
     public function prepareColumns(): void {
         $this->addColumn([
-            'index'              => 'cd.name',
+            'index'              => 'firstname',
             'label'              => 'Name',
             'type'               => 'string',
             'sortable'           => true,
@@ -46,16 +40,31 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'cd.meta_title',
-            'label'              => 'Meta Title',
+            'index'              => 'email',
+            'label'              => 'Email',
             'type'               => 'string',
-            'sortable'           => false,
+            'sortable'           => true,
             'searchable'         => true,            
+            'filterable'         => true,
+            'closure' => function ($row) {                
+                return '<a href="mailto:'.$row->email.'">'.$row->email.'</a>';
+            },     
+        ]);
+
+        $this->addColumn([
+            'index'              => 'phone',
+            'label'              => 'Phone',
+            'type'               => 'string',
+            'sortable'           => true,
+            'searchable'         => true,       
+            'closure' => function ($row) {                
+                return '<a href="tel:'.$row->phone.'">'.$row->phone.'</a>';
+            },     
             'filterable'         => true
         ]);
 
         $this->addColumn([
-            'index'              => 'c.date_added',
+            'index'              => 'created_at',
             'label'              => 'Created At',
             'type'               => 'date',
             'sortable'           => true,
@@ -65,13 +74,23 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'              => 'c.status',
+            'index'              => 'updated_at',
+            'label'              => 'Updated At',
+            'type'               => 'date',
+            'sortable'           => true,
+            'searchable'         => false,            
+            'filterable'         => false,
+            'filtereable_type'   => 'date_range',
+        ]);
+
+        $this->addColumn([
+            'index'              => 'active',
             'label'              => 'Status',
             'type'               => 'string',
             'sortable'           => true,    
             'filterable'         => true,
             'closure' => function ($row) {                
-                return ($row->status  == 'A') ? 'Active' : 'Disabled';
+                return ($row->active  == 'A') ? 'Active' : 'Disabled';
             },
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
@@ -95,7 +114,7 @@ class CategoryDataGrid extends DataGrid
             'method' => 'POST',
             'type'   => 'delete',
             'url'    => function ($row) {                
-                return fn_link("catalog.category.delete&category_id=" . $row->category_id);
+                return fn_link("customers.delete&user_id=" . $row->id);
             },
         ]);
 
@@ -106,7 +125,7 @@ class CategoryDataGrid extends DataGrid
             'method' => 'GET',
             'type'   => 'list',
             'url'    => function ($row) {                
-                return fn_link("catalog.category.update&category_id=" . $row->category_id);
+                return fn_link("customers.update&user_id=" . $row->id);
             },
         ]);
     }
@@ -115,7 +134,7 @@ class CategoryDataGrid extends DataGrid
         $this->addMassAction([
             'title'     => 'Add',
             'icon'      => 'bx-plus',
-            'dispatch'  => fn_link('catalog.category.add'),
+            'dispatch'  => fn_link('customers.add'),
             'type'      => 'action',
             'method'    => 'GET'
         ]);
@@ -123,9 +142,9 @@ class CategoryDataGrid extends DataGrid
         $this->addMassAction([
             'title'     => 'More',
             'icon'      => 'bx-plus',                        
-            'method'    => 'GET',            
+            'method'    => 'POST',            
             'options' => [
-                ['label' => 'Bulk Delete', 'value' => fn_link('catalog.category.m_delete'), 'type' => 'delete'],
+                ['label' => 'Bulk Delete', 'value' => fn_link('customers.m_delete'), 'type' => 'delete'],
             ],
         ]);
     }

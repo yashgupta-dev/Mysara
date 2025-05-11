@@ -62,7 +62,6 @@ class Category extends BaseController
         if ($this->requestMethod === 'POST') {
             Validation::validate([
                 'name'          =>  'required|string',
-                'description'   =>  'string',
                 'meta_title'    =>  'required|string',
 
             ], $this->requestParam['category_description']);

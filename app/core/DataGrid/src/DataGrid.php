@@ -465,7 +465,7 @@ abstract class DataGrid extends BaseModel
         if (!empty($request['filters']) && is_array($request['filters'])) {
             // check filter under keys have values or not
             foreach ($request['filters'] as $key => $value) {
-                if (empty($value)) {
+                if (!isset($value)) {
                     unset($request['filters'][$key]);
                 }
             }
@@ -476,7 +476,6 @@ abstract class DataGrid extends BaseModel
 
             $validated['filters'] = $request['filters'];
         }
-
         // validate daterange
         $validated['filters'] = array_merge($validated['filters'], $this->createFilters($request));
 
@@ -790,8 +789,8 @@ abstract class DataGrid extends BaseModel
 
             $tablename      = $params['tablename'];
             $fields         = $params['fields'];
-            $joins          = $params['joins'] ?? [];
-            $groups         = $params['groups'] ?? [];
+            $joins          = $params['joins']      ?? [];
+            $groups         = $params['groups']     ?? [];
             $conditions     = $params['conditions'] ?? [];
 
             // Build SELECT fields
@@ -821,11 +820,12 @@ abstract class DataGrid extends BaseModel
             $sort_order     = $params['order'];
             $sorting        = " ORDER BY {$sort_column} {$sort_order}";
 
-
             // Pagination
             if (!empty($params['items_per_page'])) {
-                $params = array_merge($params, $this->pagination($tablename . $join, array('count(*) as total_items'), $conditions, 'row', [],  $params['items_per_page'], $params['page']));
-
+                $sql = "SELECT count(*) as total_items FROM {$tablename} {$join} WHERE 1 {$condition} {$group}";
+                $total_items = mysqli_fetch_assoc(DB::get()->get->query($sql));
+                
+                $params = array_merge($params, $this->pagination($total_items, $params['items_per_page'], $params['page']));                
                 $offset = $params['offset'] ?? 0;
 
                 $limit = " LIMIT {$offset}, {$params['items_per_page']}";

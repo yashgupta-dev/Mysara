@@ -18,7 +18,7 @@ class Text extends Column
         // Use exact match for dropdown
         if ($this->filterableType === FilterTypeEnum::DROPDOWN) {
             if (is_string($requestedValues)) {
-                $conditions[] = " AND {$this->columnName} = {$requestedValues}";
+                $conditions[] = " AND {$this->columnName} = '{$requestedValues}'";
             } elseif (is_array($requestedValues)) {
                 $orConditions = [];
                 foreach ($requestedValues as $value) {

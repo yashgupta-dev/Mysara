@@ -70,68 +70,6 @@ class CategoryModel extends BaseModel
      * @param  bigint $parent_id
      * @return array
      */
-    function categories($request = []) {
-        $fields = $conditions = $join = $sorting = array();
-
-        if (!empty($request['items_per_page'])) {
-            $itemsPerPage = $request['items_per_page'];
-        } else {
-            $itemsPerPage = Setting::getConfig('config_pagination');
-        }
-
-        $fields = [
-            "cp.category_id AS category_id",
-            "GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name",
-            "c1.parent_id",
-            "c1.sort_order"
-        ];
-        
-        $join[] = " category_path cp";
-        $join[] = " LEFT JOIN category c1 ON (cp.category_id = c1.category_id)";
-        $join[] = " LEFT JOIN category c2 ON (cp.path_id = c2.category_id)";
-        $join[] = " LEFT JOIN category_description cd1 ON (cp.path_id = cd1.category_id)";
-        $join[] = " LEFT JOIN category_description cd2 ON (cp.category_id = cd2.category_id)";
-        
-        $conditions['cd1.language_id'] = "1";
-        $conditions['cd2.language_id'] = "1";
-
-        if (!empty($request['is_filter']) && $request['is_filter'] == 'Y') {
-            // filter name
-            if(!empty($request['name'])) {
-                $conditions['LCASE(cd.name)'] = array($request['name'], 'LIKE');
-            }
-        }
-        // filter with category ID in array
-        if(!empty($request['category_id'])) {
-            $conditions['c1.category_id'] = implode(', ', is_array($request['category_id']) ? $request['category_id'] : [$request['category_id']]);
-        }
-       
-        if (!empty($request['page'])) {
-            $page = $request['page'];
-        } else {
-            $page = 1;
-        }
-
-        $group[] = "cp.category_id";
-
-        $request = array_merge($request, $this->pagination(implode(' ',$join), array('count(*) as total_items'), $conditions, 'row', [], $itemsPerPage, $page));
-        
-        $attributes = $this->select(implode(' ', $join), implode(',', $fields), $conditions, 'rows', $sorting, $request, $group);
-
-        return [$attributes, $request];
-        
-    }
-
-    /**
-     * categories
-     *
-     * @param  array $fields
-     * @param  array $conditions
-     * @param  array $join
-     * @param  array $other
-     * @param  bigint $parent_id
-     * @return array
-     */
     function category($request = []) {
         $fields = $conditions = $join = $sorting = array();
 
@@ -176,7 +114,7 @@ class CategoryModel extends BaseModel
             'top'         => (isset($data['top']) ? (int)$data['top'] : 0),
             'column'      => (int)$data['column'],
             'sort_order'  => (int)$data['sort_order'],
-            'status'      => (int)$data['status']
+            'status'      => $data['status']
         ], ['category_id' => $data['category_id']]);
         
         if($update) {

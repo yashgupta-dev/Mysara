@@ -400,32 +400,26 @@ class BaseModel extends BaseController
                 break;
         }
     }
-    
+
     /**
      * pagination
      *
-     * @param  mixed $table
-     * @param  mixed $selection
-     * @param  mixed $where
-     * @param  mixed $func
-     * @param  mixed $sorting
+     * @param  mixed $totalItems
      * @param  mixed $items_per_page
-     * @return array
+     * @param  mixed $page
+     * @return void
      */
-    public function pagination($table = '', $selection = array(), $where = array(), $func = 'row', $sorting = [], $items_per_page = 0, $page = 1) {
-        $params = [];        
-        $response = $this->select($table, $selection, $where, $func, $sorting);
-        
-        if(!empty($response['total_items'])) {
-            $totalItems = $response['total_items'] ?? 0;
+    public function pagination($totalItems = 0, $items_per_page = 10, $page = 1) {
+        $params = [];                
+        if(!empty($totalItems['total_items'])) {            
             $params['items_per_page'] = $items_per_page;
             $params['page'] = $page;
-            $params['total_items'] = $totalItems;
+            $params['total_items'] = $totalItems['total_items'];
             if (!empty($page)) {
                 $page = $page;
-                if (($page - 1) * $items_per_page >= $totalItems) {
+                if (($page - 1) * $items_per_page >= $totalItems['total_items']) {
 
-                    $page = ceil($totalItems / $items_per_page);
+                    $page = ceil($totalItems['total_items'] / $items_per_page);
                 }
 
                 $offset = (($page - 1) * $items_per_page);

@@ -13,14 +13,14 @@
             </div>
             <div class="modal-body">
 
-                <form action="{$c_url}" name="{$product_search_form_prefix}_search_form" method="get" class="{$form_meta}" id="{$product_search_form_prefix}search_form">
+                <form action="{fn_link($dispatch)}" name="{$product_search_form_prefix}_search_form" method="get" class="{$form_meta}" id="{$product_search_form_prefix}search_form">
                     <input type="hidden" name="type" value="{$search_type|default:"simple"}" {if $autofocus}autofocus="autofocus"{/if} />
+                    <input type="hidden" name="dispatch" value="{$dispatch}" />
                     
                     <div class="form-group mb-3">
                         <label for="q">{$lang.text_find_results_with}</label>
                     <input type="text" name="q" id="q" value="{if !empty($search.q)}{$search.q}{/if}" size="50" class="form-control" placeholder="{$search_label}"/>
                     </div>
-
 
                     <div class="">
                         {assign var="i" value=0}

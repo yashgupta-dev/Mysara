@@ -64,9 +64,9 @@ class DataGridExport
         foreach ($records['records'] as $record) {
             $row = [];
             foreach ($this->datagrid->getColumns() as $column) {
-                if ($column->getExportable()) {
-                    $explode = explode('.', $column->getIndex());
-                    $row[] = $record->{$explode[1]};
+                if ($column->getExportable()) {                    
+                    $index_name = explode('.',$column->getIndex())[1] ?? $column->getIndex();
+                    $row[] = $record->{$index_name};
                 }
             }
             fputcsv($output, $row);

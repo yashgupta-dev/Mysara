@@ -2,3 +2,4 @@ vendor/*
 core/storage/*
 composer.lock
 config.php
+core/logs/*
