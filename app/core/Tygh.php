@@ -35,6 +35,9 @@ class Tygh
         $this->smarty->setCompileDir(CACHE . 'views/templates_c/');
         $this->smarty->setCacheDir(CACHE . 'views/cache/');
         $this->smarty->addPluginsDir(APP.'functions/');
+        $this->smarty->registerPlugin('function', 'fn_link', 'fn_link');
+        $this->smarty->registerPlugin('function', 'fn_url', 'fn_url');
+
     }
     
     /**
