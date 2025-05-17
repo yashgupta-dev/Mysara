@@ -34,5 +34,6 @@
                 
             {/if}
         {/foreach}
+        <th>&nbsp;</th>
         </tr>
     {/if}

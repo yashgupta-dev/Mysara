@@ -90,52 +90,6 @@ class AttributeModel extends BaseModel
     }
     
     /**
-     * getAttributes
-     *
-     * @param  mixed $request
-     * @return array
-     */
-    public function getAttributes($request) {
-        $fields = $conditions = $join = $sorting = array();
-
-        if (!empty($request['items_per_page'])) {
-            $itemsPerPage = $request['items_per_page'];
-        } else {
-            $itemsPerPage = Setting::getConfig('config_pagination');
-        }
-
-        $fields = [
-            'a.attribute_id',
-            'ad.name',
-            'agd.name as group_name',
-            'a.sort_order'
-        ];
-
-        $join[] = "attribute a ";
-        $join[] = " LEFT JOIN attribute_description ad ON (ad.attribute_id = a.attribute_id)";
-        $join[] = " LEFT JOIN attribute_group_description agd ON (agd.attribute_group_id = a.attribute_group_id)";
-
-        if (!empty($request['is_filter']) && $request['is_filter'] == 'Y') {
-
-            if (!empty($request['name'])) {
-                $conditions['ad.name'] = array($request['name'], 'LIKE');
-            }
-        }
-
-        if (!empty($request['page'])) {
-            $page = $request['page'];
-        } else {
-            $page = 1;
-        }
-
-        $request = array_merge($request, $this->pagination(implode(' ',$join), array('count(*) as total_items'), $conditions, 'row', [], $itemsPerPage, $page));
-
-        $attributes = $this->select(implode(' ', $join), implode(',', $fields), $conditions, 'rows', $sorting, $request);
-
-        return [$attributes, $request];
-    }
-    
-    /**
      * addGroup
      *
      * @return bool

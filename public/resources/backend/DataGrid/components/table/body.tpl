@@ -2,8 +2,7 @@
         <tr class="cm-longtap-target"
             data-ca-longtap-action="setCheckBox"
             data-ca-longtap-target="input.cm-item"
-            data-ca-id="{$result[$data.meta.primary_column]}">            
-            
+            data-ca-id="{$result[$data.meta.primary_column]}">
                 <td width="3%" class="left mobile-hide table__check-items-cell table__check-items-cell--show-checkbox">
                     <input type="checkbox" class="row-checkbox cm-item" name="{$data.meta.primary_column}[]" value="{$result[$data.meta.primary_column]}"/>
                 </td>

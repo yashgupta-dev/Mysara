@@ -65,8 +65,9 @@ class DataGridExport
             $row = [];
             foreach ($this->datagrid->getColumns() as $column) {
                 if ($column->getExportable()) {                    
-                    $index_name = explode('.',$column->getIndex())[1] ?? $column->getIndex();
-                    $row[] = $record->{$index_name};
+                    $explode = explode('.', $column->getIndex());
+                    $field = $explode[1] ?? $column->getIndex();
+                    $row[] = $record->{$field};
                 }
             }
             fputcsv($output, $row);
@@ -89,9 +90,11 @@ class DataGridExport
         foreach ($records['records'] as $record) {
             $item = $xml->addChild('record');
             foreach ($this->datagrid->getColumns() as $column) {
-                $explode = explode('.', $column->getIndex());
-                $field = $explode[1] ?? $column->getIndex();
-                $item->addChild($field, htmlspecialchars((string) ($record->{$field} ?? '')));
+                if ($column->getExportable()) {
+                    $explode = explode('.', $column->getIndex());
+                    $field = $explode[1] ?? $column->getIndex();
+                    $item->addChild($field, htmlspecialchars((string) ($record->{$field} ?? '')));
+                }
             }
         }
 

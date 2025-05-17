@@ -269,8 +269,13 @@ function fn_query_remove($url, $params = [])
         $query_string = $url_parts[1];
         $query_params = [];
         parse_str($query_string, $query_params);
+
         foreach ($params as $param) {
-            unset($query_params[$param]);
+            if(!empty($query_params['filters'][$param])) {                
+                unset($query_params['filters'][$param]);    
+            } else {
+                unset($query_params[$param]);
+            }
         }
         $new_query_string = http_build_query($query_params);
         $new_url = $url . '?' . $new_query_string;

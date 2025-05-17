@@ -2,6 +2,7 @@
 
 namespace app\controllers\backend\Catalog;
 
+use app\controllers\backend\Datagrid\AttributeDataGrid;
 use app\core\Json;
 use app\core\Tygh;
 use app\core\Response;
@@ -37,7 +38,7 @@ class Attribute extends BaseController
      */
     public function index()
     {
-        list($lists, $search) = $this->model->getAttributes($this->requestParam);
+        list($lists, $search) = fn_datagrid(AttributeDataGrid::class)->process();
 
         Tygh::assign('search', $search);
         Tygh::assign('lists', $lists);

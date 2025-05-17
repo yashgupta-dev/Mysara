@@ -37,6 +37,7 @@ class Tygh
         $this->smarty->addPluginsDir(APP.'functions/');
         $this->smarty->registerPlugin('function', 'fn_link', 'fn_link');
         $this->smarty->registerPlugin('function', 'fn_url', 'fn_url');
+        $this->smarty->registerPlugin('function', 'fn_print_r', 'fn_print_r');
 
     }
     

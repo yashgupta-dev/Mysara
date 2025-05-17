@@ -3,7 +3,7 @@
     {include file="backend/DataGrid/data-grid.tpl" 
         data=$lists 
         name="category" 
-        saved_search_name="my_search"
+        saved_search_name="categories"
         search_form_dispatch="catalog.category"
         export=true 
         dispatch="catalog.category" 

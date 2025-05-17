@@ -2,6 +2,7 @@
 
 namespace app\controllers\backend\System;
 
+use app\controllers\backend\Datagrid\System\UserDataGrid;
 use app\core\Json;
 use app\core\Tygh;
 use app\core\Email;
@@ -33,9 +34,10 @@ class Users extends BaseController
      */
     public function index()
     {
-        list($users, $search) = $this->model->getUsers($this->requestParam);
+
+        list($users, $search) = fn_datagrid(UserDataGrid::class)->process();
         
-        Tygh::assign('users', $users);
+        Tygh::assign('lists', $users);
         Tygh::assign('search', $search);
         Tygh::display('backend/system/users');
     }

@@ -9,6 +9,7 @@ use app\core\Notification;
 use app\controllers\BaseController;
 use app\core\validation\Validation;
 use app\model\Backend\AttributeModel;
+use app\controllers\backend\Datagrid\GroupAttributeDataGrid;
 
 class Group extends BaseController
 {
@@ -34,8 +35,7 @@ class Group extends BaseController
      */
     public function index()
     {
-        list($lists, $search) = $this->model->getGroups($this->requestParam);
-
+        list($lists, $search) = fn_datagrid(GroupAttributeDataGrid::class)->process();
         Tygh::assign('search', $search);
         Tygh::assign('lists', $lists);
 
